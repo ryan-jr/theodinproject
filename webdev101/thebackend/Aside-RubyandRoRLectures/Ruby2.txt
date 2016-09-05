@@ -1,0 +1,1151 @@
+
+Ruby 2: Regular Expressions
+https://www.youtube.com/watch?v=flJQ787S-4A&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q
+
+NOTE: THE FOLLOWING WILL ONLY FIND SINGLE MATCHES, TO FIND MULTIPLE MATCHES WE CAN USE SCAN OR SPLIT
+-regular expressions
+ the . can be dangerous if it is followed by a * becuase it will return anything
+ $ and ^ are rarely use because they match the end and beginning of a line but \A and \Z are used more specificially
+ 
+- a nil in an if statement is false
+
+the expression
+	a = "abcabcb" =~ /abc/
+	will return a 2, because 2 is the index of where the match occured, and a will be an integer
+ 
+-special characters
+ the \w, \W, \d, \D
+ 
+-character modifiers
+	*, will match 0 or more of the preceding characters and is greddy in that it will match any string it can find, and is dangerous because you can get a lot of false positives with this
+	for example
+		a = "This"
+		a =~ /W*/
+		#will match something, because it will match 0 or more of the preceding character
+		a =~ /W+/ will not match anything because there is not 1 or more of the preceding character
+	+, will match 1 or more occurances of the preceding character 	
+	*?, will rein in the greediness of the regular expressions and will try and find the shortest string rather than the longest string (will try and find as few as possible characters)
+	+? will match 1 or more of the preceding characters whereas *? will match 0 or more occurances of the preceding character
+	
+-the /W?/ (note the lack of modifier on the ?) will match 0 in the string "This", and will return a 0, because ? will match 1 OR NONE of the preceding characters and it will match NONE W's
+-{x} match X occurances of the preceding character
+
+-{x, y} Match at least X occurences and at most Y occurances
+	for instance \d\d\d will match 3 digits
+	\d{3} will do the same thing
+	\d{3,4} will match 3 and at most 4 digits #I will take 3 digits in a row, or 4 digits in a row, but nothing else
+	
+-character classes
+	-[aeiou], these can be read like or statements, and means match any a, e, i, o, or u
+	a =~ /[aeiou]
+	on the string "This"
+	would return 2 because "i" is at position 2
+	
+	-[a-m], matches any lowercase character between a and m 
+	-[a-zA-z] match ANY single uppercase letter or any single lowercase letter
+	
+-other character conditional matches
+	- A|b match an A or match b, whichever comes first (the order does not matter it will find the first one that it can)
+		for example on the string a = "this"
+		a =~ /h|s/ 
+		will return 2, because it found h first
+		a =~ /s|h/ will still return 2 because h came first
+	
+	-for larger things we use parens like so:
+		(Dave|Jones)
+		because parens create a single 'group' to look for
+	
+	-(abc)+ matches any "abc" string one or more times	
+	
+-pirate epxressions
+	-by default regualr expressions are "greedy"
+	-a pattern will match as MANY characters as possible to return the result
+		"This be a test it be".scan(/th.*be/)
+		  returns: ["This be a test it be"] as a match
+		-scan searches a string and returns all instances of what it found
+			so a.scan(/is/) on the string "This is a test it is"
+				would return ["is","is","is"]
+			a scan of a.scan(/i*/) 
+				would return ["", "", "i","", "", "" etc...]
+			because it is searching and finding 0 or more occurances
+			a scan of a.scan(/i+/)
+				would return ["i","i","i","i"], because it is returning one or more and getting an array of all of the "i"'s
+-an example of greediness
+	a = "this be a test it be".scan(/th.*be/)
+		#the above will return the entire string because it is greedy and will pull not just the 'be' but found the longest string possible
+	-to rein in the * and find the shortest string possible we use the ? (AKA: hook) like so
+		a.scan(/th.*?be/)
+		which will return ["This be"]
+	
+.scan WILL RETURN AN ARRAY	
+-finding grouped patterns		
+	-if you use parens to surround a piece of the regex, then just that match will be returend in a special set of variables: $1, $2, $3
+	a = "this be a test it be"
+	so a.scan(/(th)(.*?)(be)/)
+		would return ["this", "is", "be"]
+		and $1 would return "this", $2 would return "is", and $3, would return "be"
+		-and the special $ variables are overwritten with every scan/pattern match
+		
+	
+Ruby 2: Regular Expressions
+https://www.youtube.com/watch?v=flJQ787S-4A&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q
+#situation:
+-we are getting data from a file/database with unclean data that has multiple columns 
+
+The full regex string broken down
+
+#skipping past things to get an item number that is 4 digits long
+.*? (\d{4})
+
+#getting whitespaces that surround the department name/title
+\s+([A-Z&]+)\s+
+
+#grabbing a course number that is 3 digits including 0s
+(\d{3})
+
+#grabbing sections that are only 2 uppercase characters (there is whitespace preceeding this column)
+\s+([A-Z]{2})
+
+#more whitespace and intermittent data that is a cluster ID
+\s+(\d{4}|\s+)\s+ #this expression could also be written \s+(\d{4}?) #the question says 0 or 1 of the prior match
+
+	
+Ruby 2: Classes
+Lecture 3
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=3
+Classes
+-abstract term in programming, but used in almost every language, C++ was probably the first language to have them, Javascript does not but has psuedoclasses
+-a class is a template or blueprint for defining data as objects as well as defining the methods that can operate on that data
+-Objects are defined FROM a class
+-"built-in classes": string, Fixnum, Float, Array, Hash, etc..
+	-this is all called encapsulation basically putting everything in one area/set of properties to keep the same stuff to operate on it
+
+-every time we create something it becomes an object, an object is a thing that came from a class or a blueprint.  
+	-like a cup is an object that came from a blueprint that has various properties such as height, width, weight, ability to hold liquids, etc... that makes it an object from the cup class.  There can be different things that can be held in the object.  
+	- "Hello string" is an object from the string class
+	
+-Classes
+-a class defines the state and the behavior	
+	-behavior is what you can do with the data in the object
+	-state is the data itself
+	
+-Example: class Square
+	-a square has 4 sides that are the same length
+	-it would have 90 degree angles
+	-the above are properties of the class square
+	-How would we represent a square using ruby?
+		-an int with side length?, 
+	-a class lets us combine everything that would make up a square in one easy area, such as the side length but the class also has other methods and provides the behavior of how a square should work
+	
+we define classes with class and a capital letter
+		for example:
+			class Square
+						
+			end
+	
+using more stuff with the class square	
+			
+			class Square
+			#we can define all kinds of methods in a class, but teh first one has to be initalize (and init has to be spelled correctly)
+			#we do not do user input inside of a class (no gets or puts), because we don't know who/what will be using our object
+			
+				def initalize(side_length)
+					#creating an instance variable
+					#an instance variable is only available locally within the class
+					#this keeps together the state/data and its methods
+					#instance variables are differentiated with the @ such as @var1 or @square_name
+					#so we use instance variables with the same naming conventions as typical ruby vars, but with the @
+					
+					@side_length = side_length		
+				
+				end				
+			end
+
+-we use classes all the time
+-for instance a = "This is a string", does all the work behind the scenes but would be equivalent to a = string.new("This is a string")	or an integer such as i = 10 is equivalent to i = integer.new(10)
+
+-However we're not done yet because even if we call the square class and put it into a variable with something like:
+		my_square = Square.new(10)   #see how we have to create a .new version of the class and call it with a CAP letter?
+		
+		puts my_square
+		
+		#the above puts will only put out a memory location
+		
+		if you did something like
+		your_square = Square.new(20)
+		my_square = Square.new(5)
+		
+		#the instance variables that are called would have different information in them for each call
+		#basically they are different cups that were stamped out from the blueprint
+		#the cups might have different properties like different colors, etc..., but they do the same basic thing.
+
+Ruby 2: Classes
+Lecture 4
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=4		
+
+-def initalize(VAR NAME) has to be called in order to properly pass in/set a new class	
+-the @ declards instance variables and are local to JUST that instance of the class, instance is the object that was created from the class (e.g my_square and your_square)
+-instatiation creates an instance
+-this is why we use File.open because we are calling the open method from the File class
+
+-getters and setters
+-getters lets us retrieve value from an object and setters allow us to change the value of an object
+-we can call the getter method whatever we want, but it allows us to retrieve/pull out data from vars etc... we just have to make sure it does a return of @VARNAME
+
+For instance:
+#declaring the square class
+class Square
+
+  def initialize( side_length )
+    @side_length = side_length
+  end
+
+  #declaring the getter method
+  def getter
+    return @side_length
+  end
+end
+
+#carlling the square classes and putting them into variables
+my_square = Square.new(10)
+your_square = Square.new(20)
+
+#putsing out the neccessary data
+puts my_square.getter
+puts your_square.getter
+puts my_square.inspect
+
+
+#the above code would print 10 and 20 on different lines along with the memmory addresses
+
+if we wanted to print out the perimeter for our squares we would create a method IN THE SQUARE CLASS like so
+def perimeter
+	return @side_length * 4
+end
+
+#to print out the perimeter we would call the square class and use the data
+puts my_square.perimeter
+
+
+my_square is a square object, becuase it came from the square class
+because it is a square class that means you can do square things with it, which are defined in the square class
+There is data and behavior/state within the square class
+
+Putting everything in a class makes programming more clean because people know where to find things and how to add things to a class/object
+
+-setters
+-setters modify data and change the state of the data, AKA: you define a method that SETS the value of an attribute in question
+for example
+def side_length=(side_length)
+	@side_length = side_length
+end
+
+#using an = in the method name ensures that the = becomes part of the name
+#the = IS KEY for making sure that what is being passed in is defined as part of the setter
+#the above would store the incoming value into an instance variable
+
+#if we want to put out a record/something that is useful we can use interpolation again with within a to_s method in the #class.  this is because we have to use something with puts, just having puts my_square without the following line, 
+#just prints out a memory address
+puts "My square has a side length of #{my_square} and an area of #{my_square}"
+
+#this is because puts BY DEFINITION calls the to_s method and is the same thing as my_square.to_s
+#this is also why we DO NOT have puts anywhere within our classes, because it will just puts a memory address
+
+Ruby 2: Classes
+Lecture 5
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=5
+
+-we intialize somethign with the data we want to pass in and THEN assign it to the instance variables
+For example:
+
+#creating an inventory class, and refactoring the Inventory has that we had previously
+# { 123 => ["shirt, 19.99"]}
+
+#creating the class
+class Item
+	
+	#intializing the class, passing in the variables we want to use, AND declaring the instance IDs
+  def initialize(id, description, price)
+    @id = id
+    @description = description
+    @price = price
+  end
+  
+-when you create the to_s method in the Class you are using (in this case the Inventory class) you are overwriting the method.    
+-if you use a puts in the to_s method it will spit out the data you want in the format that you want with interpolation, BUT it will also print out the memory address data.  
+
+For example:
+IN INVENTORY CLASS:
+  def to_s
+    puts "#{@id}\t #{@description}\t #{@price}"
+  end
+  
+puts shirt
+
+OUTPUTS:
+ 123	shirt	 19.99
+#<Item:0x1d36ac0>
+
+but using return outputs just:
+ 123	shirt	 19.99
+
+ 
+-remember that escape characters only work in "" NOT in ''
+-what if we want the class to generate an ID that is random?
+  def initialize(description, price)
+    @id = rand(100..999)
+    @description = description
+    @price = price
+  end
+
+-This basically creates a mini database with an ID and some data, to actually make the ID persistant/unique will require a class variable that will be covered later on
+
+-what about sizes? create an @size empty array in the initialize
+	@size = []
+	
+-the statement in our to_s
+	return "#{@id}\t #{@description}\t #{@price} sizes: #{@size.join(", ")}"
+	
+-we don't have to let users know that we are using an array for sizes, so we can create a method that will let a user add and delete sizes
+		
+-we could create a remove size method	with:
+#the delete method for arrays will find the thing that it matches and remove it from the array
+	def remove_size( size )
+		@size.delete(size)
+	end	
+	
+VERY SIMPLE CLASS PROGRAM:
+	
+#creating an inventory class, and refactoring the Inventory has that we had previously
+# { 123 => ["shirt, 19.99"]}
+
+class Item
+  def initialize(description, price)
+    @id = rand(100..999)
+    @description = description
+    @price = price
+    @size = []
+  end
+
+  def add_size (size)
+    @size << size
+  end
+
+  def remove_size (size)
+    @size.delete(size)
+  end
+  
+  def to_s
+    return "#{@id}\t #{@description}\t #{@price} size(s): #{@size.join(", ")}"
+  end
+
+
+end
+
+shirt = Item.new("shirt", 19.99)
+shirt.add_size("Large")
+
+pants = Item.new("pants", 10.99)
+pants.add_size("Small")
+pants.remove_size("Small")
+puts pants
+
+puts shirt
+puts pants
+	
+Ruby 2: Classes
+Lecture 6
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=6	
+
+-still using the item class
+-there is no real way to set the price after the price has been set, which means there needs to be setters and getters for each item
+- a getter just gets the thing, and returns are redundant
+-for the ID we don't want a setter, we just want the class to define it like it is an ID in a database
+-we can use the setters with 
+	shirt.description = "Business shirt"
+	shirt.price = 69.99
+	
+-remember to use the .each method when iterating through an array	
+
+-there are some shortcuts for class getters and setters instead of writing tons of individual methods 
+-if you are going to name the getter and the setter the same name as your instance variables you can use the method attr_accessor :INSTANCEVARNAME
+-the attr_accessor method will create our instance variable, getter, and setter for us all at once just by using :
+	so the description instead of being a whole long method would be
+	attr_accessor :description
+-if you want to be more specific than returning the instance variable, then we would write out a full method
+-attr_reader and attr_writer create the getters and the setters individually
+-the :VARNAME basically creates what is called a symbol that can be thought of as a constat that has a name 
+
+
+Ruby 2: Classes
+Lecture 7
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=7
+
+Quick Review
+	-attr_accessor, attr_writer, attr_reader, these are methods in ruby are methods in ruby that write Ruby code for you. 
+	-the attr_accessor :VARNAME creates the getter, setter, and the instance variable for VARNAME
+	-the : notes that you are creating a symbol which has a special value that refers to itself, and can be thought of like a constant string, and only uses one location as opposed to a = "string", will create new instances and will take up more memory, you can use .to_s methods to print out to the screen if you want, whereas the symbol only takes up a single space in memory
+	-it does NOT assign anything, you would still have to do the assignment in the intialization code
+	-attr_reader, creates just the reader, attr_writer creates just the setter, this is because at times we may not want the user to set and ID, such as with a unique DB key.  
+	-
+	
+Class variables
+		-avialble throughout the object the shirt and pants variables currently have different values assigned to them because they are in different objects.  E.g. different cups from different blueprints that hold different things like water or tea.  Every object has different instace varaibles associated with it that do not cross over.  
+		- a class  varialbe is available to everything that was created within that same class, changing a class variable means you change it within all objects that are created within that class at the same time.  it is a global variable for all objects created from the class
+		-a global variable is denoted with two @ like so: @@
+		-we cannot use attr_reader on class variables, so we have to define the getters and the setters 
+		- a getter for a class variable is written like most methods with 
+			def NAMEOFMETHOD
+				return @@CLASSVAR
+			end
+		-a setter for a class variable 
+		-AN example of when we would use this is if we wanted to create a class varialbe that would store all of the unique IDs that have been used and make sure to use a different one
+		-to use a random number and check and make sure that number is not used, we put the number we have used into an array that is created (empty) outside of the init statement and then we try and find the ids within the array to see if they have been used.  
+	
+Ruby 2: Classes
+Lecture 8
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=8
+
+Building a coffee machine
+-the properties it has: 2 water containers, coffee pot, heater(on/off), plug/power, clock/timer, delay functionality, coffee filter/dry coffee holder/coffee level, brewing time, water cups measurer, finished brewed coffee, type of coffee, 
+
+-putting the above into a class
+	-remember that there are states and actions in a class class methods and class variables that store the state of this coffee maker 
+	-classes start with class Classname, but they use camel case with the var names
+	-when writing code set the variables and then go down and write the program, bit by bit, making sure it works, test each method before moving onto the next code.  
+	
+-The basics of creating a cofee pot class after 1 lecture
+class Java
+
+  #creating the class variable that is accessible to everything
+  @@max_water_level = 32.0     #The max OZ that the coffee pot can hold
+
+  #creating the getter variable
+  attr_reader :power
+
+  def initialize
+    @power = false                 #on/off
+    @water_level = 0.0            #float representing amount of water in oz
+    @clock = 0                 #time, using the time class and time.now and time.now.to_i <-- puts seconds since epoch time
+    @coffee_level = 0          #float keeping track of cups of coffee(dry) in oz
+    @brewed_coffee_level = 0    #float keeping track of brewed coffee in oz
+    @filter = false            #boolean
+    @brewing_time = 0          #time
+    @element_temp = 0.0        #float as degrees in C
+    @brewing = false          #brewing is or is not happening
+  end
+
+  #instead of letting the user control anything and passing any random argument to the class
+  #we are using the turn on/off methods to protect/limit user power
+  #this is encapsulating the value
+  def turn_on
+    @power = true
+  end
+
+  def turn_off
+    @power = false
+  end
+
+end
+
+#creating new a coffee object, and storing it in a variable to call later
+java = Java.new()
+
+#turing the coffee pot on and ensuring that we have turned the coffee pot on
+java.turn_on
+puts java.power
+
+#turning the cofee pot off and ensuring that we have turned it off
+java.turn_off
+puts java.power
+
+
+Ruby 2: Classes
+Lecture 9
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=9
+
+-there are a number of times when we only allow things to be viewed and not modified by the user, which is just encapsulation and user security.  
+-How something is stored is different from the use/implementation of the thing, e.g. users should not know that power is stored as a boolean
+-in ruby you can use self to refer to one of the methods that you are already in 
+-constants are generally bad programming practice, it is a better idea to have things in a variable somewhere
+-refactoring is simply going back and making sure your code is better
+
+Code after lecture 2
+
+class Java
+
+  #creating the class variable that is accessible to everything
+  @@max_water_level = 32.0     #The max OZ that the coffee pot can hold
+  @@max_coffee_level = 8.0      #The max dry OZ that the coffee pot can hold
+  @@standard_cup = 8.0        #the amount of water in oz used to brew coffee
+  #creating the getter variable
+  attr_reader :power, :water_level, :coffee_level
+
+  def initialize
+    @power = false                 #on/off
+    @water_level = 0.0            #float representing amount of water in oz
+    @clock = 0                 #time, using the time class and time.now and time.now.to_i <-- puts seconds since epoch time
+    @coffee_level = 0          #float keeping track of cups of coffee(dry) in oz
+    @brewed_coffee_level = 0    #float keeping track of brewed coffee in oz
+    @filter = false            #boolean
+    @brewing_time = 0          #time
+    @element_temp = 0.0        #float as degrees in C
+    @brewing = false          #brewing is or is not happening
+  end
+
+  #instead of letting the user control anything and passing any random argument to the class
+  #we are using the turn on/off methods to protect/limit user power
+  #this is encapsulating the value
+  #generally we try and make the methods descriptive and action oriented in some way
+  def turn_on
+    @power = true
+  end
+
+  def turn_off
+    @power = false
+  end
+
+  def add_water(ounces)
+    @water_level += ounces
+    if (@water_level > @@max_water_level)
+      @water_level = @@max_water_level
+    end
+  end
+
+
+  def add_coffee(ounces)    #TODO: Make sure there is a filter first
+     @coffee_level += ounces
+     if (@coffee_level > @@max_coffee_level)
+        @coffee_level = @@max_coffee_level
+     end
+  end
+
+  def add_filter
+    @filter = true
+  end
+
+  def remove_filter
+    @filter = false
+  end
+
+  def remove_water(ounces)
+    @water_level -= ounces
+    if (@water_level < 0 )
+      @water_level = 0.0 #pegging at 0
+    end
+  end
+  def brew
+      # must be on, have water, have filter, have coffee grounds
+    if (@power && @water_level > 0.0 && @filter && @coffee_level > 0.0)
+      self.remove_water(@@standard_cup)
+      @coffee_level -= @@standard_cup 
+      self.remove_filter
+      @brewed_coffee_level += @@standard_cup
+      @brewing = false
+      return "Your coffee is ready"
+    else
+      return "Can't Brew right now, missing input water level is at: #{@water_level}, \n dry coffee is at: #{@coffee_level}, \n The filter: #{@filter}, \n Power status: #{@power}"
+
+    end
+
+  end
+
+end
+
+#creating new a coffee object, and storing it in a variable to call later
+java = Java.new()
+
+#turing the coffee pot on and ensuring that we have turned the coffee pot on
+java.turn_on
+puts java.power
+
+#turning the cofee pot off and ensuring that we have turned it off
+java.turn_off
+puts java.power
+
+#adding some water
+java.add_water(3)
+
+#adding a float amount of water to make sure the if statement works
+java.add_water(20.9)
+
+#making it so that a user can check the water level
+#also added a :water_level symbol outside the init statement for the attr_reader
+puts java.water_level
+
+
+#testing the coffee add method
+java.add_coffee(6.2)
+
+puts java.coffee_level
+
+#turning the machine back on
+java.turn_on
+
+#adding a filter
+java.add_filter
+
+#printing out the brew
+puts java.brew
+
+
+
+06/21/2016
+Ruby 2: Classes
+Lecture 10
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=10
+
+-you can put each CLASS.new that you create into an empty array like so:
+	derp = []
+	derp << Class.new ("Thing 1", "Thing2", 3)
+	
+-you can then use a to_s method defined in the class to print things out specifically like so 
+	def to_s
+		return "#{@name} #{@thing1} #{@thing2}"
+	end 
+-the to_s method along with the .each iteration through the array can create some really awesome stuff 
+		derp.each do | things|
+		puts things.to_s 
+		end
+		
+-ruby also has .ljust and .rjust methods, and you're able to put in the number of spaces with .ljust(20) for example:
+
+    return "#{@name.ljust(20)} #{@sid.ljust(20)} #{@program.ljust(20)} "
+
+-the above would output a set of lines that looks like so:
+Name Goes Here       123456               CIS                  
+Another Name Here    222222               HIST 
+
+
+-HOLY CRAP...each of the class variables can be accessed with the CLASSNAME.classvariable call and as such can be changed when doing stuff like so:
+CLASS VARIABLES: @name @ sid @ program @classes
+acessors :name :sid :program
+
+#statement opening the file
+student_file = File.open("students.txt")
+  while !student_file.eof?
+    #because the split command passes things as an array
+    #student is now an array that we can manipulate
+    #We call the student.new class and pass in the arguments of student[0], student[1] and so on
+    #to fulfill the argument requirements
+    #we then pass those arguments from the index specified at student into herd.
+    student = student_file.gets.chomp.split(",")
+    herd << Student.new( student[0], student[1], student[3], student[0])
+  end
+student_file.close
+
+
+herd.each do |student|
+  puts student.to_s
+end
+
+herd.each do |student|
+  student.name = "Kelly"
+end
+
+
+Ruby 2: Classes
+Lecture 11: Intro to Class Inheratence
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=11 
+
+-how to go about splitting up programs, since they are getting larger.  
+-typically we keep a class in each file, and a way to refer to those classes is linking those classes, to include files, classes or other stuff that you are using we use:
+	require '.\FILENAME.rb'
+	
+-the .\ tells ruby that we are in the same directory
+-we have to use ' (single quotes) becuase " (double quotes) will read the slash as an escape character
+-another way to do the same as the above is with require_relative 'FILENAME.rb'
+
+Inheratence
+-when we change how an internal method is being used, that is known as override
+-inheretence works like geneology, the parent contributes to the direct genetic attributes of the child, but the child does not contribute to the direct genetic attributes of the parent 
+
+-With the following code there are 5 methods that are pesent:
+class Animal
+  attr_accessor :color, :name
+
+  def initialize(name, color)
+    @name = name
+    @color = color
+
+  end
+
+
+end
+
+WHY???!!!
+-because the attr_accessor for :color, :name creates the getters and the setters for each of them, meaning that there are 4 methods from those, AND the initialize method 
+
+-we could create a specific thing with tiger = Animal.new("Tigger", "orange"), but we can do more with inheretance.  
+-we could create a more specific class that would deal with these things 
+	we would do this with class Tiger < Animal
+-the above code simply means that Tiger will inhereit all of the properties/methods that the Animal class created, so while every animal has a name and a color, a tiger might have something more specific
+
+for instance a tiger might say something different than most animals:
+
+class Tiger < Animal
+
+  def speak
+    puts "Grrrrr"
+  end
+
+end
+
+so to call grr we initalize a new tiger with 
+
+#putting stuff into a new animal class, and stuffing it into the big_cat variable
+big_cat = Tiger.new("Tigger", "Orange")
+
+#printing out the speak method
+puts big_cat.speak
+
+
+  
+Ruby 2: Classes
+Lecture 12: 
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=12
+-single inheretence 
+-there is the .class method that will tell you what kind of class a variable is
+	-The above is called introspection (Ruby can look at itself which makes it very dynamic)
+-self in ruby represents the object that is calling it like for so:
+	  def identify
+    return "My name is #{@name} and I am a #{self.class}"
+  end
+-the above outputs:  My name is tigger and I am a Tiger, this is because it got the tiger class 
+	-it got tiger because tiger is the object, and self is the tiger object 
+	
+-if we create a new zebra class with class Zebra < Animal (meaning it inheretis everything from Animal), and create it with zach = Zebra.new("Zach", "Black and White")	
+	-and then if we try and call puts zach.speak, it will NOT work, because speak was only created for class Tiger, and Animal does not have it nor does Zebra, meaning that zach.speak will throw an error because it sees it as an undefined method
+	
+--the easiest way to resolve this is to put a  speak method 
+-we can override things by creating a private/specific method within the Tiger class, e.g. calling the speak method for the tiger class, will result in something different than calling the general speak method from the Animal class E.G. there is a hierarchy.  
+
+-if we were to create some tigers with the following:
+big_cat = Tiger.new("Tigger", "Orange")
+other_cat = Tiger.new("Tony", "OrangeANDBlack")
+
+and do a puts big_cat == other_cat #=> false
+-it would return false because both big cat and other cat are different objects and are created/called differently and hold different places in memory
+-the keyword super in the speak method would utilize the speak method in the Animal class OVER the speak method in the Tiger class, and will run whatever is in the superceding class 
+-we can also modify/add onto the super class with something like (THE FOLLOWING IS WITHIN THE Animal class):
+ def speak
+    "Hello, my name is #{@name}"
+  end
+  
+def speak
+    return super + "Grrrrr"
+end
+
+-The above code, would for the Tiger class say "Hello my name is #{@name} Grrrr" as opposed to if we just called super which would just display "Hello my name is #{@name}"
+
+-we can also override the inatlize method if we so choose AND within the intailize method that we specify for the class that we are using, we can modify the number of arguments  like the following
+
+class Zebra < Animal
+  def initialize(name, color, stripes)
+    @stripes = stripes
+    super(name, color)
+  end
+
+end
+
+-in the above code we are creating initalize with 3 variables rather than just 2 that we would normally have with name and color, but we also need to specify the class variable of stripes, we then call the super method and pass it the number of arguments that it needs so that we can combine it all together.  
+
+-when calling zebra with zach = Zebra.new("Zach", "Black and White"), the previous call would be wrong, BECAUSE we don't have 3 arguments there, only 2, the name and the color the correct call would look like
+zach = Zebra.new("Zach", "Black and White", 20)
+
+
+Ruby 2: Classes
+Lecture 13: 
+https://www.youtube.com/watch?v=m9Flzm1N7Js&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=13
+-we can create a bunch of animals that work within our class with something like:
+zoo = []
+
+
+10.times do | num |
+  zoo << Zebra.new("Zebra#{num}", "black and white", rand(20..100))
+end
+
+
+
+puts zoo.count
+puts zoo[0].class
+
+-the last puts, prints out what class our object is, in this instance it is not an array, but a Zebra class, because the 0th element of the array is whatever is STORED IN THE ELEMENT.  
+	-because it's a zebra we can do zebra type stuff with it.  in this case we can make it speak with our class Zebra using the super method of speak, or we can create a specific speak method for zebra like so:
+	
+	class Zebra < Animal
+  def initialize(name, color, stripes)
+    @stripes = stripes
+    super(name, color)
+  end
+
+  def speak
+    return super + " Hello World"
+  end
+
+end
+
+calling the above:
+puts zoo[rand(0..zoo.count)].speak #=> Hello, my name is Zebra5 Hello World
+
+
+-we can get an inventory of all of our zebras with 
+	zoo.each do | animal |
+		puts "#{animal.name} #{animal.color} #{animal.stripes}"
+	end
+	
+-the above call would spit out an error on stripes BECAUSE 	there is no getter for stripes, and we change that with an attr_reader :stripes
+
+Ruby 2: Classes
+Lecture 14: 
+https://www.youtube.com/watch?v=jk-La1cUNVo&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=14&spfreload=14
+-Inhereitance is when an object gets all of the objects/methods from a class, and generally it is single inheretence, usually you don't need multiple inheretence for now.  
+-the .class method is useful for figuring out what something is, via introspection.  
+-modifying our Animal class to be more than just a zoo array so we can do stuff to it.  
+-we used require_relative 'animals.rb' to create a new file
+-remember that the first thing we define is initalize 
+-we need to create an instance of the zoo class with zoo = Zoo.new
+	-because we are creating a zoo from the zoo class, we can do zoo things with it.  
+	-the above is called instatiation
+-self is a keyword in ruby that represents the thing that we are/are working on/in, and self.class would return the class of the object that you are calling class on 
+-if a subclass has a specific method that is being called, that method will take precedence/importance over a method that is above it/from it's parent.  
+-Let's say you create two animals with an Animal class, even if you give them the same name/properties, they are different objects	
+-the super keyword, basically says "utilize the parent's method of the same name" E.g. if the 
+	class Animal
+		def speak
+			puts "I'm GOING TO SAY"
+		end 
+		
+	class Tiger < Animal 
+		def speak
+			puts super + "Hello world"
+		end 
+	
+So in the above example the Tiger class would call the speak method from Animal and add to it "Hello World"
+-we can create override methods that are only available to specific classes, so for instance we could create an initalize method for the zebra class that takes a specifc number of arguments.  
+
+class Zebra < Animal
+  attr_reader :stripes
+  def initialize(name, color, stripes)
+    @stripes = stripes   #stores specific variable for the Zebra class
+    super(name, color)	  #tells Animal class to create self, and create new animal
+  end
+  
+Ruby 2: Classes
+Lecture 14 (AGAIN): 
+https://www.youtube.com/watch?v=jk-La1cUNVo&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=14&spfreload=14
+-require_relative 'NAMEOFFILE', not the single quotes, and the lack of .rb, and you should be fine 
+-encapsulate things so that users do not know How something is being created
+-with the add_animal method we would add animals to our cage with @cage << animal
+-we can loop through our cage with inventory, that will output things to the screen, but could also be used	
+	def inventory
+	@cage.each  do |animal|
+		return_str += animal.to_csv
+	end 
+	return ret_str
+
+-a simple return statement will just end things, so what we can do	is create a long string, put it into a variable and return the long string once we are out of the loop.  
+
+-to instantiate/create an instance of Zoo we have to create Zoo.new
+-Zoo is a zoo object, which means we can do Zoo things with it, which is just another way of saying that we can utilize whatever methods are available within that class
+-Zoo is NOT an array, it contains an array, which means we couldn't use zoo.count
+-we could create our own count method by calling cage.count within the count method, because the method knows that cage is an array, but the outside world does noet.  
+-the make_noise method tells every animal to make noise
+  def make_noise
+    ret_str = ""
+    @cage.each do |animal|
+      ret_str += animal.speak + "\n"
+    end
+    return ret_str
+  end
+  
+-We can create a number of tigers by simply calling our zoo method like so:
+5.times do |num|
+  zoo.add_animal(Tiger.new("Tigger#{num}", "Orange and black"))
+end  
+  
+-make sure that the variable/class names are the same so that you don't spend time hunting them down 
+
+-we can modify make_noise to have each_with_index do |animal, index|
+  def make_noise
+    ret_str = ""
+    @cage.each_with_index do |animal,index|
+      ret_str += "#{index + 1}. " + animal.to_csv + "\n"
+    end
+    return ret_str
+  end
+end
+-this way we can get the index starting at 1 and print it out.  
+
+06/27/2016
+Lecture 15
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=15
+-in ruby the equivalent operator (==) can be overridden
+-Keep in mind a = 25, b = 25 a == b would be the same BUT a = Zebra.new("Dave", "gray", 30) and b = Zebra.new("Dave", "gray", 30) WOULD BE DIFFERENT AND NOT BE EQUIVALENT, this is because a and b are different OBJECTS!!!
+-what if we want to compare objects that we think are the same?
+-we could compare specific parts of the object such as name with a.name == b.name or stripes with a.stripes or b.stripes.  THIS IS BECAUSE .name uses the string method and .stripes uses the fixnum method which are comperable.  
+-well, what if we want to compare a and b and don't want to call other specific methods.  
+-when overriding the == method the left hand side of the equation is the object that we are calling the method on, it's applied to everything before the == so in a sense the evaluation would look like if a.==(b)
+-this depends on what is being compared, if the like objects are strings, it will use the string == method, instead of another method
+-this allows us to compare records, which is very useful for things like databases, in which we might compare everything but the ID 
+-we can also override the + method, the 
+
+
+07/03/2016
+Lecture 16
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=16
+
+-an old way of doing a menu would be to create a while loop with a case statement to check for the possibilities.  The new way is to create a class
+
+-the SPLAT (*) argument lets you pass in any number of arguments to a method/class, you do need a name to put it into though like so (*menu_args), this tells Ruby, I will take as many or as few args as you get me.  
+-when Ruby sees a splat, it turns whatever is passed to it into an array, because an array can hold anything
+-remember that you have to create a class variable with @ClassVarName = SplatArg within the initailze statement
+
+-OK, so this line is pretty powerful:
+while( (choice = menu.get_menu_choice) != menu.quit )
+ESPECIALLY in conjuction with attr_reader :quit and @quit = menu_args.length
+-what the while loop is saying is that WHILE (also notice the 2(TWO) sets of parens) the choice from the menu class is not equal to 4, and if it is equal to 4 then we will end (this is because @quit is based on the length of the array/menu args)
+
+-try and format your code (at least the stuff you want on screen) to look in the editor, approximately how you want it to print out. 
+
+07/05/2016
+Lecture 17
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=17
+
+Extending the Fixnum class
+-something like extending the Fixnum class is also known as 'monkeypatching' which adds functionality to the language, and can make it more readable.
+	-This is often seen in rails with commands like 10.days.ago   which will give an object of 10 days ago
+	
+***Extension below***
+class Fixnum
+
+  #returning the number of seconds in a minute
+  def minutes
+    return self * 60
+  end
+
+	#printing seconds in a day
+  def days
+    self.24 * 60 * 60
+  end
+
+
+end
+
+
+puts 10.days
+
+-to utilize	this and effectively get the number of seconds in a day, regardless of what number is to the left of the period we use the self method.  
+	-self represents whatever is to the left of the period
+
+	
+-You can make a pst time calculator with the following method 	
+  def ago
+
+    return Time.now - self
+
+  end
+  
+ in conjuction with the following methods that extended teh fixnum class:
+puts Time.now
+puts 22.days.ago
+puts 10.minutes
+puts 2.hours.ago
+
+ which outputs the following:
+ 2016-07-05 21:45:10 -0700
+2016-06-13 21:45:10 -0700
+600
+2016-07-05 19:45:10 -0700
+
+-GEMs like the linguistics gem add features like Klingon, plural, numbers into words.  
+
+07/06/2016
+Lecture 18: Modules
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=18
+
+WHY WE USE MODULES:
+Namespacing is a way of bundling logically related objects together. Modules serve as a convenient tool for this. This allows classes or modules with conflicting names to co-exist while avoiding collisions. Think of this as storing different files with the same names under separate directories in your filesystem.
+
+-https://rubymonk.com/learning/books/1-ruby-primer/chapters/35-modules/lessons/80-modules-as-namespaces
+-we can define constants with all caps, for instance PI = 3.14159
+
+-we need to specify which module the program needs to look in, because if there are similar methods in each one, it will throw things off.  
+
+-The line of code:
+puts Trig.sin(Trig::PI/4)
+-tells the program to look inside the Trig module, and within sin, but to shortcut it we use the parens () to tell the program to look inside the trig moduel and give back the constant PI (that shortcut is done with the ::)
+-accessing a constant is done with a double colon ::
+	-rails accesses constants/shortcuts a lot 
+
+-There is no such thing as a Trig.new() because a module is different from a class, and you do not instantiate 	an object.  All the module does is encapsulate/package together constants and classes.  
+
+Prawn::Document.generate
+	-indicates that Prawn is a module, and that Document is a class inside the Prawn module, which is calling the generate method 
+	
+require 'prawn'
+
+Prawn::Document.generate("RJR.pdf") do |pdf|
+  pdf.font "Courier"
+
+  pdf.move_down(100)
+  pdf.draw_text("Hello World", :at => [0, pdf.y])
+end
+
+-the above code, requires prawn, generates the document (explained in the notes above), selects the font type (must be specific, for instance, Arial is not a font type), it moves down 100px, and draws hello world at the X, Y coordinates specified.  
+
+-within the same generate block of code we can write:
+  pdf.stroke_color = "ff0000"
+  pdf.line_width = 3
+  pdf.stroke do
+    pdf.circle [250, 250], 25;
+    pdf.circle [250, 250], 50;
+    pdf.circle [250, 250], 12;
+	
+-the above code uses red, and a line width of 3 to create 3 circles at the X, Y corrdinates 250,250 with varying radii
+
+-THE FINAL in the class is to create a word search that randomizes letters, and the placement of words that are provided from a text file.  
+
+07/07/2016
+Lecture 19: Multidimensional Arrays
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=18
+
+-double arrays have 2 dimensions, (like an X and a Y coordinate).  Double arrays/multidimensional arrays are very useful and can be useful for the final project
+-A double array/multidimensional array is simply an array containing arrays, with each element of the outer arrays being an array itself.  EG
+	cells = [1,2,3]
+	cells[0] = ["a", "b", "c"]
+	cells[1] = ["e", "f", "g"]
+-in a two dimensional array is like using the entire spreadsheet with using the row/column as a descriptor, not just a row or a column like we do for single arrays.  
+
+	cells = [
+      ["a", "b", "c", "d", "e"]
+]
+
+
+puts cells[0][0]
+
+-the above code creates the array cells, and within the array cells we create an array of a,b,c...
+-in order to puts the value of position 0,0 of the array we need to add the second index like we have above.  
+-if we just did cells[0], it would print out a,b,c...
+-the second index is the column, the first index is the row.  
+
+
+cells = [
+      ["a", "b", "c", "d", "e"],
+      [1, 2, 3, 4, 5]
+]
+
+
+puts cells[0][0]
+puts cells[1][2]
+
+-remember to put the comma in to separate the internal arrays, but to access it you need to specify the array and the part of the array that you want.  
+-you can almost think of this like battleship where you have to specify coordinates as well
+-you can update/change coordinates much the same way with statements like:
+	cells[1][4] = 100 #will change the value that WAS 5 to 100
+	
+	
+cells.each do |row|
+  row.each do |col|
+    print "#{col} "
+  end
+  puts
+
+end
+
+This basically puts out a nice column/row for our word search
+-another possibly easier way to do this is as follows:
+cells.each do |row|
+  puts row.join(' ')
+
+end
+
+07/07/2016
+Lecture 20: More Multidimensional Arrays
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=20
+
+-so how do we do the Diags in the word find/multi dimensional array?
+col = 0
+cells.each do |row|
+  row[col] = 1
+  col += 1
+end
+puts
+
+-The above code goes through each 'row' and replaces the 'column' that it is at with a 1, from there we increment the column counter and then go back through, because it completes the rest of the row for the array, and then it gets to row,(column number) it sets that to 1.  
+
+-how would we change column 3 to ALL 0s vertically?
+new_col = 3
+cells.each do |row|
+  row[new_col] = 0
+  
+end
+-what we are doing above is setting new_col to 3, because that's the column we want.  we then do the each loop for the outer array, and use row as the variable.  We use row[new_col], because we want to change the 3rd column letter in each row and set it to 0.  because we are not moving diagonally at all, we do not need a counter
+	-we could also simply use the line row[3] = 0, because we're always accessing the same point, doing it with a variable just takes up more time/space/code
+	
+	
+-how would we convert the 4th row to 2's?
+Just using a while loop because it's easier, this could also be done with a for loop
+col = 0
+while col < cells[4].length
+  cells[4][col] = 2
+  col += 1
+end
+-the above code initializes col, and says that while col is less than the length of row 4, for row 4, and the column print 2, and then increment col by 1 and move to the next column in row 4 
+
+-How would we find a certain letter in a double array?
+
+#find q in the double array
+row = 0
+while row < cells.length
+  col = 1
+  while col < cells[0].length
+    if cells[row][col] == "q"
+      save_row = row
+      save_col = col
+
+    end
+    col += 1
+
+  end
+
+  row += 1
+end
+	
+#the above code initalizes row, and says that while
+# row is less than the number of rows/2nd arrays in cells keep going through
+#we then initalize col, and then we check to see how many columns there are with
+# cells[0].length (this is because the length of the array within the cells array
+# is how many columns there are)
+#we then create the if statement that checks to see if row/col is q
+#and if it is then we save the row and the column in a variable, if not we just increment
+#col and row by 1
+
+
+07/07/2016
+Lecture 21: Timing how long code takes
+https://www.youtube.com/watch?v=aQu-_9E9at4&list=PLSXDqiI4sC5O3fI2XzlXCfKiKx9ELnH4Q&index=21	
+
+
+THe following method provides the average of how long our code takes to run given some number of times:
+
+def avg_time(num_time=1)
+  start = Time.now
+  num_times.times do
+		#yield
+  end
+  avg = (Time.now - start)/ num_time
+  puts avg
+end
+
+-puts is OK inside a method, but can be a security issue inside a class 
+-the commented out 'yield' within the block, means it runs the code that gets passed to the method within the block.  This is used heavily in rails  FOR EXAMPLE
+
+avg_time(100) do
+	#CODE GETS EXECUTED HERE WHEN THE YIELD RUNS
+	puts "hello world"
+end	
+
+-we could run the time generation of PDF documents, word find puzzles, etc...
+
+

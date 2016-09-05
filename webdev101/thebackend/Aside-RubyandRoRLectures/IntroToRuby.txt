@@ -1,0 +1,537 @@
+Introduction to Ruby
+Lecture 1: Setup and Hello World
+
+-You can use print or puts to print a string in Ruby
+-print will NOT add a new line/print things out on  a new line/print
+-puts WILL add a new line/print things out on a new line
+-print does NOT put the character turn at the end, puts DOES put the character turn at the end
+-Ruby supports character addition/multiplicaion such as "*" * 10
+-there are standard escape characters such as \, \t, \n
+-string methods include .upcase(capitialize everything), .downcase(lowercase everything), .length(find the length of something), .reverse(reverse the input)
+
+
+Introduction to Ruby
+Lecture 2: Numbers and I/O
+https://www.youtube.com/watch?v=mNt9CDg-MS0&index=2&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF
+-gets is the opposite of puts
+-ruby convention on variable naming is that variables start with lowercase letters and multiple words are separated with underscore
+-gets can be put into a variable as such: name = gets
+-if a user types 50(enter) as an input to a question, the Enter keystroke is counted as part of the len of what was entered
+-gets, returns everything that is typed from the user 
+-gets returns strings ('get string')
+-the .chomp method is useful in this instance, becuase it will take off the last character of the string, if and only if the last character is an Enter AKA: carriage return
+-you do not have to declare a variable type with Ruby meaning that variables are mutable
+-conversions between variable types can occur with .to_s and .to_f and to_i to convert to string, float, and integer
+-we can print variables into output/strings with the tradional [VARIABLE NAME] + "..." method, but we can also use "#{name} is #{seconds_old}"
+-the #{VARIABLE} will evaluate to whatever is stored in the VARIABLE, there doesn't have to be any casting/converting either
+EXAMPLE: so puts "#{name} is #{age * 360 * 24 * 60 * 60} seconds old", will all be converted/pulled/calculated as neccessary, and turned into a string
+
+s
+Introduction to Ruby
+Lecture 3: Floating Point Numbers
+https://www.youtube.com/watch?v=k6ePfV7jd3Q&index=3&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF
+
+-you can use .to_f to get floats
+-Ruby gets a number up until the point that it can which is why 18.50 becomes 18 and why a1234 being gotten from a to_i gets 0 (because it's not a number it can read)
+-Change the request based upon what the user should do, e.g. should a tip be a percentage already, or a whole number?
+-#{} is called interpolation in ruby, and makes things easier
+-to round numbers (e.g. round to 2 decimal places) for this we would use sprintf method (sprintf returns a string)
+-to convert we need to argumets sprintf("$%.2f", $3.3333)
+	-the above basically says "I want a dollar sign to preceed my code, and I want 2 digits of precision following the f", you can put just about anything you want before the % in order to preceed the amount
+	-the code I decided to use in the program is: puts "Your tip amount is #{sprintf("$%.2f", tip)}"
+-a gem is a library of code you can include in your program to include additional functionality
+
+	
+
+Introduction to Ruby
+Lecture 4: Conditional Statements
+https://www.youtube.com/watch?v=ngocHEpPEBY&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=4
+
+-Basically a fork in the road in a program
+-ruby requires the end statement for ifs etc... you can have as many statements as you want in the if block, but it's something that you need
+-Ruby checks to see if the block is true/false in order to execute it
+-equivalency in ruby is shown with ==, which can be a common problem in a conditional if somone only puts =
+-standard condtionsals include:
+<= less than/equal to
+>= greater than equal to
+!= NOT equal to
+< Less than
+> Greater than
+
+-else can be used (does not require an end):
+if (condition)
+
+else OR elsif
+
+end
+
+-the statement will satisfy the first condition that it can and skip the rest, because it checks the conditions sequentially
+
+Introduction to Ruby
+Lecture 5: Conditional Statements
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=5
+
+Creating a BMI calculator
+	-BMI is in KG so we have to use the correct formula
+	
+Introduction to Ruby
+Lecture 6: While Loops
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=6
+
+
+-While loops require 3 things: an initial condition, a boolean expression that will end the loop, and some way to end the loop
+-counting up to 10 could be done with while count < 11, while count != 10, while count <= 10
+	-if for some reason you skip 10, then !=10 could be infinite, e.g. it is too narrow/specific
+-while loops need an 'end' for them as well, meaning that if you have a while loop, and an if statement within the while loop you will need 2 'end' statements
+-there is also the .odd? and .even? method in ruby that would look like:
+	if count.even? #if this statment is true execute the code block underneath it.  
+
+Introduction to Ruby
+Lecture 7: While Loops to create a menu
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=7
+-One of the most useful cosntructs to repeat menus/selections from user is to put a menu in a while loop
+
+That block of code looks like so:
+#displaying options for the user and putting user response into a variable
+puts "Input the number of your selection"
+puts "1.  Generate password\n\n"
+puts "2.  Quit"
+puts "Selection: "
+user_input = gets.to_i
+
+#utilizing a while loop and if statements to check for user input
+while user_input == 1
+
+under the statement of code that executes you need a line of text that prompts the user for input AND a gets that points to a variable, otherwise it will be an INF loop
+-puts by itself just inserts a blank line
+
+
+Introduction to Ruby
+Lecture 8: Arrays
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=8
+-arrays are useful if you want to have a user put in a line of text, but quit if the line of text is an empty string, and then print out everything in reverse after the empty string is entered.  
+-if we try and write out the type of program above we will just end up creating nearly infintie temporary storage variables
+-Arrays are like columns in an excel spreadsheet and allow for more and more data to be put in there, regardless of type of data, and then later access it from its address
+-there are 167 (or more methods) that are applicable to arrays, so you can do a ton of stuff with it
+-you can manipulate numbers inside of arrays with calling the address of the array and adding 1 to it and putting it back into the array, etc...
+-random is a pretty cool function that you can manipulate in the following ways
+	-rand in ruby calls a number that is less than 1, you can make it greater than 1 by multiplying it by 10, you can calso convert it to an integer and add 1 to it. You can also assign rand to a variable, and most importantly call a random number within a given range of numbers such as rand(1..100) will call a random number between 1 and 100
+
+Introduction to Ruby
+Lecture 10: Arrays part 2
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=10
+-we can puts specific index stuff with puts ARRAY/ARRAY_VARIABLE_NAME[INDEX]
+-you can use the .count and the .length method for similar things as well as .size
+-we can use a while loop to increment through an array as such
+	#simple array loop/increment
+	array = [IMAGINE THERE'S DATA IN HERE SEPARATED BY COMMAS]
+	count  = 0
+	#to ensure we don't go outside the bounds of the array we can simply use the < conditional or use the conditional we have now, but change the condition to array.length - 1
+	while count <=array.length 
+		puts array[count]
+		count +=1
+	end
+	
+	#we can reverse the above program by setting count = states.length and changing the conditional/execution block to read while count >= 0 and count -=1
+-we can access the last element in an array with ARRAY[-1]
+-.index tells you the index of whatever it is that you want to search for in an array
+-if you wanted to print a number with each state you could use the interpolated method to do so
+	puts array.index("SEARCH STRING HERE")
+-.reverse returns a new array, just the other way around
+	-reverse does not store an array in a variable, but this can be done with the method .reverse! which will store the reversed array in a variable from which it was called
+-another way to loop through things is to use ARRAY.each do |VARIABLE NAME HERE |  end
+	EG states.each do |state|
+		puts state
+		end
+
+Introduction to Ruby
+Lecture 11: Arrays part 3
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=11
+-there are minium and maximum methods to find the min and max of a set of integers/strings
+-You can write such comparisons without using max/min methods using while loops, the each method, etc...
+-you can also use a sort method		
+-you can chain methods together
+		
+Introduction to Ruby
+Lecture 12: Arrays part 4
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=12
+- << is used to indicate to push data to an array, it is the same thing as the .push method
+- >> is used to pop data off of the array (the last element) AKA .pop
+- .shift removes the first element from the array and decrements everything
+
+Introduction to Ruby
+Lecture 13: Hashes
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=13
+-data structure is a term to denote how data is placed into and read out of a computer
+-while an array was a column in a spreadsheet, a hash is a more general version of an array that has 2 columns that has a key and a value
+-a 'hashrocket' => denotes what key is being associated with what value { KEY => VALUE } THis is when we are hard coding Hashes/dicitonaries and not dynamically creating them 
+- to look up data we have to index the stuff, just like we did with arrays, but we would put in the key like so: puts "#{HASHVARIABLENAME["KEY"]}" 
+and also like so puts HASHVARIABLENAME["KEY"]
+-you create the hash with {} and can call it with {}, but also call it with []
+-an array is identical to a hash if the hash uses numbers as keys
+-in order to access a hash in a loop we have to use the each method HASHNAME.each do | |
+	-that will output everything in the hash so x = {"Jon" => 3} being called with the x.each do |i| puts i
+	 would print Jon 3
+	 -to get just a key or just a just a value we can create an each with multiple variables as such:
+	 HASHVARIABLENAME.each do |var1, var2|
+		puts var1
+	-there are also methods such as each_key, each_value, each_pair
+
+	
+Introduction to Ruby
+Lecture 14: Methods
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=14
+-Methods are a way of breaking up code into blocks so that we don't have to repeat ourselves as much DRY
+-we generally define a method at the top of the program
+	def hello
+		#CODE GOES HERE
+	end
+
+-if you call the method before you have defined it, an error will result
+-we can call other methods within methods
+	def number
+		puts 10
+	end
+	
+	def hello
+		puts hello
+		number
+	end
+	-would print hello 10
+	
+-basically think of mehtods/functions as little lego blocks that help build up your program
+-we can pass paramaters (data/arguments) into methods
+-eg:
+	def hello(first_name)
+		puts "hello" + first_name
+	end
+	to call it would look like: hello(Jon) would print out: hello Jon
+	we could also interpolate it by passing hello(12) and puts "hello" #{first_name} and the method will print out anything
+
+-we can pass multiple arguments like such
+	def add (x, y)
+		puts x + y
+	end
+	add (2, 2)
+
+Introduction to Ruby
+Lecture 15: More Methods
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=15
+-typically a method does not print something to the screen, usually it just passes back some results
+-for this you can use puts, or more conventionally return
+		def add (x, y)
+		return x + y
+	end
+	puts add (2, 2)
+	a = add(3,3)
+	
+-ruby is awesome because if you were to pass it 2 and 2.0 into the add function, it will automiatically convert everything to floats and return it as neccessary
+-if we store the value of the method in a variable, we are able to manipulate it easier/more consiely.  
+
+Something like a basic menu program and method would look like:
+def menu
+  options = "1.  Names\n"
+  options += "2.  Address\n"
+  options += "3.  Phone Numbers\n"
+  options += "4.  Quit\n"
+
+  return options
+end
+
+#menu program
+
+puts menu
+puts "please input a selection: "
+
+user_choice = gets.to_i
+
+while user_choice != 4
+if user_choice == 1
+  puts "Names go here"
+  puts menu
+  user_choice = gets.to_i
+elsif user_choice == 2
+  puts "Addresses go here"
+  puts menu
+  user_choice = gets.to_i
+elsif user_choice == 3
+  puts "Numbers go here"
+  puts menu
+  user_choice = gets.to_i
+else
+  nil
+
+end
+end
+
+-NOTE: We have to concatonate options, otherwise we will just get the last option back, we also have to use user_input gets with every if statement because we don't want the program to constantly loop since otherwise !=4 will always be true, and there has to be something to stop the program.
+
+Introduction to Ruby
+Lecture 16: More Hashes
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=16
+
+-to create a hash we declare the var and use curly braces, older versions of ruby use => to denote when things were being associted between a key and a value, newer versions of ruby use a : to denote when things are being assocaited
+	var1 {"dogs" => "fur", "cat" => "ears"}
+-on the left is the key, on the right is the value
+
+-to print a key and value on one line for each key/value pair, you need a while loop with an each statement:
+	states.each do |state, abbreviation|
+		puts state, abbreviation
+	end
+	-we could do the above block of code with interpolation so the executed block looked like:
+		puts "#{state}, #{abbreviation}"
+		
+-to print out ONLY the states that start with a certain letter we would do
+#this works because state is an array of single characters, which allows us to check
+	states.each do | state, abbreviation |
+		if state[0] == "W" or state[0] == "w"
+			puts "#{state}, #{abbreviation}"
+		end
+	end
+
+
+	
+-to find the state with the most characters:
+#print out the longest state
+longest = states[0].to_s
+longest_key = ""
+
+states.each do | state, abbreviation |
+  puts state.length
+  if state.length >= longest.length
+    longest = state
+    longest_key = abbreviation
+  end
+end
+
+puts "This is the longest state: #{longest} which has #{longest.length} characters"
+puts "It's abbreviation is #{longest_key}"
+
+
+Introduction to Ruby
+Lecture 17: Hashes and Enumerable
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=17
+-hash methods such as has_key? are very helpful
+-Any method in Ruby that ends in a ?, returns a true or a false (AKA boolean)
+-we would search for a key like so:
+	puts states.has_key?('FLORIDA')
+-In ruby, a single quote ' will NOT interpert escape characters but a " will
+-we can do the same for values with states.has_value('')
+-ENUMERABLE is a bunch of code for hashes and arrays that make more/other methods available
+-Aside: if you do .max and .min on an array of strings, it will sort things alphabetically, 
+-find_all takes a hash and runs a block of code against every key/value in the hash for example:
+	states.find_all{ | state, abbrev| state[0] == "A"}
+	-finds all states with the letter A
+-there is also a .find, but it will return ONLY the first value that it finds and no more
+-the methods work for both strings and numbers
+-SUPER COOL METHOD/code:
+numbers  = [1, 20, 25, 50, 22, 39, 250, 274, 10009]
+
+#finds all of the numbers in the given array/string/thing that are greater than 30
+puts numbers.find_all{ |num| num >30}
+-we have to use the each method on hashes because the keys might be strings or something else, if the keys were numbers, then it would be an array.  
+	for example to print out all the abbreaviations in an array of states	
+		states.each_value #could also be each_key do |abbrev|
+			puts abbrev
+		end
+		
+Introduction to Ruby
+Lecture 18: Creatin an HTML menu from Hashes
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=18
+-we can use loops to dynamically print menus like with this code that calls the 'states' hash/dictionary
+
+#prints a number of states from the hash/dictionary
+states.each do |state, abbrev|
+  puts "\t<option value='#{abbrev}'>#{state} </option>"
+  #just need to put into to .html file, which we are doing with copy/paste for now
+
+end
+
+-Ruby also has a .succ method which is short for 'successor' which will allow you to print one thing after the next (e.g puts "A".succ will print out B )
+
+
+-we could also use it to print out a simple HTML menu like so 
+letter = "A"
+while letter != "AA" and letter != "Aa"
+  puts "<a href ='/#{letter}'>#{letter} </a>"
+  letter = letter.succ
+end
+-anything with a ! modifies/changes the thing before the . so with letter.succ! letter would take on the value of .succ and the variable would not neccessarily need to be called in the loop in such an explicit way
+
+
+Introduction to Ruby
+Lecture 19: Intro to files
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=19
+
+-opening files is pretty basic, but for now files need to be in the same directory as we are calling them from
+Basic structure for opening a file:
+	File.open("NAMEandEXTENSIONoftheFILEweWANTtoOPEN.txt")
+	states_file = File.open("states.txt")
+
+-in order to manipulate files we need to assign them to a variable
+-for every file we open we need to close it/call the .close method
+	states_file.close
+
+-we can read lines from a file, but in order to do so we need to call gets on the variable that holds the file that we opened
+	first = states_file.gets
+	puts first
+
+-because the first variable is a string we can manipulate it with string methods
+-we can use states_file.gets.chomp to get rid of carriage returns etc... just like we would with keyboard input
+-to determine the length of a file (in a roundabout way) we can use the end of file method .eof? (returns true or false)
+	#while not at the end of the file, print things
+			while ! states_file.eof?
+
+
+	#remeber that a while loop needs 3 things 1.  Inital conditon 2. boolean expression and something that chnanges the condition
+	# The intial condition is that we are not at the end of the file 
+
+-writing a state to a file requires writing to it, and to do so
+-using the "w" file writing mode will DESTROY/OVERWRITE EVERYTHING IN THE FILE
+-please not that .readlines will just open and close the file
+-reading from a file 
+-the .split method will split based upon a specified character or set of characters like so
+	data = first.split(",")
+-to create dynamic elements/add elements to an array
+-we can create a dicitonary/hash dynamically/consistently being written to with:
+while ! states_file.eof?
+
+  first = states_file.gets.chomp
+  puts first.split(",")
+  data = first.split(",")
+ #because the 0th element is put into the original position of the hash as the key the next one needs to be the value
+
+  states[ data[0]] = data[1]
+
+Introduction to Ruby
+Lecture 20: Variable Scope
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=20
+-you can think of methods as 'black boxes', anything that is created within that black box stays within that box
+	-the only way to get things out of the box is to return something out of the box/method
+	
+-you can create gloabal variables with $VARIABLENAME, which is bad programming practice because it not only makes it global but global across files etc...
+-whatever is passed will carry through the same data type
+
+-getting data out of the method is done with a return
+
+example:
+def add (a, b)
+	sum = a + b
+	return sum
+end
+
+sum = (add 2,2)
+puts sum
+
+#the following would work the same as the above, just in fewer lines of code
+puts add(3,3)
+
+#the following shows how you can combine things into one statement
+#the following line of code would spit out 8
+#this is because calling the add twice w/in the parens takes prcedence and returns 4 both times
+#the add method is then called outside the parens and adds 4 + 4, returning 8
+puts add(add(2,2), add(2,2))
+
+
+Introduction to Ruby
+Lecture 21: Regex
+https://www.youtube.com/watch?v=hcdx6z643lk&list=PLSXDqiI4sC5NinJXEoYH6FYQ7vtIO8IPF&index=21
+-used to search for patterns in text strings, can be very powerful
+- example:
+
+#the following would tell you the start position of where it would find is, in this case 0
+#declaring the string/variable
+a = "abc123"
+
+#checking the string variable
+a = ~/abc/
+
+-space matches a space etc...and case sensitivity matters
+-special characters
+the '.' is basically a wildcard is like saying ANYCHARACTER followed by CHARACTERS I WANT TO FIND
+for example:
+a = "This is a lazy fox"
+a =~/.is/
+#this would return 1, because h is the first character and is is/are the following characters
+
+-the . will match any single character, even spaces making it very useful
+example:
+a = "This is a lazy fox"
+a =~/..is/
+#because there are 2 periods it would match the 1st two characters and return 0
+
+-but let's say we want to find a period, or some other special character in the regex, we have to escape it using a backslash like so \.
+
+example:
+a = "This is a lazy fox."
+a =~/\./
+#the above would return 18
+
+-we can also match the beginning and end of strings with \A for the beginning an \Z for the end
+example:
+a = "This is the lazy fox."
+a =~/\Ath/
+#the above would not match anything because there is no lowercase th in the beginning
+#we find certain characters we want at the beginning or end by adding them immediatley after the \A or BEFORE \Z
+
+-we have to add the string that we are searching for AFTER the \A because we are searching for that which is AFTER the beginning of the string (if that makes sense), but we CANNOT go PAST the end of the string so we have to add it BEFORE the \Z like so
+a = "This is the lazy fox."
+a =~/fox\Z/
+#the above is correct and would return 12
+a =~/\Zfox/
+#the above is INCORRECT and would return an error because you are attempting to look past the end of the string
+a =~/\Z/
+#the above would return the length of the string
+
+-MORE special characters
+\w matches any letter, digit, or underscore
+a = "This is the lazy fox."
+a =~/\wfox/
+#the above will not return anything since fox is preceeded by a space, and NOT by a letter, digit, or underscore
+
+\W matches anything that \w does not match
+a = "This is the lazy fox."
+a =~/\Wfox/
+#the above will return 11 
+
+
+\d matches any digit
+a = "I have 10 foxes."
+a =~/\d/
+#the above will return where the digit is at which is 7
+#if we want to find two digits we can use /\d\d fox/ which will return the digits and up to and including the word fox #and the space, but the above will break if there is only one digit and return nil.  
+
+
+\D matches antyhign that \d does not match
+\s matches any whitespaces (spaces, tabes, newlines, etc..)
+\S matches any NON-whitespaces characters (any visible characters)
+
+-rubular.com is used for regular expression testing
+-we can include logical ORs in regular expressions with 
+	
+	a =~/av|an/
+	
+-there can be character modifiers
+	the * matches 0 (ZERO) or more occurances of the preceding character and is greedy
+	so searching for \d* in the above sentences would find digits in the sentence but also the spaces, since it's matching potentially 0 digits
+	
+	the + modifier matches 1 or more occurances of the preceeding character
+	so for the string: "10.  I have 20 Foxes and you have 100"
+		the modifier \d+ would find the 10, the 20, and the 100
+		the modifier a+ would find every single a in the string
+		
+	the ? modifier finds one or none of the previous character 
+
+example:
+with the phone numbers 555-5555 and 236452-22211445
+
+find the valid phone number
+
+-one could write \d\d\d-\d\d\d\d but that is tedious and will find the correct phone number, but we could also use \d{3}-\d{4} which will find the correct matching
+
+-we could match a social security number with \d{3}-\d{2}-\d{4}
+-only use wildchard 
+
+
+  
+  

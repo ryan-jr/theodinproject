@@ -1,0 +1,6 @@
+Things to go back to/skipped over
+-jQuery project (clean up)
+
+Learn to Program Ruby, Chris Pine
+https://pine.fm/LearnToProgram/chap_08.html
+-CH8 Things to try problems 3 and 4 (wedding number and bottles of beer)

@@ -1,0 +1,62 @@
+#07/20/2016
+#http://www.theodinproject.com/web-development-101/introduction-to-frameworks?ref=lc-pb
+#Frameworks
+
+-WebDevs generally have 4 major task categories: Create, Read, Update, Delete
+
+#What is a web framework?
+-A web framework is a software development language, environemnt, that makes sure you don't have to re-write common functionality repeatedly.  Basically they are libraries that speed up development time
+VOCAB: LAMP (Linux, Apache, MySQL, PHP/PERL/Python) is a package that contains a web server(Apache) that is able to run web apps.  
+-a framework is more general than a content managment system, but a framework can help you build a CMS
+-a f/w can be thought of as a collection of tools rather than a specific thing
+
+#What you can do with a web framework
+-F/w(s) provide the tools to cover the basic CRUD cases with libraries for session managment, database access, etc... in this way f/w(s) promote DRY.  
+
+#Choosing a F/w
+-Generally a good place to start is to see if your favorite scripting language has a f/w available.  (e.g. Ruby on Rails or Django (for Python)), PHP has PHPCake, etc...
+-Just like anything else there are strengths and weaknesses to any framework you choose, 
+
+
+
+
+#http://www.wired.com/2010/02/Ruby_on_Rails_for_Beginners
+#Why Rails is cool
+-Rails is a programming toolbox that implements many of the common functions of a DB driven site with clear/clean structure.  
+-Rails uses a Model, View, Controller style of architecture
+	-The DB and its representation (the model), along with the UI (the view), and the functional logic/programming (controller), are all kept separate.  
+
+
+#An introduction to web development frameworks
+#http://www.crossbrowser.net/an-introduction-to-web-development-framework/
+
+-choosing a web dev framework is more about finding one that you're comfortable with than finding the 'best' one, b/c all of the popular ones have their advantages and frameworks 
+	
+	
+#ASP.NET
+-MS flavor
+-sold, but costly	
+-like you would expect, works best with the full MS stack
+-The mono project is an open source .NET dev f/w 
+
+
+#PHP
+-lots of support
+-PHP can be messy, but a number of frameworks that deal with this.  
+-uses MVC architecture/RESTful 
+
+#Python/Django 
+-Django is the most sold, and almost only option for a web f/w 
+-follows RESTful concepts.  
+
+#Rails 
+-Rails has a tendency to do a lot of things for you via 'magic' and may not be the best choice if you want granular control of everything
+-uses MVC and follows RESTful guidelines 
+
+
+
+
+Other resources used/consulted:
+http://stackoverflow.com/questions/4507506/what-is-a-web-framework-how-does-it-compare-with-lamp
+https://jeffknupp.com/blog/2014/03/03/what-is-a-web-framework/
+

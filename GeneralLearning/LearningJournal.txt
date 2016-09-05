@@ -1,0 +1,176 @@
+Learning Journal
+
+Things I've learned along the way 06/10/2016
+1.  Break up a problem into smaller problems if you can
+2.  Understand the boundries/bounds/range/scope of the problem, this can help you understand edge cases
+3.  Chances are you will not entirely understand the problem the first time, keep pressing on.  
+4.  This line is pretty handy in ruby:   array.inject(0, :+)
+5.  So is this: it numbers.reduce(:*)
+6.  Full Stack means: everything from the web page to the database/back end
+7.  The .join method is pretty awesome
+8.  A problem might take hours, but it feels great onece you've solved it.  
+9.  You will get stuck...and feel stupid
+10.  It's OK to skip around.  
+
+06/13/2016
+1.  Getting sidetracked happens, if you're going to get sidetracked make sure you know two things:
+A.  WHY you're getting sidetracked (have a goal in mind, know where you want to end/end up)
+B.  About how much TIME/resources it will cost you if you get sidetracked
+
+2.  Enterprise Development is NOT just about working on a huge system
+-I REALLY like the idea of Enterprise development working along  a continum as is defined in this episode of Talk Python to Me around 30:34
+https://talkpython.fm/episodes/transcript/54/enterprise-software-with-python
+-where Enterprise development is not JUST working on a huge system, but possibly finding a niche role to work on or a specific space that you're able to improve.  
+
+3.  The other thing I learned about learning/coachability was finding HOW you enjoy learning
+http://5by5.tv/rubyonrails/213
+-I've found that I enjoy low contact learning, in that I prefer to learn via lecture with clearly structured flow of information which is digestable and not presented in a format of here is X + Y + Z feature, all in a 2 minute timespan or less.  A standard college lecture lets me take notes, proccess it later, and think about how to implement/apply what I just learned.  
+
+4.  Write a little at a time, don't write 400 lines of code and figure out where the issues is.  
+5.  Don't hard code numbers if you can help it, because things are often dynamic and usually change
+6.  There is an implicit carriage return in ruby with "" which is why we use .chomp after user input, and want the user to put in a blank line to complete/run a program
+7.  If you were to pass 2 and 2.0 to an add method/function in Ruby, it will automatically convert the data as neccessary
+
+06/14/2016
+1.  Librarians can be pretty persnickitey
+2.  While loops for menu selections are pretty good, I should probably memorize that structure
+3.  .min, .max, and .minmax in Ruby are super useful methods
+
+06/15/2016
+-the world is a mess, so don't be surprised if you're a mess yourself - Jessica Valenti
+
+
+06/16/2016
+-Two of the most useful constructs I've found in Ruby.
+1.  Using a while loop to check for a menu condition like so:
+#displaying options for the user and putting user response into a variable
+puts "Input the number of your selection"
+puts "1.  Generate password\n\n"
+puts "2.  Quit"
+puts "Selection: "
+user_input = gets.to_i
+
+#utilizing a while loop and if statements to check for user input
+while user_input == 1
+  if user_input == 1
+ #EXECUTE A BLOCK OF CODE/CONDITIONALS THAT PROMPT THE USER FOR INPUT AND HAVE A GETS, OTHERWISE IT WILL BE AN INFINTE LOOP
+ 
+2.  Using the random function to select a random thing in the index of an array like so:
+#the following line of code in english:
+#from random array call an random index that starts from 0 and goes up to and including the lenght of the rand_arr array
+rand_arr[rand(0..rand_arr.length)]
+
+3.  Go back through your notes every day
+
+06/17/2016
+-in the case of some array.length, you might go past the boundry of the array and get a nil value back, which means that you can't do traditional methods on it like +,-,*,/
+-regular expressions are super powerful, but can be really complicated
+-classes are simply blueprints that define an object and the characteristics that make it up
+	-e.g. there is a cup blueprint that can have different heights, widths, depths, colors etc...
+	
+06/18/2016
+-if you're confused about a complext/multipart program and can't get it to work, cut scope/go smaller until you can get it to work in some small way, and then build on that.  You're eyes will likely be bigger than your stomach so you have to start out with small bites.  
+-classes are REALLY blowing my mind right now, more abstract than I was expecting, but SUPER powerful.  
+-I love how I can define a to_s method in the class to print out the neccessary stuff that I want with a string, and ruby knows what to do
+
+06/19/2016
+-Productivity is a mix a various things and can be a regularly moving goalpost depending on what one wants
+-classes are still pretty cool, and still really blowing my mind
+06/20/16
+-If you're returning a value that you want to modify a variable, be sure to make sure that it points to that variable, for instance
+	def add(a)
+		add = a + 1
+		return add
+	end
+	
+	a = 0
+	counter = 0
+	
+	while add < 5 and counter < 5
+		add(a)
+		puts (a)
+		counter +=1
+	end
+
+-The above will ALWAYS print out A.  Why? because the value of add/a is never stored back into the variable.  What happens is that add is called and the operation is performed and add is passed back, but the value a in the main program is never updated, SO the program puts out the only value of a that it knows, which is 0.  
+-in order to correct this we would use a = add(a) which then prints out the correct value.  
+-also puts a, will always print something (like a number from the program above) on a new line e.g. 1 2 3 would be vertical, but print a from the program above will always print things side by side like so: 123.  
+-keeping it simple and working incrementally is key to having good code
+-hackerrank is awesome for having coding challenges and competitions
+-Ruby has a ton of cool methods 
+-Classes an inheretence are awesome since you get to have greater specificity over what you want.  
+
+06/21/2016
+-HOLY CRAP...each of the class variables can be accessed with the CLASSNAME.classvariable call and as such can be changed when doing stuff
+-Classes and inhretence are extremely powerful.  
+
+
+06/22/2016
+-find out/know coding patterns
+-learn testing pretty well, know how to write rspec tests effectively
+-there has got to be a better way to find a future countdown number/date
+
+06/23/2016
+-sub classes class Tiger < Animal, need to be declared OUTSIDE of the main class
+-ok underestimating how long something will take is a thing a LOT of people do.  
+-yeah, screwing up a file include and hunting around for 20 minutes trying to find where the error is because you accidentally put in a space where you shouldn't have isn't fun
+
+06/24/2016
+-Setting high standards for yourself is a good thing 
+
+06/26/2016
+-make sure that your variable and class names are the same, otherwise you'll lose time trying to figure stuff out 
+-There is a fine line between being humble and imposter syndrome
+-
+
+06/28/2016
+-so in the Reddit hangman program
+https://www.reddit.com/r/beginnerprojects/comments/1irw2j/project_hangman_game/
+	the first problem that I had was getting the file to open, using the correct syntax, the second problem I had was getting it all read correctly into an array, because using readlines, already puts things into an array, so I solved that with lines= tex.readlines.to_s and then doing a .split on the lines and returning lines.  
+	
+
+06/29/2016
+-With the reddit hangman program, I didn't know how to implement the game with hashes/dictionaries, so I used an array with which pulls even values for the word and next adds 1 to that value to get the definition and puts both into an array that is returned to the main program 
+-OK, so I figured out those problems, but now I just need to iterate over element 0 of the array, so I can get each letter, and put THAT into an array that I can check against for letter correctness/validity.  
+	-def_and_word[0] is a string value 
+	-So, I solved that by using a .split("")
+-now when the words print out the have the extra newline characters and the ,'s with them as the first two elements of the array, so I removed element 0 twice (since the array shifts), then since everything prints out as an array, I used a .join to put everything back together
+
+07/03/2016
+-What the hell is mapping, I still see it everywhere but I need to figure out what it is 
+-the SPLAT (*) argument lets you pass in any number of arguments to a method/class, you do need a name to put it into though like so (*menu_args)
+-ok so with the digitsum stuff on CodeFight, remeber that you can read things into an array, put them to a string, split the string, and read each of the string elements.  
+the method looks like so:
+#this method will take every digit in a number, and add them together to get a sum
+def digitSum(n)
+
+  arr = []
+  arr << n
+  nums = arr.to_s.split("")
+  sum = 0
+
+  nums.each do |adding|
+    sum += adding.to_i
+
+
+  end
+
+  return sum
+  
+07/04/2016
+-The what if game, is a game that is inevitable, but it won't help you so you have to mitigate it in some way.  
+-You have to do something to provide social proof in order to socialize 
+
+07/05/2016
+-self represents whatever is to the left of the period
+-a Time object in ruby returns a number that you can perform operations on 
+
+07/24/2016
+-Rails apparently hates life and does not like folder names to be capitalized, because otherwise it will just say 'you're missing a helper.rb file', ugh, so much for clean/clear directory and naming structure.  
+
+07/25/2016 
+-planning and mocking can save you tons of time and heartache with a Rails project
+	-see the planningdoc.txt in the rorprojects/podcast folder
+	
+	
+	

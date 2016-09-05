@@ -1,0 +1,11 @@
+Things I've learned along the way
+1.  Break up a problem into smaller problems if you can
+2.  Understand the boundries/bounds/range/scope of the problem, this can help you understand edge cases
+3.  Chances are you will not entirely understand the problem the first time, keep pressing on.  
+4.  This line is pretty handy in ruby:   array.inject(0, :+)
+5.  So is this: it numbers.reduce(:*)
+6.  Full Stack means: everything from the web page to the database/back end
+7.  The .join method is pretty awesome
+8.  A problem might take hours, but it feels great onece you've solved it.  
+9.  You will get stuck...and feel stupid
+10.  It's OK to skip around.  

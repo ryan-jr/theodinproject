@@ -1,0 +1,187 @@
+#Codeschool Rspec Testing tutorial
+#http://rspec.codeschool.com/levels/1
+
+Level 1 Introduction:
+-domain specific language for testing AKA, good language/specific language for testing
+-BDD: behavior drivin development for testing the behavior of our application
+
+-install rspec w/ >gem install rspec
+-inside the project directory we will call: > rspec --init
+
+-our project will be in /lib/zomibe.rb
+
+-the words test/specification are used interchanably
+-in this instance we would have spec/lib/zombie_spec.rb 
+-within the file we would require "spec_helper", to load the specification info
+-we then have to describe what the program is supposed to do with code like:
+describe "A Zombie" do
+	#your examples (AKA: tests) would go here
+	it "is named Ash"
+end
+
+-the "is named Ash", is the name of the examle and "it" is how examples are declared ("it" is a declaring method)
+
+-to run the test we do >rspec [FILEPATH]
+
+-A more typical writing would look like:
+>describe Zombie do
+	it "is named Ash"
+ end
+ 
+ -within the file that we are testing (zombie.rb), we would create the zombie class with "class Zombie [...] end"
+ -and within the zombie_spec file we would require "spec_helper" and require "zomibe" along with the describe code above
+ 
+ The rest of the example would look like:
+ 
+ describe Zombie do
+	it "is named Ash" do
+		zombie = zombie.new
+		zombie.name.should == "Ash"
+	end
+end
+
+-the "should" in this instance is our expectation/assertion 
+-this test will still fail
+
+within zombie.rb we would write:
+class Zombie
+	attr_accessor :name
+	
+	def initialize
+		@name = "Ash"
+	end
+end
+ 
+running the rspec again with >rspec [FILEPATH], it now passes.
+
+ Writing another example inside our specification:
+ 
+describe Zombie do
+...
+	it "has no brains" do
+		zombie = Zombie.new
+		zombie.brains.should < 1
+	end
+end
+
+-"Should" in this case is the modifier and the "<" is the matcher
+-running the test again with the new rspec stuff, it will fail again
+
+within our zombie.rb file we want
+class Zombie
+	attr_accessor :name, :brains
+	
+	def initialize
+		@name = "Ash"
+		@brains = 0
+	end
+end
+
+-This causes us to pass
+
+Other matchers we might use:
+
+zombie.alive.should == false AKA zombie.alive.should be_false
+zombie.rotting.should == true AKA zombie.alive.should be_true
+zombie.height.should > 5 AKA zombie.brains.should be < 1
+
+-we can also swap out "should" for "should not" if we want to test if the opposite is true
+
+-oftentimes there are "predicate methods" which are denoted with a "?" which means that it returns true or false
+it would look like:
+class Zombie
+	def hungry?
+	  true
+	 end
+end
+
+and we would test it with:
+describe Zombie do
+	it "is hungry" do
+		zombie = Zombie.new
+		zombie.hungry.should == true
+	end
+end
+
+
+Pending examples
+-pending examples are useful if you want to go through things one by one
+you can create pendings/to-do lists by leaving of the "do" from "it...do", but also with:
+
+
+xit "is named ash" do
+...
+end
+-placing x before "it"
+OR
+
+it "is named Ash" do
+	pending
+	...
+end
+-placing pending within the code block
+
+
+NOTE:
+ALL CODE IS IN THE tweet_spec.rb file
+
+CODE CHALLENGE 1:
+Lets start writing a specification for the Tweet class. Write a describe block for the Tweet model without any examples inside it.
+
+
+SOLUTION:
+describe Tweet do
+  
+end
+
+
+CODE CHALLENGE 2:
+Now create a pending test called "can set status".
+
+SOLUTION:
+describe Tweet do
+  it "can set status"
+end
+
+CODE CHALLENGE 3:
+Now let's write the example. Go ahead and instantiate a tweet, give it the status "Nom nom nom", and test the status has been properly set to this value using an == equality matcher.
+
+
+SOLUTION:
+describe Tweet do
+  it "has a status of Nom nom nom" do
+  tweet = Tweet.new
+  tweet.status = "Nom nom nom"
+    tweet.status.should == "Nom nom nom"
+  end
+end
+
+CODE CHALLENGE 4:
+Using a predicate 'be' matcher, make sure that a tweet like "Nom nom nom" (which is not a reply because it doesn't start with an '@' sign) is public.
+
+SOLUTION:
+describe Tweet do
+  it 'without a leading @ symbol should be public' do
+    tweet = Tweet.new(status: 'Nom nom nom')
+    tweet.should be_public
+  end
+end
+
+CHALLENGE:
+Finish the example below to ensure that our tweet.status.length is less than or equal to 140 characters. Use a be matcher in your spec.
+
+describe Tweet do
+  it 'truncates the status to 140 characters' do
+    tweet = Tweet.new(status: 'Nom nom nom' * 100)
+    tweet.status.length.should be <= 140
+  end
+end
+
+
+
+
+
+
+
+
+

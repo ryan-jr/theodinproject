@@ -1,0 +1,902 @@
+#Learn to Program Ruby, Chris Pine
+#CH 1
+#https://pine.fm/LearnToProgram/chap_01.html
+#NOTES
+
+
+Introduction to puts
+
+So what's going on in that program? I'm sure you can guess what the  1+2 does; our program is basically the same as:
+
+puts 3
+puts simply writes onto the screen whatever comes after it.
+
+
+
+
+Integer and Float
+
+In most programming languages (and Ruby is no exception) numbers without decimal points are called integers, and numbers with decimal points are usually called floating-point numbers, or more simply, floats.
+
+Here are some integers:
+
+5
+-205
+9999999999999999999999999
+0
+And here are some floats:
+
+54.321
+0.001
+-205.3884
+0.0
+-----------------
+
+More Arithmetic
+puts 1+2
+puts 2*3
+puts 5-8
+puts 9/2
+
+And, results:
+3
+6
+-3
+4
+
+
+
+when you do arithmetic with integers, you'll get integer answers. When your computer can't get the "right" answer, it always rounds down. (Of course, 4 is the right answer in integer arithmetic for 9/2. 
+
+
+So now experiment with some programs of your own! If you want to write more complex expressions, you can use parentheses. For example:
+
+puts 5 * (12-8) + -15 
+puts 98 + (59872 / (13*8)) * -52
+-------------------------------
+Results
+5
+-29802
+
+
+Write a program which tells you:
+
+how many hours are in a year?
+how many minutes are in a decade?
+how many seconds old are you?
+If I am 1246 million seconds old, how old am I?
+
+
+
+CH2 Strings
+--------------------------------------------------------
+We refer to groups of letters in a program as strings. (You can think of printed letters being strung together on a banner.) 
+
+As you can see, strings can have punctuation, digits, symbols, and spaces in them... more than just letters. That last string doesn't have anything in it at all; we would call that an empty string.
+
+You can use puts to print out strings as well as arithmetic and numbers with things like
+
+puts "I like" + " dogs"
+
+So you can add strings, but you can also multiply them! (By a number, anyway.):
+
+puts 'blink ' * 4
+
+There are other instances that work/have different outputs such as:
+
+puts  12  +  12
+puts '12' + '12'
+puts '12  +  12'
+
+or
+
+puts  2  *  5
+puts '2' *  5
+puts '2  *  5'
+
+Problems
+
+At this point you may have tried out a few things which didn't work. If not, here are a few:
+
+puts '12' + 12
+puts '2' * '5'
+#<TypeError: no implicit conversion of Fixnum into String>
+Hmmm... an error message. The problem is that you can't really add a number to a string, or multiply a string by another string. It doesn't make any more sense than does this:
+
+puts 'Betty' + 12
+puts 'Fred' * 'John'
+Something else to be aware of: you can write 'pig'*5 in a program, since it just means 5 sets of the string 'pig' all added together. However, you can't write 5*'pig', since that means 'pig' sets of the number 5, which is just silly.
+
+Backslash is an escape character in Ruby and can work on strings such as:
+puts 'You\'re swell!'
+
+and
+
+puts 'You\'re swell!'
+puts 'backslash at the end of a string:  \\'
+puts 'up\\down'
+puts 'up\down'
+You're swell!
+backslash at the end of a string:  \
+up\down
+up\down
+
+
+CH3 Variables and Assignments
+--------------------------------------------------------
+
+To store the string in your computer's memory, we need to give the string a name. Programmers often refer to this process as assignment, and they call the names variables. This variable can be just about any sequence of letters and numbers, but the first character needs to be a lowercase letter. Let's try that last program again, but this time I will give the string the name myString (though I could just as well have named it str or  myOwnLittleString or henryTheEighth).
+
+myString = '...you can say that again...'
+puts myString
+puts myString
+...you can say that again...
+
+
+Also, just as we can assign an object to a variable, we can reassign a different object to that variable. (This is why we call them variables: because what they point to can vary.)
+
+composer = 'Mozart'
+puts composer + ' was "da bomb", in his day.'
+
+composer = 'Beethoven'
+puts 'But I prefer ' + composer + ', personally.'
+
+Results:
+Mozart was "da bomb", in his day.
+But I prefer Beethoven, personally.
+
+
+variables can point to any kind of object, not just strings:
+
+var = 'just another ' + 'string'
+puts var
+
+Results:
+just another string
+
+var = 5 * (1+2)
+puts var
+
+Results:
+15
+
+
+In fact, variables can point to just about anything... except other variables. So what happens if we try?
+
+var1 = 8
+var2 = var1
+puts var1
+puts var2
+
+puts ''
+
+var1 = 'eight'
+puts var1
+puts var2
+8
+8
+
+eight
+8
+So first, when we tried to point var2 to var1, it really pointed to 8 instead (just like var1 was pointing to). Then we had var1 point to  'eight', but since var2 was never really pointing at var1, it stays pointing at 8.
+
+
+
+CH4 Mixing it up
+--------------------------------------------------------
+
+We've seen that if we want a program to print 25, the following does not work, because you can't add numbers and strings:
+
+var1 = 2
+var2 = '5'
+
+puts var1 + var2
+Part of the problem is that your computer doesn't know if you were trying to get 7 (2 + 5), or if you wanted to get 25 ('2' + '5').
+
+Before we can add these together, we need some way of getting the string version of var1, or to get the integer version of var2.
+
+Conversions
+
+To get the string version of an object, we simply write  .to_s after it:
+
+var1 = 2
+var2 = '5'
+
+puts var1.to_s + var2
+25
+Similarly, to_i gives the integer version of an object, and to_f gives the float version. Let's look at what these three methods do (and don't do) a little more closely:
+
+var1 = 2
+var2 = '5'
+
+puts var1.to_s + var2
+puts var1 + var2.to_i
+25
+7
+Notice that, even after we got the string version of  var1 by calling to_s, var1 was always pointing at 2, and never at '2'. Unless we explicitly reassign  var1 (which requires an = sign), it will point at 2 for the life of the program.
+
+Now let's try some more interesting (and a few just weird) conversions:
+
+puts '15'.to_f
+puts '99.999'.to_f
+puts '99.999'.to_i
+puts ''
+puts '5 is my favorite number!'.to_i
+puts 'Who asked you about 5 or whatever?'.to_i
+puts 'Your momma did.'.to_f
+puts ''
+puts 'stringy'.to_s
+puts 3.to_i
+
+
+15.0
+99.999
+99
+
+5
+0
+0.0
+
+stringy
+3
+So, this probably gave some surprises. The first one is pretty standard, giving 15.0. After that, we converted the string '99.999' to a float and to an integer. The float did what we expected; the integer was, as always, rounded down.
+
+Next, we had some examples of some... unusual strings being converted into numbers.  to_i ignores the first thing it doesn't understand, and the rest of the string from that point on. So the first one was converted to 5, but the others, since they started with letters, were ignored completely... so the computer just picks zero.
+
+Finally, we saw that our last two conversions did nothing at all, just as we would expect.
+
+Another Look at puts
+
+There's something strange about our favorite method... Take a look at this:
+
+puts 20
+puts 20.to_s
+puts '20'
+20
+20
+20
+Why do these three all print the same thing? Well, the last two should, since 20.to_s is '20'. But what about the first one, the integer 20? For that matter, what does it even mean to write out the integer 20? When you write a 2 and then a 0 on a piece of paper, you are writing down a string, not an integer. The integer 20 is the number of fingers and toes I have; it isn't a 2 followed by a 0.
+
+Well, here's the big secret behind our friend, puts: Before  puts tries to write out an object, it uses to_s to get the string version of that object. In fact, the s in puts stands for string; puts really means put string.
+
+
+
+The Methods gets and chomp
+
+If puts means put string, I'm sure you can guess what gets stands for. And just as puts always spits out strings, gets will only retrieve strings. And whence does it get them?
+
+From you! Well, from your keyboard, anyway. Since your keyboard only makes strings, that works out beautifully. What actually happens is that gets just sits there, reading what you type until you press Enter.
+
+puts gets
+Is there an echo in here?
+Is there an echo in here?
+Of course, whatever you type in will just get repeated back to you. Run it a few times and try typing in different things.
+
+Now we can make interactive programs! In this one, type in your name and it will greet you:
+
+puts 'Hello there, and what\'s your name?'
+name = gets
+puts 'Your name is ' + name + '?  What a lovely name!'
+puts 'Pleased to meet you, ' + name + '.  :)'
+Eek! I just ran it—I typed in my name, and this is what happened:
+
+
+Results:
+Hello there, and what's your name?
+Chris
+Your name is Chris
+?  What a lovely name!
+Pleased to meet you, Chris
+.  :)
+
+
+Hmmm... it looks like when I typed in the letters C, h, r, i, s, and then pressed Enter, gets got all of the letters in my name and the Enter! Fortunately, there's a method just for this sort of thing:  chomp. It takes off any Enters hanging out at the end of your string. Let's try that program again, but with chomp to help us this time:
+
+puts 'Hello there, and what\'s your name?'
+name = gets.chomp
+puts 'Your name is ' + name + '?  What a lovely name!'
+puts 'Pleased to meet you, ' + name + '.  :)'
+
+Results:
+Hello there, and what's your name?
+Chris
+Your name is Chris?  What a lovely name!
+Pleased to meet you, Chris.  :)
+Much better! Notice that since name is pointing to  gets.chomp, we don't ever have to say  name.chomp;  name was already  chomped.
+
+
+CH4 More about Methods
+--------------------------------------------------------
+we haven't really talked about what methods are. We know what they do, but we don't know what they are.
+
+But really, that is what they are: things that do stuff. If objects (like strings, integers, and floats) are the nouns in the Ruby language, then methods are like the verbs. And, just like in English, you can't have a verb without a noun to do the verb. For example, ticking isn't something that just happens; a clock (or a watch or something) has to do it. In English we would say, "The clock ticks." In Ruby we would say  clock.tick (assuming that clock was a Ruby object, of course). Programmers might say we were "calling clock's  tick method," or that we "called tick on clock."
+
+So as I was saying, just as every verb needs a noun, so every method needs an object. It's usually easy to tell which object is performing the method: it's what comes right before the dot, like in our clock.tick example, or in 101.to_s. Sometimes, however, it's not quite as obvious; like with the arithmetic methods. As it turns out, 5 + 5 is really just a shortcut way of writing 5.+ 5. For example:
+
+puts 'hello '.+ 'world'
+puts (10.* 9).+ 9
+
+Results:
+hello world
+99
+
+
+This also gives us a deeper understanding of why we can do 'pig'*5 but we can't do 5*'pig':  'pig'*5 is telling 'pig' to do the multiplying, but 5*'pig' is telling 5 to do the multiplying.  'pig' knows how to make 5 copies of itself and add them all together; however, 5 will have a much more difficult time of making  'pig' copies of itself and adding them together.
+
+And, of course, we still have puts and gets to explain. Where are their objects? In English, you can sometimes leave out the noun; for example, if a villain yells "Die!", the implicit noun is whoever he is yelling at. In Ruby, if I say puts 'to be or not to be', what I am really saying is self.puts 'to be or not to be'. So what is self? It's a special variable which points to whatever object you are in. We don't even know how to be in an object yet, but until we find out, we are always going to be in a big object which is... the whole program! And lucky for us, the program has a few methods of its own, like puts and gets. Watch this:
+
+iCantBelieveIMadeAVariableNameThisLongJustToPointToA3 = 3
+puts iCantBelieveIMadeAVariableNameThisLongJustToPointToA3
+self.puts iCantBelieveIMadeAVariableNameThisLongJustToPointToA3
+
+Results:
+3
+3
+
+If you didn't entirely follow all of that, that's OK. The important thing to take away from all of this is that every method is being done by some object (every verb is being performed by some noun), even if it doesn't have a dot in front of it. 
+
+
+Fancy String Methods
+So, our first string method is reverse, which gives a backwards version of a string
+
+>var1 = "cat"
+>var1.reverse
+>tac
+>var1
+>cat
+
+As you can see, reverse doesn't reverse the original string; it just makes a new backwards version of it. That's why var1 is still 'cat' even after we called reverse on var1.
+
+Be careful of methods such as .length which will return a number, in order to puts something like .lenghth you have to do .length.to_s in order to convert it.  
+
+One should also note that .length returns the number of characters, not the number of letters in a string (this includes spaces etc...)
+
+So, there are also a number of string methods which change the case (uppercase and lowercase) of your string.  upcase changes every lowercase letter to uppercase, and downcase changes every uppercase letter to lowercase.  swapcase switches the case of every letter in the string, and finally, capitalize is just like downcase, except that it switches the first character to uppercase (if it is a letter).
+
+letters = 'aAbBcCdDeE'
+puts letters.upcase
+puts letters.downcase
+puts letters.swapcase
+puts letters.capitalize
+puts ' a'.capitalize
+puts letters
+
+Results:
+AABBCCDDEE
+aabbccddee
+AaBbCcDdEe
+Aabbccddee
+ a
+aAbBcCdDeE
+
+Pretty standard stuff. As you can see from the line  puts ' a'.capitalize, the method capitalize only capitalizes the first ***character*** (in this case, space is the first character that Ruby sees), not the first ***letter***. 
+
+Also, as we have seen before, throughout all of these method calls, letters remains unchanged. I don't mean to belabor the point, but it's important to understand. There are some methods which do change the associated object, but we haven't seen any yet, and we won't for some time.
+
+-The above sentence only means that if you were to call the variable letters, that you would still get the original string back.  In this case: aAbBcCdDeE
+
+
+he last of the fancy string methods we'll look at are for visual formatting. The first one, center, adds spaces to the beginning and end of the string to make it centered. However, just like you have to tell puts what you want it to print, and + what you want it to add, you have to tell center how wide you want your centered string to be. So if I wanted to center the lines of a poem, I would do it like this:
+
+lineWidth = 50
+puts(                'Old Mother Hubbard'.center(lineWidth))
+puts(               'Sat in her cupboard'.center(lineWidth))
+puts(         'Eating her curds an whey,'.center(lineWidth))
+puts(          'When along came a spider'.center(lineWidth))
+puts(         'Which sat down beside her'.center(lineWidth))
+puts('And scared her poor shoe dog away.'.center(lineWidth))
+
+
+                Old Mother Hubbard                
+               Sat in her cupboard                
+            Eating her curds an whey,             
+             When along came a spider             
+            Which sat down beside her             
+        And scared her poor shoe dog away. 
+
+		
+Hmmm... I don't think that's how that nursery rhyme goes, but I'm too lazy to look it up. (Also, I wanted to line up the  .center lineWidth part, so I put in those extra spaces before the strings. This is just because I think it is prettier that way. Programmers often have strong feelings about what is pretty in a program, and they often disagree about it. The more you program, the more you will come into your own style.) Speaking of being lazy, laziness isn't always a bad thing in programming. For example, see how I stored the width of the poem in the variable lineWidth? This was so that if I want to go back later and make the poem wider, I only have to change the very top line of the program, instead of every line which does centering. With a very long poem, this could save me a lot of time. That kind of laziness is really a virtue in programming.
+
+
+The other two string formatting methods are ljust and  rjust, which stand for left justify and right justify. They are similar to center, except that they pad the string with spaces on the right and left sides, respectively. Let's take a look at all three in action:
+
+lineWidth = 40
+str = '--> text <--'
+puts str.ljust  lineWidth
+puts str.center lineWidth
+puts str.rjust  lineWidth
+puts str.ljust(lineWidth/2) + str.rjust(lineWidth/2)
+--> text <--                            
+              --> text <--              
+                            --> text <--
+--> text <--                --> text <--
+
+
+CH6 More about Methods
+--------------------------------------------------------
+
+For Ruby, we can use the standard comparison operators of <, >, <=, >=, == (equivalence), !=, but we also have some special cases:
+
+ we can compare strings, too. When strings get compared, they compare their lexicographical ordering, which basically means their dictionary ordering.  cat comes before dog in the dictionary, so:
+
+puts 'cat' < 'dog'
+true
+There's a catch, though: the way computers usually do things, they order capital letters as coming before lowercase letters. (That's how they store the letters in fonts, for example: all the capital letters first, then the lowercase ones.) This means that it will think 'Zoo' comes before 'ant', so if you want to figure out which word would come first in a real dictionary, make sure to use downcase (or upcase or  capitalize) on both words before you try to compare them.
+
+One last note before Branching: The comparison methods aren't giving us the strings 'true' and  'false'; they are giving us the special objects true and false. (Of course, true.to_s gives us  'true', which is why puts printed 'true'.)  true and false are used all the time in if statements/conditionals.  
+
+
+
+Branching
+
+Branching is a simple concept, but powerful. In fact, it's so simple that I bet I don't even have to explain it at all; I'll just show you:
+
+puts 'Hello, what\'s your name?'
+name = gets.chomp
+puts 'Hello, ' + name + '.'
+if name == 'Chris'
+  puts 'What a lovely name!'
+end
+
+Results: 
+Hello, what's your name?
+Chris
+Hello, Chris.
+What a lovely name!
+
+And
+
+Results:
+Hello, what's your name?
+Chewbacca
+Hello, Chewbacca.
+
+And that is branching. If what comes after the if is  true, we run the code between the  if and the end. If what comes after the  if is false, we don't. Plain and simple.
+
+
+I indented the code between the if and the end just because I think it's easier to keep track of the branching that way. Almost all programmers do this, regardless of what language they are programming in, because it keeps the flow of code easy and consistent to follow.  
+
+
+Often, we would like a program to do one thing if an expression is true, and another if it is false. That's what else is for:
+
+puts 'I am a fortune-teller.  Tell me your name:'
+name = gets.chomp
+if name == 'Chris'
+  puts 'I see great things in your future.'
+else
+  puts 'Your future is... Oh my!  Look at the time!'
+  puts 'I really have to go, sorry!'
+end
+
+Branching is kind of like coming to a fork in the code: Do we take the path for people whose name == 'Chris', or else do we take the other path?
+
+And just like the branches of a tree, you can have branches which themselves have branches:
+
+puts 'Hello, and welcome to 7th grade English.'
+puts 'My name is Mrs. Gabbard.  And your name is...?'
+name = gets.chomp
+
+if name == name.capitalize
+  puts 'Please take a seat, ' + name + '.'
+else
+  puts name + '?  You mean ' + name.capitalize + ', right?'
+  puts 'Don\'t you even know how to spell your name??'
+  reply = gets.chomp
+
+  if reply.downcase == 'yes'
+    puts 'Hmmph!  Well, sit down!'
+  else
+    puts 'GET OUT!!'
+  end
+end
+
+
+
+Sometimes it might get confusing trying to figure out where all of the ifs, elses, and  ends go. What I do is write the end at the same time I write the if. So as I was writing the above program, this is how it looked first:
+
+puts 'Hello, and welcome to 7th grade English.'
+puts 'My name is Mrs. Gabbard.  And your name is...?'
+name = gets.chomp
+
+if name == name.capitalize
+else
+end
+Then I filled it in with comments, stuff in the code the computer will ignore:
+
+puts 'Hello, and welcome to 7th grade English.'
+puts 'My name is Mrs. Gabbard.  And your name is...?'
+name = gets.chomp
+
+if name == name.capitalize
+  # She's civil.
+else
+  # She gets mad.
+end
+
+
+
+Anything after a # is considered a comment (unless, of course, you are in a string). After that, I replaced the comments with working code. Some people like to leave the comments in; personally, I think well-written code usually speaks for itself. I used to use more comments, but the more "fluent" in Ruby I become, the less I use them. I actually find them distracting much of the time. It's a personal choice; you'll find your own (usually evolving) style. So my next step looked like this:
+
+puts 'Hello, and welcome to 7th grade English.'
+puts 'My name is Mrs. Gabbard.  And your name is...?'
+name = gets.chomp
+
+if name == name.capitalize
+  puts 'Please take a seat, ' + name + '.'
+else
+  puts name + '?  You mean ' + name.capitalize + ', right?'
+  puts 'Don\'t you even know how to spell your name??'
+  reply = gets.chomp
+
+  if reply.downcase == 'yes'
+  else
+  end
+end
+Again, I wrote down the if, else, and  end all at the same time. It really helps me keep track of "where I am" in the code. It also makes the job seem easier because I can focus on one small part, like filling in the code between the if and the else. The other benefit of doing it this way is that the computer can understand the program at any stage
+
+
+Looping
+
+Often, you'll want your computer to do the same thing over and over again—after all, that's what computers are supposed to be so good at.
+
+When you tell your computer to keep repeating something, you also need to tell it when to stop. Computers never get bored, so if you don't tell it to stop, it won't. We make sure this doesn't happen by telling the computer to repeat certain parts of a program while a certain condition is true. This works very similarly to how if works:
+
+command = ''
+
+while command != 'bye'
+  puts command
+  command = gets.chomp
+end
+
+puts 'Come again soon!'
+
+
+Results:
+
+Hello?
+Hello?
+Hi!
+Hi!
+Very nice to meet you.
+Very nice to meet you.
+Oh... how sweet!
+Oh... how sweet!
+bye
+Come again soon!
+
+A Little Bit of Logic
+
+Let's take a look at our first branching program again. What if my wife came home, saw the program, tried it out, and it didn't tell her what a lovely name she had? Well... she probably wouldn't care. But I'd care! So let's rewrite it:
+
+puts 'Hello, what\'s your name?'
+name = gets.chomp
+puts 'Hello, ' + name + '.'
+if name == 'Chris'
+  puts 'What a lovely name!'
+else
+  if name == 'Katy'
+    puts 'What a lovely name!'
+  end
+end
+Hello, what's your name?
+Katy
+Hello, Katy.
+What a lovely name!
+It works... but it isn't a very pretty program. Why not? Well, the best rule I ever learned in programming was the DRY rule: Don't Repeat Yourself. I could probably write a small book just on why that is such a good rule. In our case, we repeated the line puts 'What a lovely name!'. Why is this such a big deal? Well, what if I made a spelling mistake when I rewrote it? What if I wanted to change it from  'lovely' to 'beautiful' on both lines? I'm lazy, remember? Basically, if I want the program to do the same thing when it gets  'Chris' or 'Katy', then it should really do the same thing:
+
+puts 'Hello, what\'s your name?'
+name = gets.chomp
+puts 'Hello, ' + name + '.'
+if (name == 'Chris' or name == 'Katy')
+  puts 'What a lovely name!'
+end
+Hello, what's your name?
+Katy
+Hello, Katy.
+What a lovely name!
+Much better. In order to make it work, I used or. The other logical operators are and and  not. It is always a good idea to use parentheses when working with these. Let's see how they work:
+
+iAmChris  = true
+iAmPurple = false
+iLikeFood = true
+iEatRocks = false
+
+puts (iAmChris  and iLikeFood)
+puts (iLikeFood and iEatRocks)
+puts (iAmPurple and iLikeFood)
+puts (iAmPurple and iEatRocks)
+puts
+puts (iAmChris  or iLikeFood)
+puts (iLikeFood or iEatRocks)
+puts (iAmPurple or iLikeFood)
+puts (iAmPurple or iEatRocks)
+puts
+puts (not iAmPurple)
+puts (not iAmChris )
+
+results:
+true
+false
+false
+false
+
+true
+true
+true
+false
+
+true
+false
+
+
+The only one of these which might trick you is  or. In English, we often use "or" to mean "one or the other, but not both." For example, your mom might say, "For dessert, you can have pie or cake." She did not mean you could have them both! A computer, on the other hand, uses or to mean "one or the other, or both." (Another way of saying it is, "at least one of these is true.").  
+
+
+CH7 Arrays and Iterators
+--------------------------------------------------------
+
+Let's write a program which asks us to type in as many words as we want (one word per line, continuing until we just press Enter on an empty line), and which then repeats the words back to us in alphabetical order. OK?
+
+For this we need a way to store an unknown amount of words, and how to keep track of them all together, so they don't get mixed up with other variables. We need to put them in some sort of a list. We need arrays.
+
+[]  #array
+[5] #array
+['Hello', 'Goodbye'] #array
+
+flavor = 'vanilla'             #not an array
+[89.9, flavor, [true, false]]  #array
+
+Next, we have a simple assignment; then an array holding three objects, the last of which is the array [true, false]. Remember, variables aren't objects, so our last array is really pointing to float, a string, and an array. Even if we were to set flavor to point to something else, that wouldn't change the array.
+
+To help us find a particular object in an array, each slot is given an index number. Programmers (and, incidentally, most mathematicians) start counting from zero, though, so the first slot in the array is slot zero. Here's how we would reference the objects in an array:
+
+names = ['Ada', 'Belle', 'Chris']
+
+puts names
+puts names[0]
+puts names[1]
+puts names[2]
+puts names[3]  # This is out of range.
+Ada
+Belle
+Chris
+Ada
+Belle
+Chris
+
+Finally, we tried puts names[3], just to see what would happen. Were you expecting an error? Sometimes when you ask a question, your question doesn't make sense (at least to your computer); that's when you get an error. Sometimes, however, you can ask a question and the answer is nothing. What's in slot three? Nothing. What is names[3]?  nil: Ruby's way of saying "nothing".  nil is a special object which basically means "not any other object." And when you  puts nil, it prints out nothing. (Just a new line.)
+
+
+The Method each
+
+each allows us to do something (whatever we want) to each object the array points to. So, if we want to say something nice about each language in the array below, we'd do this:
+
+languages = ['English', 'German', 'Ruby']
+
+languages.each do |lang|
+  puts 'I love ' + lang + '!'
+  puts 'Don\'t you?'
+end
+
+puts 'And let\'s hear it for C++!'
+puts '...'
+I love English!
+Don't you?
+I love German!
+Don't you?
+I love Ruby!
+Don't you?
+And let's hear it for C++!
+...
+So what just happened? Well, we were able to go through every object in the array without using any numbers, so that's definitely nice. Translating into English, the above program reads something like: For each object in languages, point the variable lang to the object and then do everything I tell you to, until you come to the end. 
+
+
+the |lang| is VERY similar to the variable assignment in a for loop in python
+e.g. for x in list
+	print(x)
+
+You might be thinking to yourself, "This is a lot like the loops we learned about earlier." Yep, it's similar. One important difference is that the method each is just that: a method.  while and end (much like do, if, else, and all the other  blue words) are not methods. They are a fundamental part of the Ruby language, just like = and parentheses; kind of like punctuation marks in English.
+
+But not each; each is just another array method. Methods like each which "act like" loops are often called iterators.
+
+One thing to notice about iterators is that they are always followed by do...end. while and if never had a do near them; we only use do with iterators.
+
+Here's another cute little iterator, but it's not an array method... it's an integer method!
+
+3.times do
+  puts 'Hip-Hip-Hooray!'
+end
+Hip-Hip-Hooray!
+Hip-Hip-Hooray!
+Hip-Hip-Hooray!
+
+
+
+More Array Methods
+
+So we've learned each, but there are many other array methods... almost as many as there are string methods! In fact, some of them (like length, reverse, +, and *) work just like they do for strings, except that they operate on the slots of the array rather than the letters of the string. Others, like last and join, are specific to arrays. Still others, like push and pop, actually change the array. And just as with the string methods, you don't have to remember all of these, as long as you can remember where to find out about them (right here).
+
+First, let's look at to_s and join.  join works much like to_s does, except that it adds a string in between the array's objects. Let's take a look:
+
+foods = ['artichoke', 'brioche', 'caramel']
+
+puts foods
+puts
+puts foods.to_s
+puts
+puts foods.join(', ')
+puts
+puts foods.join('  :)  ') + '  8)'
+
+200.times do
+  puts []
+end
+artichoke
+brioche
+caramel
+
+["artichoke", "brioche", "caramel"]
+
+artichoke, brioche, caramel
+
+artichoke  :)  brioche  :)  caramel  8)
+As you can see, puts treats arrays differently from other objects: it just calls puts on each of the objects in the array. That's why putsing an empty array 200 times doesn't do anything; the array doesn't point to anything, so there's nothing to puts. (Doing nothing 200 times is still doing nothing.)
+
+Now let's take a look at push, pop, and last. The methods push and pop are sort of opposites, like + and - are.  push adds an object to the end of your array, and pop removes the last object from the array (and tell you what it was).  last is similar to pop in that it tells you what's at the end of the array, except that it leaves the array alone. Again, push and pop actually change the array:
+
+favorites = []
+favorites.push 'raindrops on roses'
+favorites.push 'whiskey on kittens'
+
+puts favorites[0]
+puts favorites.last
+puts favorites.length
+
+puts favorites.pop
+puts favorites
+puts favorites.length
+raindrops on roses
+whiskey on kittens
+2
+whiskey on kittens
+raindrops on roses
+1
+
+
+
+
+CH8 Making our own methods
+--------------------------------------------------------
+
+
+
+
+Repetition is a bad thing. Still, we can't make it into a big loop or iterator, because sometimes we have things we want to do between questions. In situations like these, it's best to write a method. Here's how:
+
+def sayMoo
+  puts 'mooooooo...'
+end
+
+Uh... our program didn't sayMoo. Why not? Because we didn't tell it to. We told it how to sayMoo, but we never actually said to do it. Let's give it another shot:
+
+def sayMoo
+  puts 'mooooooo...'
+end
+
+sayMoo
+sayMoo
+puts 'coin-coin'
+sayMoo
+sayMoo
+
+So we defined the method sayMoo. (Method names, like variable names, start with a lowercase letter. There are a few exceptions, though, like + or ==.) But don't methods always have to be associated with objects? Well, yes they do, and in this case (as with  puts and gets), the method is just associated with the object representing the whole program. In the next chapter we'll see how to add methods to other objects. But first...
+
+Method Parameters
+
+You may have noticed that some methods (like  gets, to_s, reverse...) you can just call on an object. However, other methods (like +, -, puts...) take parameters to tell the object how to do the method. For example, you wouldn't just say  5+, right? You're telling 5 to add, but you aren't telling it what to add.
+
+To add a parameter to sayMoo (let's say, the number of moos), we would do this:
+
+def sayMoo numberOfMoos
+  puts 'mooooooo...'*numberOfMoos
+end
+
+sayMoo 3
+puts 'oink-oink'
+sayMoo  # This should give an error because the parameter is missing.
+
+results:
+mooooooo...mooooooo...mooooooo...
+oink-oink
+#<ArgumentError: wrong number of arguments (0 for 1)>
+
+numberOfMoos is a variable which points to the parameter passed in. I'll say that again, but it's a little confusing:  numberOfMoos is a variable which points to the parameter passed in. So if I type in  sayMoo 3, then the parameter is 3, and the variable numberOfMoos points to 3.
+
+As you can see, the parameter is now required. After all, what is sayMoo supposed to multiply  'mooooooo...' by if you don't give it a parameter? Your poor computer has no idea.
+
+If objects in Ruby are like nouns in English, and methods are like verbs, then you can think of parameters as adverbs (like with sayMoo, where the parameter told us how to sayMoo) or sometimes as direct objects (like with puts, where the parameter is what gets putsed).
+
+
+
+ocal Variables
+
+In the following program, there are two variables:
+
+def doubleThis num
+  numTimes2 = num*2
+  puts num.to_s+' doubled is '+numTimes2.to_s
+end
+
+doubleThis 44
+44 doubled is 88
+The variables are num and numTimes2. They both sit inside the method doubleThis. These (and all of the variables you have seen so far) are local variables. This means that they live inside the method, and they cannot leave. If you try, you will get an error:
+
+def doubleThis num
+  numTimes2 = num*2
+  puts num.to_s+' doubled is '+numTimes2.to_s
+end
+
+doubleThis 44
+puts numTimes2.to_s
+44 doubled is 88
+#<NameError: undefined local variable or method `numTimes2' for #<StringIO:0x007fb08b932f40>>
+Undefined local variable... In fact, we did define that local variable, but it isn't local to where we tried to use it; it's local to the method.
+
+This might seem inconvenient, but it actually quite nice. While it does mean that you have no access to variables inside methods, it also means that they have no access to your variables, and thus can't screw them up:
+
+def littlePest var
+  var = nil
+  puts 'HAHA!  I ruined your variable!'
+end
+
+var = 'You can\'t even touch my variable!'
+littlePest var
+puts var
+HAHA!  I ruined your variable!
+You can't even touch my variable!
+
+There are actually two variables in that little program named var: one inside littlePest, and one outside of it. When we called littlePest var, we really just passed the string from one var to the other, so that both were pointing to the same string. Then littlePest pointed its own local  var to nil, but that did nothing to the  var outside the method.
+
+
+Return Values
+
+You may have noticed that some methods give you something back when you call them. For example, gets returns a string (the string you typed in), and the + method in 5+3, (which is really 5.+(3)) returns 8. The arithmetic methods for numbers return numbers, and the arithmetic methods for strings return strings.
+
+It's important to understand the difference between methods returning a value to where the method was called, and your program outputting information to your screen, like  puts does. Notice that 5+3 returns  8; it does not output  8.
+
+So what does puts return? We never cared before, but let's look at it now:
+
+returnVal = puts 'This puts returned:'
+puts returnVal
+This puts returned:
+
+The first puts didn't seem to return anything, and in a way it didn't; it returned nil. Though we didn't test it, the second puts did, too;  puts always returns nil. Every method has to return something, even if it's just nil.
+
+
+If we wanted all of our methods to return the string 'yellow submarine', we would just need to put that at the end of them:
+
+def sayMoo numberOfMoos
+  puts 'mooooooo...'*numberOfMoos
+  'yellow submarine'
+end
+
+x = sayMoo 2
+puts x
+
+Classes
+Chapter 9
+ 
+So far we've seen several different kinds, or classes, of objects: strings, integers, floats, arrays, and a few special objects (true, false, and nil) which we'll talk about later. In Ruby, these classes are always capitalized:  String,  Integer, Float, Array... etc. In general, if we want to create a new object of a certain class, we use new:
+
+a = Array.new  + [12345]  # Array  addition.
+b = String.new + 'hello'  # String addition.
+c = Time.new
+
+puts 'a = '+a.to_s
+puts 'b = '+b.to_s
+puts 'c = '+c.to_s
+a = [12345]
+b = hello
+c = 2016-01-29 11:35:38 -0800
+Because we can create arrays and strings using  [...] and '...' respectively, we rarely create them using new. (Though it's not really obvious from the above example, String.new creates an empty string, and Array.new creates an empty array.) Also, numbers are special exceptions: you can't create an integer with Integer.new. You just have to write the integer.
+

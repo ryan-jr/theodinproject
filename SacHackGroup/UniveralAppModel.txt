@@ -1,0 +1,23 @@
+#06/22/2016
+Universal App Model Talk
+-MS looking to introduce Universal App Model to ensure communication between apps/platforms, etc..
+-MS releasing rpoject cenntenial
+	-With Cenntenial you take an MSI
+	-MSIs are bad because they are super messy, tricky, and uninstalling is hard to get right
+	-the AppX package is far easier/more streamlined
+	-MS is trying to own the lifetime/lifespan of the project
+	-Cenntenial cannot deploy device drivers/NT services, because they require admin access
+	-You can use powershell modules (default w/ WIN 10) to create/maintain packages
+	-You can take a VB6 app, use Cenntenial and deploy it on a WIN10 machine, w/o admin privleges
+	-This is meant to prevent annoying UAC prompts, you don't need a Universal Windows Platform to use the Universal App model
+	-MOST sdks, etc.. will work just fine, there may be a few that are off limits for whatever reason
+	-APPX is the replacement for MSI 
+	-Should be able to do the same things that you normally would but w/o user irritaiont, IT staff irritation, etc...
+	-WIN10 is a requirement to create and deploy to an APPX package
+	-cenntential is still in internal preview, not yet public release
+	-MS is expecting that most line of business apps will be through the store, MS will make sure that it passes the Windows Application Certification Proccess
+	
+	
+Random other stuff:
+-Zamarin is what translates the codebase between MS code and iOS/Android code	
+	

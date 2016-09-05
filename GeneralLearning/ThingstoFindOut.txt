@@ -1,0 +1,49 @@
+1.  In the Web Dev 101, ruby project section:
+This Works for Simon Says:
+def repeat(word, number = 2)
+   ([word] * number).join(" ")
+end
+
+BUT THIS DOES NOT:
+def repeat(word, number = 2)
+   ((word) * number).join(" ")
+end
+
+WHY???
+
+For some reason, when reading the following code with the following array I get back 8 AKA the last number in the array 
+
+numbers = ["1", "1", "19", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "5",
+           "1", "19", "22", "1", "64", "1", "1", "101", "77", "1", "1", "1", "1", "1", "1", "1", "6",
+           "1", "12", "1", "1", "1", "20", "1", "1", "1", "1", "1", "1", "1", "15", "1", "1", "7",
+           "1", "1", "1", "1", "1", "1", "1", "18", "1", "1", "1", "1", "1", "1", "1", "25", "8",
+          ]
+
+#retrieve and print out the largest number in an array
+largest = numbers[0]
+
+
+numbers.each do |number|
+  puts number
+  if largest <= number
+    largest = number
+    puts "LARGEST"
+    puts largest
+  end
+end
+
+puts largest
+		  BUT
+		  
+WHEN I RUN THE SAME CODE WITH INTEGERES LIKE SO:
+numbers = [1 , 10, 25, 101, 99, 27, 32 , 64, 27 , 85, 33, 42, 1, 15 , 17, 2, 3]
+IT GIVES ME BACK THE CORRECT INFO
+
+How does the following work in Ruby/what is the argument strucutre for it?
+	states.find_all{ | state, abbrev| state[0] == "A"}
+	
+	
+-classes
+-design patterns
+-recursion	
+

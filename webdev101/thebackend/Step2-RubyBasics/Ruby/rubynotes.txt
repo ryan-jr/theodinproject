@@ -1,0 +1,33 @@
+Ruby Notes
+-ruby is a lot like python, quick, direct and straightforward.
+-strings are enclosed in " " and can be acted upon with methods such as "string".length or "string".reverse
+-the math operators are the same
+-lists in python are known as arrays in ruby, and are created with []
+-ruby has helpful methods such as 40.to_s converts 40 to a string, there is also .to_i to convert to integers, and to_a to convert to arrays
+-you separate array numbers with , and you can call methods on arrays such as .max or .min or .sort
+-variables are created like they are in Python with a simple pointer like ticket = [12, 47, 35], and if you type the pointer in the console
+	-it will return what the variable is pointing to.
+-ruby allows for the replacing of things found in an array variable with the VARNAME['THING TO BE MODIFIED'] = 'THING TO REPLACE IT WITH'
+-print is also pretty easy with 'print'
+-the reverse function will reverse everything, letter by letter
+-the .lines function is like readline() and will just take in the entire line of something, we can read an array to a line with VAR.lines.to_a
+-ruby also uses dictionaries (and may also refer to them as a hash)
+-things are added to the dictionary with the proper key/pair with an assignment, for example with the dictionary books = {}
+	books["The Merchant of Venice"] = :good
+	-books refers to the dictionary, ["THING YOU WANT ASSOCIATED WITH THE VALUE"], = :good, is what assigns the value of good to the association
+	-the key in this instance is the book titile, and the value is the rating given (AKA the symbol)
+	-you can see all of the keys in a dictionary with VARIABLE_NAME_OF_DICTIONARY.keys
+	
+-!!!I still have no idea what blocks are other than code surrounded by braces!!!
+-Capitlization matters in ruby with Dir.entires and Hash.new(0) and other commands
+-we can search for files in a directory with Dir["/*.txt"], with the * being wildcard and .txt being the file ending 
+-in Ruby we write things with a copying method and a variable such as:
+	-FileUtils.cp('/comics.txt', '/Home/comics.txt') which is the VARIABLE, .cp is the copying method ('filebeing copied', 'copydestination')
+-we can also append in Ruby with File.open("/Home/comics.txt", "a"), which then brings up a prompt asking for more input
+
+-we can also find timestamps with the .mtime method that takes the file director/name as input as such:
+	-File.mtime("/Home/comics.txt")
+	-we can get the hour with File.mtime("/Home/comics.txt").hour this can also be done with .year, .min, .sec, .day
+-In ruby you define a method with def NAME_GOES_HERE(arguments go here), and then hitting enter and putting whatever you want into the code
+-to call in libraries/methods we use require LIBRARY
+-Ruby is a combination of HTML and readable language, making it super simple to manipulate and understand.  

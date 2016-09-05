@@ -1,0 +1,27 @@
+Khan Academy CS Algorithims
+Intro to Algorithims
+
+Algorithim: A set of steps to acomplish a task
+Examples:
+-compression algortihims (used in google vidoe)
+-Maps use route finding algorithims
+-Nasa uses Optimization algorithims
+-minimax algorithims make chess AIs that never lose
+-new algorithims are constantly being created for weather, astronomy, biology, data analysis, etc...
+
+
+What makes a good algorithim?
+1.  Is correct
+2.  Is efficent
+
+-in some cases, nearly good is good enough, such as in the case of a path finding algorithim
+-we measure efficency in Asymptotic Analysis which evalutes algorithims absent hardware, language, etc...
+
+
+
+Algorithims
+-iterating through each number in a guessing game to get the number is a linear search, but bisecting each set of numbers is a binary search, which is able to significantly reduce the number of guesses.  
+-path finding algorithims require bounds on what is/is not valid for movement
+
+
+

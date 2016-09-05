@@ -1,0 +1,93 @@
+#Mackenzie Child: Intro to Rails
+#https://www.youtube.com/watch?v=zppMfm4fuxM&list=PL23ZvcdS3XPKnwg3lMv-JGNCn08kB0wsA&index=2 
+#What is RoR?
+-RoR is a web f/w that lets you build powerful sites easily and is used the world over
+-3 central tenets of RoR are: 'convention over configuraiton', MVC architecture, and Don't Repeat Yourself.
+	-MVC:
+		A: Models: Ruby code that does the 'heavy lifting' of validation/database access, etc... 
+		B: Views: handles data from the models and presents what the user sees
+		C: Controller: controls the 'flow' of the app and configuration of the App
+
+-Convention over configuration: the suggested/'rails way' of doing things, to try and make things easier
+-DRY: There to make things easier/simpler and more straightforward
+
+#https://www.youtube.com/watch?v=sAi1r8tzzS4&index=3&list=PL23ZvcdS3XPKnwg3lMv-JGNCn08kB0wsA
+#Basics of Ruby
+-creator took parts of languges that they liked and put them all into Ruby
+-designed to be reaadable by humans 1st, and computers 2nd, which is why Ruby is a great starter language
+-unless is the opposite of an if statment
+>age = 22 
+>unless age > 65 
+>puts "You are young"
+>end
+
+#https://www.youtube.com/watch?v=fP64Wvz13AM&index=4&list=PL23ZvcdS3XPKnwg3lMv-JGNCn08kB0wsA
+#First Rails App
+-make a new directory where you want your rails app to 'live' at, and change directories into it (from the console)
+-running the 'rails new EXAMPLE APP' will create a new app/project for rails (again from console)
+-typing rails -s or rails server into the console will startup the local rails server and allow you to work/develop locally
+-the site is located at localhost//:3000
+-structure of the rails app: has App, Bin, Config, DB, Lib, Log, Public, test, TMP, and vendor as top level folders
+-important files to note are the database.yaml and secrets.yaml in the config folder which handles the stuff for databases, RoR defaults to sqlite3, but you can use other stuff.  
+-another important files is the 'routes.rb' file which handles all the mapping of incoming web requests to your app/wesite 
+-the db folder has the schema.rb file, which is something we never want to modify directly, but only through migrations because it holds important parts of the database files/info that we want.  
+-the public directory holds the error pages etc...
+-the test file holds everything we need for TDD  
+-the TMP directory holds the temporary file
+-Other important files are the gemfile and gemfile.lock which determines the required gems that we need for our app/site 
+-the rakefile locates/load tasks that are loaded from the command line
+-the readme file holds all the basic stuff that you would expect
+
+#https://www.youtube.com/watch?v=JxxUgp0w8Uw&index=5&list=PL23ZvcdS3XPKnwg3lMv-JGNCn08kB0wsA
+#The MVC setup
+-want to have the ability to CRUD stuff (Create Read Update Delete), to store/manipulate data we need to create a model to do this 
+-to create a model, we want to go back to the console (making sure we still have our local server running), and make sure that we are in the directory where we created our rails app/website
+the command we want to use to create a model is:
+>rails generate model Post title:string body:text
+-we have to use capital letters for models we want to create
+-the 'title:string and body:text' are attributes that we added
+-The datatypes for different columns:
+	-String(default),text (this is used for longer strings AKA:paragraph length) integer, date, time, datetime, binary (used for data, audio, video, etc...), boolean, timestamp, decimal, float (use float when you don't care about precision, b/c float rounds), primary_key(IDs each row in a table)
+-if you were to open up the db folder an look into the migration subfolder, you would see a uniquely created file, which when opened up in a text editor shows a create_table method that has a loop entitled posts.  Within that loop is a string called title, and a text called body.  
+		create_table :posts do |d|
+			t.string :title
+			t.text :body
+		t.timestamps null: false 
+		end 
+-we don't have a schema file yet which means that the Posts table hasn't been create/migrated yet, to solve this we go back to the console and run 
+>rake db:migrate
+
+-we've created our first model, but we need to create a controller so that we can interact with it 
+	-the controller lives between the model in the views so that the data can be rendered properly etc...
+-to generate the controller we would run:
+>rails generate controller Posts index
+-NOTE that Posts is plural where as the model was singular, and we also create an index file, you don't have to create the index, but we did this to create a route/view for the index.html we could use.  
+-we can go to localhost3000/posts/index and find our index page.  
+***NOTE: With the current version of rails 4.2.6
+
+
+#https://www.youtube.com/watch?v=pfBxS-AgyQY&index=6&list=PL23ZvcdS3XPKnwg3lMv-JGNCn08kB0wsA
+#adding functionality
+-if we go to the console and run the:
+>rake routes 
+command, we will see the routes that we currently have to our server/the pages that are available.  
+
+-the rake routes columns
+	A: Prefix generally has the links/places where we can go
+	B: Verb has the REST(Representational State Transfer Protocl) options (there are 4)
+		1.  The Verb Post corresponds with creating things
+		2.  The Verb GET corresponds with reading  things 
+		3.  The Verb Patch corresponds with Updating Things 
+		4.  The Verb Delete corresponds with deleting things 
+		
+	C:	URI pattern corresponds witht the URI that you can go to within our project/app
+	D: Controller action is fairly self explanatory, specifies the controller and where it maps to
+
+-In the blog\app\controllers folder, we want to open the posts_controller.rb file, and create a new method called new with 
+def new
+end
+-if we navigate to localhost3000/new, we get a 	
+
+-so the idea of 'actions' is associated with Rails controllers
+-the concept of 'templates' is associated with Rails views
+	

@@ -1,0 +1,377 @@
+Learn SQL the Hard Way
+
+http://sql.learncodethehardway.org/book/introduction.html
+
+CRUD and SQL Databases
+
+ What SQL does is give you a language for interacting with data in a database. It's advantage though is that it closely matches a theory established many years ago defining properties of well structured data. It's not exactly the same (which some detractors lament) but it's close enough to be useful.
+
+How SQL works is it understands fields that are in tables, and how to find the data in the tables based on the contents of the fields. All SQL operations are then one of four general things you do to tables:
+
+Create
+Putting data into tables.
+Read
+Query data out of a table.
+Update
+Change data already in a table.
+Delete
+Remove data from the table.
+This has been given the acronym "CRUD" and is considered a fundamental set of features every data storage system must have. In fact, if you can't do one of these four in some way then there better be a very good reason.
+
+One way I like to explain how SQL works is by comparing it to a spreadsheet software like Excel:
+
+A database is a whole spreadsheet file.
+A table is a tab/sheet in the spreadsheet, with each one being given a name.
+A column is a column in both.
+A row is a row in both.
+SQL then gives you a language for doing CRUD operations on these to produce new tables or alter existing ones.
+The last item is significant, and not understanding this causes people a lot of headaches. SQL only knows tables, and every operation produces tables. It either "produces" a table by modifying an existing one, or it returns a new temporary table as your data set.
+
+As you read this book, you'll begin to understand the significance of this design. For example, one of the reasons Object Oriented languages are mismatched with SQL databases is that OOP languages are organized around graphs, but SQL wants to only return tables. Since it's possible to map nearly any graph to a table and vice-versa this works, but it places a lot of work on the OOP language to do the translation. If SQL returned a nested data structure then this wouldn't be a problem.
+
+Another place that causes a mismatch is in SQL concepts such as ternary relationships and attributed relationships, which OOP just completely does not understand. In SQL I can make 3 tables related to each other using a 4th table, and that 4th table is a cohesive relationship. To do the same thing in an OOP language I have to make a whole intermediary class that encodes this relationship, which is kind of weird in OOP.
+
+This may sound like total magic incantations right now, but by the time you're done with this book you'll understand these issues and how to deal with them.
+
+An introduction to relational DBs
+https://www.youtube.com/watch?v=z2kbsG8zsLM
+
+Relational Databases
+-puts data into keys/specific identifiers and resolves inconsistences to make sure there aren't overlapping issues
+-This allows us to create related tables that points to specific data
+-relational databases organizes data into tables and interrelates the data with keys (generally integers)
+
+Stanford Minicourse 1
+Part 1: Introduction to Databases
+https://www.youtube.com/watch?v=D-k-h0GuFmE
+
+
+Database Managment Systems
+-Provide effiencet reliabe conveient and safe multiuser storage of and access to massive amounts of persistent data
+
+Massive:
+-handles data at a large scale, generally in the TB range, and could usually not fit in the mem of a standard computer system
+
+Persistent:
+-exists outside of/beyond the use of a system, AKA: the data will still be there
+
+Safety:
+-will be held in a consistent state, even if there are hardware/software/user/power failures
+
+Multiuser:
+-concurrency control, controls how users access the DB/data items
+
+Convenient:
+-designed to make it easy to work w/ large amounts of data
+-phys data independence: how the program is laid out on a disk is independent from how the data is accessed/structured by a program
+-High level query languages: declarative languages that describe what data you want, but not the algorithim neccessary to get that data
+
+Efficent:
+-paramount, b/c there are thousands of queries/updates per second
+
+Reliability:
+-99.9999% uptime etc... is neccessary
+
+Intro to databases:
+-Dtabase apps may be programmed via f/ws such as RoR or Django
+-middleware includes app servers that access the data
+-data intensive apps may not use DBMS at all (excel spreadhseets, or just in a file)
+-we focus on DBMS
+
+Key concepts
+-Data model: how the data is strucutred e.g. relational data model in which everything is kept as a set of records, or as an XML where everything is in a hierarchal form, or as a graph/edge format
+
+-Schema vs. data: AKA types of data (scema) data AKA variables.  Schemas usually are set up with a higher level data definition language
+
+-DDL: Data definition language: used to set up a schema/type of data
+
+-DML: Data manipulation/query language: used for querying/modifying data
+
+Key People
+-DBMS Implmenter: builds the system
+-DB designer: establshis the schema and structure
+-DB app developer: programs that operate on the DB
+-DB admin: Loads the data, and keeps everything running
+
+Stanford Minicourse 1
+Part 2: The Relational Model
+https://www.youtube.com/watch?v=spQ7IFksP9g
+
+Relational Model-used by all major commercial DB systems
+-very simple
+-can query w/ high level languages
+-has efficent/easy implementations
+
+What the relational model is
+-DB = set of named relations (AKA: Tables)
+-If there were a student table and a school table, there are a set of predefined attributes (AKA columns)
+	-for student the attribs would be: ID, NAME, GPA, PHOTO
+	-for school the attribs would be: NAME, STATE, Enrollment
+-the data is stored in tuples in the tables
+	-student 1 ID: 123, Name: Amy, GPA: 3.9 Photo: True
+	-student 2 ID: 234, Name: Jon, GPA: 3.5 Photo: False
+	-School 1 Name: Berkely, State: CA, Enrollment: 36,000
+	-School 2 Name: Stanford, State: CA, Enrollment: 15,000
+	-School 2 Name: MIT, State: CM, Enrollment: 10,000
+	
+-each tuple (AKA: ROW), has a value for each attribute, and each attibute has a type or domain
+-schema is the strucutral desciption of relations in a database or how things relate to each other (Schema like Student, or School)
+-instance is the acutal contents of a thing at any given time
+-Null in databases is a special value for "unknown" or "undefined" (AKA if there is no GPA or name given), if you have query that gives back nulls, it could have problems
+-Keys: Attribute whose value is unique to the tuple (E.g. the ID is unique), for the school the set of Name AND state, would likely be a unique key.  These are useful to find specific tuples, and creating specific indicies, and pointing to specific aspects
+
+Creating tables in SQL:
+>Create Table Student(ID, name, GPA, photo)
+-in the above command we create a table with the name student and the attributes of ID, name, GPA, and photo
+
+-if you wanted to give specific types to attributes it would look like:
+>Create Table School (name string, state char(2), enrollment integer)
+-the above specifies the type of input that is valid with each tuple/thing in the DB
+
+
+Stanford Minicourse 1
+Part 3: Querying Relational DBs
+https://www.youtube.com/watch?v=nf1-h2GpEGc
+
+Steps:
+-steps in creating and using a relational DB
+1: create a schema and use a DDL/Data Definition Language
+2: Bulk load/put in the inital data 
+3: QUery/modify the data
+
+Querying relational DBs:
+-Support Adhoc queries in a high level language
+-ad hoc means that the request d/n require long programs, but can be structured as you think about what you want to ask
+-high level means that you can write compact queries that will get lots of data
+	EXAMPLES:
+		-All students w/ a GPA>3.7 applying to specific schools
+		-All enginerring departments in CA w/ 500 or greater applicants
+		-Schools w/ the highest average acceptance rate over the last 5 years
+
+-some qurires are easy, others may be a bit harder
+-some may be easy for DBMS to execute efficnetly,and others may be harder
+-Query Language is/can also bue used to modify data
+
+Quereying relational DBs:
+-Queries return relations("compositional", "closed")
+-when you get the same type of object/relation that you queried it is known as closure
+-compositionality is the ability to run a query over the results of a previous query
+
+Query Languages
+-an example query in the following languages
+	-the query we submit: We want the IDs of students with a greater than 3.7 GPA applying to Stanford
+
+-relational algebra
+	-formal language (theoretically well grounded/mathematic)
+	EXAMPLE: piID Sigma GPA>3.7 ^ (Name='Stanford'(Student INFSYMBOL Apply))
+
+-SQL
+	-actual/implemented language
+	EXAMPLE: Select Student.ID	
+			 From Student, Apply
+			 Where Student.ID=Apply.ID
+			 And GPA>3.7 and college='Stanford'
+
+			 
+Stanford Minicourse 1
+Part 1: Introduction to SQL
+https://www.youtube.com/watch?v=wxFmiRwXcQY
+
+SQL introduction:
+-SQL
+-supported by all major commercial DB systems
+-is standardized w/ many new features added over time
+-Inveractive via GUI or prompt, or w/ embedded programs
+-declarative statments are based on relational algebra
+
+
+SQL Intro
+-DDL Data def language: has commands to create table, drop the table, etc...
+-DML Data manip language: has commands to select, insert, delete, and update everything in the DB
+
+Stanford Minicourse 2
+Part 1:  Introduction
+https://www.youtube.com/watch?v=wxFmiRwXcQY
+The Basic Select Statement
+-has 3 parts
+1: From-IDs the relations you want to query over
+2: Where-combines and filter the relations you want
+3: Select-tells you what to return
+
+
+Stanford Minicourse 2
+Part 2:  More on the basic SELECT statement
+https://www.youtube.com/watch?v=4IxirOdp6bw
+
+
+Review
+-the select statement selects data from a particular table/row/column that satisfies a given set of conditions
+
+The example that we will be refering to is the School DB that we created
+	School with columns of *cname, state, and enrollment
+	Student with columns of *sID, sName, GPA, HSsize
+	Application with columns of *sID, *cName, *major, decision
+		*These are unique keys
+
+Example queries:
+SELECT sID, sName, GPA FROM Student WHERE GPA > 3.6;
+	-returns students names/IDs from the student table with a greater than 3.6 GPA
+
+SELECT sName, major FROM Student, Apply WHERE Student.sID = Apply.sID;
+	-combines 2 relations, finds majors of students who have applied, the condition is the join condition of student IDs that have the same ID as students who have applied
+	-there may be duplicates, the way to get rid of them is by adding DISTINCT after the SELECT statement
+	
+SELECT sName, GPA, decision FROM Student, Apply WHERE Student.sID = Apply.sID and sizeHS < 1000 and major = 'CS' and cName = 'Stanford';
+	-retrieves the names/GPAs of students whose high school size is less than 1k and their major is CS and have applied to Stanford, we will retireve the decision associted with it.  
+	
+
+Select cName from College, Apply WHERE College.cName = Apply.cName and enrollment > 20000 and major = 'CS';
+	-finds all large campuses that have someone applying to CS
+	-because there is a cName column in both School and Application, we need to preface the first cName with what we explictly want, in this case we would change the first cName to School.cName
+	
+SELECT Student.sID, sName, GPA, Apply.cName, enrollment FROM Student, School, Apply, WHERE Apply.sID = Student.sID and Apply.cName = School.cName;
+	-We join all the relations of student college and apply to ensure that we talk about the same student/college and we will get their ID, name, GPA, enrollment status, etc...
+	-we can sort/order our data with the ORDER BY clause and can use desc to get descending attribute, e.g. ORDER BY gpa desc, because the default is by ascending order
+	
+SELECT sID, major FROM Apply WHERE major like '%bio%';
+	-the like keyword/preidcate allows us to do simple string matching on attribute values
+	-we are pattern matching for all of the majors that begin with 'bio' so we can find biology and biology related majors.  
+	-this: %bio% says: match any major where there is some set of characters, followed by 'bio' followed by some set of characters
+	-select *, gets all attributs of something
+
+SELECT * FROM student, college
+	-gets tons of stuff
+	
+SELECT sID, sName, GPA, sizeHS, GPA*(SizeHS/1000.0) FROM Student;
+	-This shows our ability to do math within SQL statement, this modifies/normalizes the GPA depending on the size of the HS
+	-we can change the column name on the last column by using/appending AS scaledGPA to the end of the statement
+	
+
+Stanford Minicourse 2
+Part 3:  Table Variables and Set Operators
+https://www.youtube.com/watch?v=thcqxTlSAmw
+
+	
+	
+	
+	
+	
+
+Khan Academy
+Hour of Databases
+Video 1: Welcome to SQL
+https://www.khanacademy.org/computing/hour-of-code/hour-of-sql/v/welcome-to-sql
+
+Relational databases
+-kind of like a spreadsheet
+-stores data in a table
+-a row represents an item, and a column represents data about that item
+-relational databases store relations between tables instead of having to constantly rewrite/store data
+-SQL is a language designed for accessing/manipulating databases
+
+Khan Academy
+Hour of Databases
+Video 2: Creating a table and inserting data
+https://www.khanacademy.org/computing/hour-of-code/hour-of-sql/p/creating-a-table-and-inserting-data#
+
+Creating a table/inserting data
+
+"""
+CREATE TABLE groceries: Creates the table with the name/title of 'groceries'
+
+id INTEGER PRIMARY KEY: creates a column id that associates a key with each row
+name TEXT: creates a column name that stores text
+quantity INTEGER: creates a column quantity that stores numeric data
+"""
+CREATE TABLE groceries (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER)
+
+
+"""
+The following put into the table grocries the values associated w/ each column: INTEGER, TEXT, INTEGER.  Each statment ends with a semicolon
+"""
+INSERT INTO groceries VALUES (1, "Bread", 1);
+INSERT INTO groceries VALUES (2, "Peanut Butter", 1);
+INSERT INTO groceries VALUES (3, "Hot Dogs", 2);
+INSERT INTO groceries VALUES (4, "Hamburgers", 4);
+
+
+Khan Academy
+Hour of Databases
+Video 2: Querying a table
+https://www.khanacademy.org/computing/hour-of-code/hour-of-sql/p/querying-the-table
+
+Querying a table
+-to request data SELECT * FROM [TABLE NAME]
+-to specify how to order the data use the ORDER BY command
+-to specify a certain subset of data we can use the WHERE command
+
+"""
+SELECT * FROM [INSERT TABLE NAME] : how we get the data, the * specifies to get everything, and we have to specify what table we are getting data from
+
+WHERE aisle > 5:  Defines a specific operation/comparison to be made
+
+ORDER BY aisle: specifies how to arrange the data and based upon what column
+"""
+SELECT * FROM [INSERT TABLE NAME] WHERE aisle > 5 ORDER BY aisle;
+
+Khan Academy
+Hour of Databases
+Video 3: Aggregating Data
+https://www.khanacademy.org/computing/hour-of-code/hour-of-sql/p/aggregating-data
+
+-an aggregate function in SQL is useful to get maximum, minimum, summation, etc... from the DB/specific column.  
+
+SELECT SUM(quantity) FROM groceries;
+SELECT MAX(quantity) FROM grocieries;
+SELECT MAX(quantity) FROM grocieries GROUP BY aisle;
+SELECT aisle, SUM(quantity) FROM grocieries GROUP BY aisle;
+
+KHAN ACADEMY SQL DOCUMENTATION:
+Documentation
+SQL
+
+Creating tables
+CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, weight REAL); Many data types
+
+CREATE TABLE customers (id INTEGER PRIMARY KEY, age INTEGER); Using primary keys
+
+
+Inserting data
+INSERT INTO customers VALUES (73, "Brian", 33); Inserting data
+
+INSERT INTO customers (name, age) VALUES ("Brian", 33); Inserting data for named columns
+
+
+Querying data
+SELECT * FROM customers; Select everything
+
+SELECT * FROM customers WHERE age > 21; Filter with condition
+
+SELECT * FROM customers WHERE age < 21 AND state = "NY"; Filter with multiple conditions
+
+SELECT * FROM customers WHERE plan IN ("free", "basic"); Filter with IN
+SELECT name, age FROM customers; Select specific columns
+
+SELECT * FROM customers WHERE age > 21 ORDER BY age DESC; Order results
+
+SELECT name, CASE WHEN age > 18 THEN "adult" ELSE "minor" END "type" FROM customers; Transform with CASE
+
+Aggregating data
+SELECT MAX(age) FROM customers; Aggregate functions
+
+SELECT gender, COUNT(*) FROM students GROUP BY gender; Grouping data
+
+
+Joining related tables
+SELECT customers.name, orders.item FROM customers JOIN orders ON customers.id = orders.customer_id; Inner join
+
+SELECT customers.name, orders.item FROM customers LEFT OUTER JOIN orders ON customers.id = orders.customer_id; Outer join
+
+Updating and deleting data
+UPDATE customers SET age = 33 WHERE id = 73; Updating data
+
+DELETE FROM customers WHERE id = 73; Deleting data
+
+
+
+

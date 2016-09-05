@@ -1,0 +1,404 @@
+#http://www.theodinproject.com/web-development-101/ruby-on-rails-basics?ref=lnav
+#07/24/2016
+#Ruby on Rails 101 
+-Rails uses 'convention over configuration' which means that the Rails developers have made a lot of decisions for you about how things should be structured/how code should run.  
+-think of it like buying a car, you probably don't care about individual specs, but trust the manufacturer and trust that things will work as you want. Rails is the manufacturer.  
+
+
+#Michael Hartl Ruby on Rails: An Overview
+-Rails can make a ton of websites etc...
+-to create a rails app you want to make a new directory where you want everything located at
+>mkdir new-directory 
+	-then you change to the directory you just created and run:
+>rails new exampleapp
+	-exampleapp in this instance, is the name of whatever it is that you're wanting to create 
+	-from here rails will take over and install what it needs in order to set up the site.  
+	-rails has a standard file structure, and can seem overwhelming at first, but you get used to it. 
+	-at this point you have a basic app but we still want to check the gemfile, which is located in the set of files that were just installed in the exampleapp directory.
+	-in order to see the gemfile you can open it in your favorite text editor
+	-usually rails will have the 'rails' gem and teh 'sqlite3-ruby' gem installed, and everything else will be commented with the # sign.  
+
+#http://railsapps.github.io/what-is-ruby-rails.html
+#Daniel Kehoe: What is Ruby on Rails?
+
+Ruby 
+-programming language, general purpose but usually used for web programming 
+
+Rails 
+-extends the Ruby language 
+-code that is added to Ruby
+-F/W for building webstites for easier collaboration/maintenance 
+-Codified in the Rails API (Application Programming Interface/AKA: Dircevites that control the code)
+-Combines Ruby, with HTML, CSS, and JS to create web apps.
+-Rails is considered serverside/back end (browser being front end) 
+-Rails is popular among startups becuse of a number of open source software libraries that help build complex sites quickly 
+
+Why Ruby
+-The createer wanted to create something that was more streamlined that allowed for the creation of high level abstrauctions such as metaprogramming allowing for creation of 'domain specific languages'.  
+-The key advantage of Ruby is RubyGems which is a simple pakcage manager that makes it easy to create/share software libraries that extend Ruby.  
+
+-The Disadvantages of Ruby are that it can be slow relative to C++ or Java, Ruby is not well suited to multiple simultaneous tasks (parallelism).
+-Many also complain that Rails 'does too much'.  
+
+
+Do you need to study Ruby to learn rails?
+-pretty much no with on caveat, but spend at least some time with Ruby (an hour or so), to get comfortable with the syntax, RubyMonk and TryRuby are good tutorials 
+-You'll develop Ruby skills as you learn rails.   
+
+Why Rails 
+-Rails collaboration is quick and easy with easy to understand syntax and a large pool of open source libraries to enhance rails.  
+
+
+Rails Guiding Principles
+A.  Rails is opinonated 
+-An example of a 'non-opionated' language is something like Perl where 'there's no right way/one way' to do things. Rails is said to be 'opinonated' with a 'rails way' of doing things.  This is largely for the benefit of faster development, collaboration, and easier maintanance.  
+
+B.  Rails is generally left up to the creators 
+-The opionons that are in the rails API are the decisions of a 'benevolent dictator for life' that is informed by other developers.  
+
+C.  Convention over configuration 
+-Another example of 'opionated software', these are generally settings/values assigned without user intervention, Rails doesn't requre a ton of configuration files like some Java frameworks etc...
+-Rails makes assumptions such as if there is a model object in Rails called 'users' it will save the data to a DB named 
+'users' without any config required.  Rails will also assume the tabl ename is plural if the class name is singular 
+-This design enhances productivity, b/c there is less time setting up config files and thinking about where things go, and because it is a fairly stnadard modle, it's easier to collaborate.  
+
+D.  DRY 
+-pretty much there to avoid duplication, complexity, and enhance maintainability.  
+
+Where Rails gets Complicated
+A.  When Rails has no opinion 
+-jobs such as background proccessing Rails has no opinion on 
+
+B.  Allowed substitiltuons
+-Whiel there are many things that are chosen for the developer by the 'benevoloent dictator for life', there are some options that exist even within that and allow for substitutions.  Most tutorials only focus on the 
+
+C.  Conventions or magic?
+-Convention over config can add obsurity, there may be no clear/obvious code/there may be no clear way to learn the conventions.  
+
+D.  DRY to Obscurity 
+-Convent over config may have more obscurity due to Rails implementing code in the depths of the code library that may look like magic.  This can be frustrating when attempting to customize an application 
+
+How Rails Works 
+-A web browser uses HTML, CSS, and JS to display web pages via files that are obtained from a web server.  
+-HTML creates structured documents that combine content (vide, text, etc...) with basic design elements, CSS apply a specific design appearance, and JS, is able to manipulate JS and CSS.  
+-With Rails an APP server is utilized to generate pages dynamically (as opposed to static web pages) Rails uses ruby to dynamically assemble HTML, CSS, and JS from compenent files while oftentimes filling in content from a db 
+-We would create a web app because we might want to include certain content or layout stiles or add features easier.  
+
+6 Perspectives on a Rails APP 
+1.  Web Browswer's perspective 
+-From this perspective rails is simply a program that gennerates HTML, CSS< and JS files.  
+
+2.  From a coder's perspective 
+-There is a common rails structure:
++-app
+| +-assets
+| | +-images
+| | +-javascripts
+| | +-stylesheets
+| +-controllers
+| +-helpers
+| +-mailers
+| +-models
+| +-views
++-config
++-db
++-features
++-lib
++-log
++-public
++-script
++-spec
+
+--assets are images, CSS styleshee files, and JS files. 
+
+3.  SW architect's perspective 
+-the contents of the above files are organized according to a hihger level abstraction known as 'software architecture' 
+-SW is purely conceptional b/c it takes place as text files, but comes into being in the mind of programmers.  Most programming languages impose a standard set of abstractions that meet the common needs of most programmers.  
+-we keep lists wit an abstraction we call an array, perform operations via iteration, etc... 
+-An 'object' is a fundamental abstraction as the basis for all other abstractions', 
+
+"""
+Ruby tutorials say, “In Ruby, everything is an object,” and then show that all objects have state (data or “attributes”), behavior (procedures or “methods”), and identity (unique existence among all other objects). Objects are described with a class definition that describes attributes and methods; objects are used by a program as instances that have identical methods but differing data. Ruby provides a standard syntax for defining classes, creating instances, and calling methods.
+"""
+
+-code can be optimized via patterns that can be easily recognized (SW design patterns), one such pattern is Rails MVC architecture 
+
+4.  Time Traveler's perspective
+-Git is used as version control/a snapshot of your project's filesystem as utilized with git commits  
+-you can use github for remote backups of your projects, git/github are also important collaboration tools.  
+-from a time traveler's perspective a rails project is a series fo snapshots of files stored in a git repo.
+
+5.  Gem Hunters Perspective 
+-You can think of a rails app as a collection of gems that provide basic functionality and custom code for unique features for a particular website.  
+-The gemfile in the rails app lists each gem use by the app, that is used by the bundler utility program, and adds each gem to the programming environment.  
+-some gems are required (such as the one to connect to a db), while others are there to make development easier, or add functionality (payment proccessing etc...)
+-knowing what gems to use can be an extremely powerful tool 
+
+6.  Tester's perspective 
+-Rails has a 'baked in' test framework as part of TDD which is often used when building an app 
+-Software is always tested either by users who don't know they'r eguinea pigs, but oftentimes before it is released.  This might involve a QA team with integration testing which tests every component, or acceptance testing which tests specific requirements.  
+-another part of testing is 'unit tests' that are small test programs to test discrete parts of a software program in isolation from the rest of it.  
+-testing purposes include improving the user expericne by finding problems before they come up, it provides oversight and verification of the idea that what was written, works.  
+-oftentimes TDD practitioners will write their tests first in order to thing about specifications, edge cases, etc...
+-TDD also allows one to ensure that nothing breaks after a refactor 
+-BDD is behavior driven development that is simiar to TDD but focuses on writing specs for a project via descriptive stories that can be the basis of automated testing 
+
+Rails Stack 
+-A stack is a set of technoloiges or sw libraries that are used to create an app or deliver web pages 
+	-an example of this is LAMP (Linux, Apache, MySql, PHP)
+-Rails and Ruby can be used with a number of different operating systems and databases 	
+-the choice of gems/parts of the stack to be included are often driven by app requirements or sometimes personal prefrences
+
+
+Rails for Zombies
+http://railsforzombies.org/levels/1
+
+Level 1 
+Overview 
+-building Twitter for Zombies 
+-starting with Database called 'tweets', column 1 is ID, col 2 is status, col 3 is zombie 
+-how do we retrive the tweet w/ ID 3?
+-a hash is just multiple keys/values var = {key:val}
+-id stats and zombies are keys and what's associated witht them ar values 
+-we read the hash value through something like var[:value]
+-we can read/concat multiple values with var[:value] + " " + var2[:value2]
+
+-to retrieve a tweet object with id 3 we would use t = Tweet.find(3)
+-Rails is able to find pluarlized versions of things so t = Tweet.find(3) is able to access the 'tweets' info.  
+-the Tweet.find(3) returns everything the in the 3 hash/table and we could do something like puts t[:d] =>3, or puts t[:status] => eating brains
+-we can also use an alternate syntax of t.id, t.status, or t.zombie to get the same info 
+-most rails apps use the dot syntax 
+-to get the object with id 1 we would do w = Weapon.find(1)
+-Crud is create, read, updated, and delete 
+
+-We can read with the Tweet.find(3) argument (.find is the read method here )
+-we can create with the code
+ t = Tweet.new 				#creates a new tweet in the var t 
+ t.status = "I eat brains"	#updates the status 
+ t.save						#saves the tweet to the db 
+ 
+ -we can update the tweet with the following code: 
+ t = Tweet.find(3)		#searches the database and assigns what it finds to a variable
+ t.zombie = "here"		#updates the 'zombie' column with what is on the right of the = 
+ t.save					#saves the update
+ 
+ -we can delete the tweets with 
+ t = Tweet.find(3)	#finds the tweet
+t = t.destroy 		#delets the tweet 
+
+-with read when using tweet.find we can specify multiple values Tweet.find(3,4,5) which returns multiple values as an array
+-reading functions include Tweet.count which returns the total number of tweets, Tweet.order(:zombie) which returns all tweets ordered by zombie, Tweet.limit(10) returns the first 10 tweets, Tweet.where(zombie: "ash"), returns all tweets from zombie 'ash'. 
+	-we can use method chaining like so: 
+		Tweet.where(zombie: "ash").order(:status).limit(10)
+		
+-you can also use DBNAME.create to create a new record
+
+
+Level 2 - Models
+-models are how Rails apps communicates with data storage 
+-when we used Tweet.find(3), we were able to do this because of a model that is app/models/tweet which is set in a variable 
+-we can use validates_presence_of :status to check and make sure that we set something in the db 	
+	-we can specify error messages with t.errors.messages 
+
+-rails has a number of validations including validates_presence_of #makes sure something is there, validates_numericality_of #makes sure something is a number, validates_uniqueness_of, validates confirmation of, confirmation of, length of, format of, inclusion of, exclusion of, etc...
+
+-validations also can be written as: 
+validates :status #attribute, presence :true #what we are validating/checking for 
+OR
+validates :status, length:{ minimum: 3 } 
+OR COMBINING THE ABOVE STATMENTS AS 
+validates :status, presence: true, length: { minimum: 3}
+
+-Most rails apps use a relational db, because the data is interrelated/interacts with each other 
+-Let's say that there is a personal ID that we want to map to an address, we just need to tell rails that this relationship exists 
+
+-Since we want to specify the relationship in both directions (that the ID is associated with the address, and that the address is associated with the ID) we can use/create a database as such:
+
+#Defining that the zombie has many tweets associated with them
+class Zombie < 
+ActiveRecord::Base
+	has_many :tweets #notice the lowercase and portal
+	
+end 	
+
+#Defining that a tweet belongs to a zombie
+class Tweet < ActiveRecord::Base 
+	belongs_to :zombie #singular because a tweet can only belong to one zombie 
+end 
+
+ash = Zombie.find(1) #=> returns tweet info 
+t = Tweet.create(status: "Your eyelids are awesome", zombie: ash)
+ash.tweets.count 	#Returns tweet count of 3  
+ash.tweets 			#returns the tweets that have been made as an array with the tweet content and the zombie ID
+	
+-we could also do  
+t.zombie	#returns zombie info and tweets 
+t.zombie.name		#returns the zombie name of "ash"
+
+
+-Creating a Zombie class in the database in which we are sure there is a unique name present:
+class Zombie < ActiveRecord::Base
+  validates :name, presence: true, uniqueness: true
+end
+
+#creating a relationship of what belongs to who
+class Zombie < ActiveRecord::Base 
+	belongs_to : zombie 
+end	
+
+#finding a weapon in the database Zombie 
+z = Zombie.find(1)
+z.weapons 
+
+LEVEL3: Views 
+-views are visiual representations of Apps, the user interface or what people see.  
+-views sit above models on the top of the stack 
+
+.erb files are embeded ruby files, which puts ruby code inside files like index.html.erb 
+
+-we would have standard HTML surrounding the ruby code which is noted with <% RUBY CODE HERE %>, and we print that ruby code with <%= RUBY CODE THAT RUNS AND THAT WE WANT PRINTED HERE %>
+
+-We can avoid repeating ourselves by using boilerplate HTML code which is usually found in the /app/views/layouts/application.html.erb file 
+-every page that we create will use this template by default.  
+-the <%= yield %> command tells our code where it should go
+
+-we would make a link with <%= link_to twee.zombie.name, zombie_path(tweet.zombie) %> or the alternate syntax of <%= link_to tweet.zombie,name, tweet.zombie %>
+
+-links follow the standard of <%= link_to text_to_sho, model_instance %>
+
+-we can add things like <%= x,x, confirm: "Are you sure?" %> for a confirmation box  
+
+#code that allows looping through each tweet and displays it 
+<% Tweet.all.each do |tweet| %>
+	<tr> 
+		<td> <%= tweet.status %> </td>
+		<td> <%= tweet.zombie.name %> </td>
+	</tr>
+<% end %>
+
+Tweet is the class 
+Tweet.all is an array of class 
+tweet is a single tweet 
+
+-we could modify the <td> lines above to include links to the tweets with link_to tweet.status, tweet AND link_to tweet.zombie.name, tweet.zombie respectively.  
+
+-What if the table is empty?
+<% tweets = Tweet.all %>
+<% tweets.each do |tweet| %>
+<% tweets.each do |tweet| %>
+...
+<% end %>
+
+<% if tweets.size == 0 %> 
+	<em> No Tweets found </em>
+<% end %>
+
+
+#EDIT/DELETE tweets 
+<% tweets.each do |tweet| %>
+	<tr> 
+		<td> <%= link_to tweet.status, tweet %> </td>
+		<td> <%= link_to tweet.zombie.name, tweet.zombie %> </td>
+		<td> <%= link_to "Edit", edit_tweet_path(tweet) %> </td>
+		<td> <%= link_to "Destroy", tweet, method: :delete %> </td>
+	</tr>
+<% end %>
+
+
+#URL Generator Methods
+Action, Code, URL
+List All Tweets, tweets_path, /tweets 
+New tweet form, new_tweet_path, /tweets/new 
+
+#the following requrie some kind of path for a tweet 
+#for example #=> tweet = Tweet.find(1)
+Action, Code, URL
+Show a tweet, tweet, /tweets/1
+Edit a tweet, edit_tweet_path(tweet), /tweets/1/edit 
+Delete a tweet, tweet, method: :delete, /tweets/1
+
+Link format:
+<%= link_to text_to_show, CODE FROM URL GENERATOR METHODS %>
+
+
+Exercises
+-PRINT OUT THE ZOMBIES NAME AND GRAVEYARD
+-db name: zombie
+<h1><%= zombie.name %></h1>
+
+<p>
+  <%= zombie.graveyard %>
+</p>
+
+
+
+-LINK to the zombie's show page. Use the zombie's name as anchor text 
+<% zombie = Zombie.first %>
+
+<p>
+<%= link_to zombie.name, zombie %>
+</p>
+
+
+
+-USE AN EACH BLOCK TO PRINT THE NAMES OF ALL THE Zombies
+<% zombies = Zombie.all %>
+
+<ul>
+<% zombies.each do |zombie| %>
+  <td> <%= zombie.name %> </td>
+  <% end %>
+</ul>
+
+
+-In the each block, if a zombie has more than one tweet, print out SMART ZOMBIE.
+<% zombies = Zombie.all %>
+
+<ul>
+  <% zombies.each do |zombie| %>
+    <li>
+      <%= zombie.name %>
+      	<% if zombie.tweets.size > 1 %>
+      	<em> SMART ZOMBIE </em>
+      	<% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+-In the each block, make the zombie's name link to its edit page.
+<% zombies = Zombie.all %>
+
+<ul>
+  <% zombies.each do |zombie| %>
+    <li>
+      <%= link_to zombie.name, edit_zombie_path(zombie) %>
+    </li>
+  <% end %>
+</ul>
+
+
+COOL LINKS TO CHECK OUT:
+https://medium.com/@invoker/how-to-use-the-steak-clause-to-win-your-next-negotiation-55b4dafbea94#.9rxe6ie9p
+https://medium.com/@appendTo/learn-smart-not-hard-applying-learning-research-to-learning-programming-b42ff9bb863a?mc_cid=2cf55638c0&mc_eid=1de4a643d0#.ty0fglz5a
+https://hackernoon.com/i-dont-care-how-well-you-code-understand-your-compensation-a1e810973c5e#.1clp7dxog
+
+
+
+
+Lynda.com Ruby On Rails understanding MVC architecture 
+https://www.youtube.com/watch?v=3mQjtk2YDkM
+-MVC Architecture 
+-Model, View, Controller
+-Models are objects and encompases the db 
+-views are what the user sees 
+-the controller takes user inputs and updates/changes the views/model as necessary. 
+-The browser communicates with the controller and the controller communicates with the model as needed, and when ready the information is sent to the view which is sent back to the browser
+-in summary The controller handles decisions, the view handles the presentation, and the model handles data.  
+-The rails names/labels for the contoller is ActionController, View is ActionView, Model is ActiveRecord
+-ActionController and ActionView are often put together as ActionPack
+
+
+
+
+ 

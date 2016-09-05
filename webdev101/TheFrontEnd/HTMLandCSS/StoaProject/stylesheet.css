@@ -1,0 +1,68 @@
+body {
+	background: #f5f5f5;
+
+}
+
+img {
+	background-color: #36498a;
+	position: absolute;
+	left: 50%;
+	margin-left: -475px;
+	border: 1px solid white;
+	border-radius: 10px;
+		
+}
+
+p {
+	background-color: #;
+	position: absolute;
+	left: 57%;
+	top: 8px;
+	margin-left: -475px;
+	color: white;
+	font-family: Arial;
+	font-style: italic;
+	
+}
+
+.header {
+	background-color: red;
+	position: absolute;
+	left: 40%;
+	top: 180px;
+	color: white;
+	text-decoration: none;
+	
+	
+}
+.contentbox {
+	position:absolute;
+	background-color: white;
+	border: 1px solid black;
+	font-family: Georgia;
+	margin: 10% 20% 0 25%;
+	width: 950px;
+	text-align: center;
+	
+}
+
+
+#find {
+	position: absolute;
+	top: 180px;
+	left: 60%;
+	margin: auto;
+	
+	
+	
+}
+
+#findpair {
+	position: absolute;
+	top: 180px;
+	left: 72%;
+	margin: auto;
+	
+	
+	
+}

@@ -1,0 +1,45 @@
+HackerRank Notes
+
+Ruby Control structures
+
+#Iterating through an array/each
+We iterate through an array by using the array method each like so and using do and declaring a variable like so
+
+array = [1,2,3]
+
+array.each do |num|
+	puts num 
+end
+
+#Unless
+-unless is the logical equivalent of 'if not'
+-the code might look like:
+
+def scoring(array)
+  # update_score of every user in the array unless the user is admin
+    array.each do |user|
+        unless user.is_admin?
+            user.update_score
+        end
+    end
+    
+end
+
+#simple loops
+- a simple infinite loop in ruby can be called with:
+loop do
+end 
+
+
+#until
+-until is the equiavlent of 'while not'
+#the following would be read as: "Rund the coder.practice method until coder.oh_one? is true"
+until coder.oh_one? == true
+coder.practice
+
+#it could also be implemented as
+while not <condition>
+    <code>
+end
+end
+

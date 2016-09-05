@@ -1,0 +1,55 @@
+THE STRUGGLE THROUGH JQUERY
+
+-the '$' in Jquery simply stands in for writing out jQuery/calling jQuery on everything we want to run.  
+
+Basic Syntax:
+http://stackoverflow.com/questions/8667736/what-does-the-sign-mean-in-jquery-or-javascript
+Basic syntax is: $(selector).action()
+
+A dollar sign to define jQuery
+A (selector) to "query (or find)" HTML elements
+A jQuery action() to be performed on the element(s)
+
+
+Why we put $ in front of some variables/things:
+
+
+No there is no real difference.
+http://stackoverflow.com/questions/10204606/is-there-any-specific-reason-behind-using-with-variable-in-jquery
+
+It's just a convention that helps you remember that a isn't the DOM element but it's a jQuery object.
+
+var a = document.getElementById('a');
+a.innerHTML  //fine
+
+var $a = $('#a');
+$a.html()   // fine
+Ohhh, and by the way, neither a or $a are good variable names ... you should use meaningful variable names not abc characters.
+
+Read the jQuery info tag on this very same site:
+
+Variable Naming Conventions
+
+jQuery wrapped variables are usually named starting with '$' to distinguish them from standard JavaScript objects.
+
+var $this = $(this);
+
+EXPLAINING THIS CODE:
+var $row = $("<div />", {
+    class: 'row'
+});
+
+the var $row defines this as a jquery element, and the ("<div />", { creates the self closing div tag
+the { opens up the handler of jquery to let you tell it what you want it to do, and from there you assign it to the class
+ of 'row' and then close out the jquery call.  
+ 
+USEFUL RESOURCES FOR CREATING THE ODIN PROJECT ETCH A SKETCH/SKETCHPAD:
+
+Creating the grid itself:
+http://stackoverflow.com/questions/25518243/creating-div-grid-with-jquery-for-loop
+
+
+
+
+Changing the background color of individual squares:
+http://stackoverflow.com/questions/21051440/how-to-define-the-css-hover-state-in-a-jquery-selector

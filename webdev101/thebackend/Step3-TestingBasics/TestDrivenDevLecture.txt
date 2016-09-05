@@ -1,0 +1,31 @@
+https://www.youtube.com/watch?v=nBtO1UOK9Hs
+Nell Shamrell - Test Driven Development: A Love Story - Ancient City Ruby 2013
+***Description***
+Practicing Test Driven Development (TDD) is like falling in love. It may first seem like all your development problems will disappear. However, it's not all unicorns and rainbows. You have to work at it, and keep working at it, for the rest of your development life. It is hard, and it's natural to question whether the value is worth the effort.
+
+So why do it? Why would you bother going through all that trouble, dramatically changing the way you code, learn new domain specific languages, and initially slow down the rate at which you produce code when you have no time to lose?
+
+This talk will answer the "why" by sharing my experience of passing through the five stages of grief (denial, anger, bargaining, depression, and acceptance) as I learned TDD, and how acceptance grew to love.
+
+You will walk away from the talk with techniques for maintaining and strengthening your relationship with TDD. Test frameworks and languages may come and go, but the fundamentals and value of TDD remain.
+***END***
+
+
+Notes
+-There is never a perfect time for testing, and the ideal time for testing is ASAP
+-where to start?
+-new code must have testing be a part of it, and you can use tests to learn about legacy code
+-Testing at the end/last leaves holes in the code, and leaves things that could go wrong
+-Red, green, refactor
+-In this case, Red means "write a failing test/a test case in which the code fails", green means "write the code so that it passes", refactor means "refactor the code so it is more effienct/as need be"
+-don't write new functionality without a failing test, this is so you can find problems, before they happen, this is why they call it test DRIVEN development.  
+-testing is about trest, the only way to 100% trust your code is to test all of it.  
+
+Things to learn
+-tests prevents breaking, and a full test suite can prevent this, and the best time to fix something is directly after you break it
+-testing is a form of documentation and can show intention of a developer that may no longer be there.  
+-Test driven code is modular, loosley coupled, and has smaller, more managable methods
+
+Useful stuff to know
+-A stub is a stand in for an object called by your code, which recieves messages from your code when under test, and returns scripted responses you tell it to return.  
+-mocks are stubs w/ attitude, and acts a lot like a regular stub, but knows which methods/arguments should be called, and are much more specific.  

@@ -1,0 +1,140 @@
+#HackerRank
+#Arrays and Hashes
+#https://www.hackerrank.com/domains/ruby/ruby-arrays/difficulty/all/page/1
+
+#Array Init
+-you can intialize arrays with the usual array = []
+-but array.new allows you to have more flexibility/options
+-such as arr = Array.new(1), will create the array arr with one object in it, the 'nil' object
+AND
+-arr2 = Array.new(2, 10), will create the array arr2 with 2 elements in it, both of the elements being 10 (e.g [10, 10])
+
+#Array Index part 2
+-you can return the last item from a list with NAMEOFARRY[-1]
+-you can also do NAMEOFARRAY.first and .last to get the first and last items from an array 
+-you can return the first n elements of an array with NAMEOFARRAY.take(n)
+-you can drop the first n elements of an array and return the rest with NAMEOFARRY.drop(n)
+
+#Ruby Array - Adding to an Array
+-you can use traditional methods such as NAMEOFARRAY.push(THINGTOPUSHINTOTHEARRAY)
+-you can push something to the first position of the array with the unshif method 
+-you can insert something at a specific point with ARRAYNAME.insert(index, THINGTOPUSHINTOTHEARRAY)
+-you can insert any number of elements at a specific index, pushing everything else back with ARRAYNAME.insert(index, thing1, thing2...)
+
+#Ruby Array - Removing elements from an array
+-arr.pop and arr.shift remove the elements from the end of the array, and the beginning of the array, respectively
+-arr.delete_at(n) removes an element from a specific position/index
+-to delete all occurences of a specific element is arr.delete(THING)
+
+#Ruby Array - selecting elements in an array
+-there are non-destructive (that which does not modify/change the array when selecting elements) and destructive (changes the original array) methods of selecting things
+
+Nondestructive things 
+the select method allows you to specify what you want from the array, such as all elements greater than 2 or elements that are not odd
+	example:
+	arr.select {|a| a > 2}
+-the above would return all elements of arr that are greater than 2
+
+-you can also return an array that rejects certain elements such as those that are divisible by 3
+	arr.reject {|a| a > 3}
+	
+Destructive things
+-removing elements from an array until the code block returns false is done with the drop_while method
+	arr.drop_while {|a| a > 1}
+-the above removes everything from the array that is greater than 1 until it hits a 1 or a 0 in the array
+-delete_if deletes things from the array if the condition is not met arr.delete_if{|a| a < 2}
+-keep_if does the opposite of delete if and keeps things if they meet the selected condition arr.keep_if{|a| a < 5}
+
+#07/11/2016
+#Array selection
+#NONDESTRUCTIVE METHODS
+#note that these return the values in the array, not their indicies
+#you can make select and reject destructive methods by adding ! at the end like select! reject!
+-with array.select you can choose things based on values with code like the following:
+	arr.select {|a| a > 2}    
+-you can also reject inputs with this method:
+	arr.reject {|a| a > 2}
+-you can remove elements up until the first FALSE is returned as well:
+		arr.drop_while {|a| a > 1}
+
+#Destructive selection 
+-you can use the arr.delete_if method to delete certain inputs 		
+	arr.delete_if {|a| a < 2}
+-you can also KEEP selected elements that you want 
+		arr.keep_if {|a| a < 4}
+	
+#CODE EXAMPLES	
+=begin
+def select_arr(arr)
+  # select and return all odd numbers from the Array variable `arr`
+    arr.select {|a| a % 2 != 0}
+    
+
+end
+
+def reject_arr(arr)
+  # reject all elements which are divisible by 3
+    arr.reject {|a| a % 3 == 0}
+end
+
+def delete_arr(arr)
+  # delete all negative elements
+    arr.delete_if {|a| a < 0}
+end
+
+def keep_arr(arr)
+  # keep all non negative elements ( >= 0)
+    arr.keep_if {|a| a >= 0}
+end
+=end 	
+
+#Hashes initialization
+-AKA: associative arrays, dictionaries, hashes use any object as an index 
+-empty_hash = Hash.new(1) creates an empty Hash with the variable name, and the default value of every key set to 1 
+-you can also create a new hash with the key value pairs such as new_hash = {"dig" => 100, "dug" => 200}
+#EXAMPLE CODE 
+=begin
+
+empty_hash = Hash.new 
+default_hash = Hash.new(1)
+hackerrank = {"simmy" => 100, "vivmbbs" => 200}
+
+=end
+
+#Hash iteration, using each 
+new_hash = {"dig" => 100, "dug" => 200}
+-the above would be iterated over with new_hash.each do |key, value|, and the same kind of code/conventions as an array each
+
+#EXAMPLE CODE
+=begin
+
+def iter_hash(hash)
+    hash.each do |key, value|
+        puts key
+        puts value
+    end
+    
+end
+
+=end 
+
+#selecting, adding an removing from hashes 
+-you can add to hashes with the store method 
+	h.store(key, value)
+-you can remove an existing key with h.delete(key)
+-we can also use the keep_if and delete_if methods 
+		-hash.keep_if {|key, value| key % 2 == 0}    #will keep all even numbers in the hash 
+		-hash.delete_if {|key, value| key % 2 != 0}   #does the same as above, just using the not operator
+
+#EXAMPLE CODE
+=begin		
+hackerrank.store(543121, 100)
+hackerrank.keep_if { |key, val| key.is_a? Integer }
+#is_a is the METHOD you have to call on the key in order to check for it, and Integer is the argument/boolean
+#it checks for
+hackerrank.delete_if {|key, value| key % 2 == 0}
+#the above could also be accomplished with 	key.even? insead of key % 2 because key.even? will only return True values. 
+=end
+
+
+
