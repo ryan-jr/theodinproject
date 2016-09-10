@@ -1,0 +1,336 @@
+# The Odin Project: Step 4 Notes
+# 09/09/2016 
+#http://www.theodinproject.com/ruby-programming/advanced-ruby-building-blocks?ref=lc-pb 
+
+# Codeacademy 
+-the unless command is the oppositie of true and checks to see if something is false rather than if something is true 
+
+### EXAMPLE CODE 
+hungry = false
+
+unless hungry
+  puts "I'm writing Ruby programs!"
+else
+  puts "Time to eat!"
+end
+
+-because unless is the opposite keyword of end, just like if it requires an end  to close the statement.  
+
+-the primary booleans in ruby are && (true && false) == false, || (true || false) == true, and ! ( 1 != 2) == true.  
+
+
+-until is a compliment of the while loop and looks like: 
+
+The complement to the while loop is the until loop. It's sort of like a backwards while:
+
+In the example below, we first create a variable i and set it to zero.
+Then we execute a block of code until i is equal to 11. That block of code increments i.
+When i is equal to 11, the block ends.
+Finally, we print i, the value of i, to the console.
+counter = 1
+until counter == 11
+  puts counter
+  counter += 1
+  
+end
+
+
+-the following for loop is EXCLUSIVE of the last number:
+-for loops are used if we know how much we're going to be looping through/iterating through something 
+
+
+for num in 1...10
+  puts num
+end
+
+-in ruby {} for an iterator block are interchangable with do and end keywords 
+
+-the next keyword is used to skip code blocks and skip back to the top of the loop, and can be used either before an if block or within it like so:
+
+i = 20
+loop do
+  i -= 1
+  next if i % 2 != 0
+  print "#{i}"
+  break if i <= 0
+end
+
+
+OR (note however, that the following requires an end to close the statement)
+
+i = 20
+loop do
+  i -= 1
+  if i % 2 != 0
+      next 
+  end
+  print "#{i}"
+  break if i <= 0
+end
+
+
+### CODEACADEMY ###
+The loop iterator is the simplest, but also one of the least powerful. A more useful iterator is the .each method, which can apply an expression to each element of an object, one at a time. The syntax looks like this:
+
+object.each { |item| # Do something }
+You can also use the do keyword instead of {}:
+
+object.each do |item| # Do something end
+The variable name between | | can be anything you like: it's just a placeholder for each element of the object you're using .each on.
+
+### END ### 
+
+
+-the .times method is also valid, for .times you have to put a number in numeral format in front of .times 
+
+10.times do
+    print "hello"
+end
+
+
+Another until example:
+ctr = 0
+
+until ctr == 50
+    ctr += 1
+    print ctr
+
+
+end
+
+Rewritten as:
+ctr = 51
+
+until ctr == 0
+    ctr -= 1
+    print ctr
+
+
+end
+
+### another for loop example 
+
+for num in 1..50 
+	puts num 
+end 
+
+
+### another loop example 
+
+ctr = 0
+
+loop do
+    ctr += 1
+    print "Ruby!"
+    break if ctr == 30
+end 
+
+### CODEACADEMY REDACTED PROJECT ### 
+
+puts "Words to search through"
+text = gets.chomp
+
+puts "Words to redact"
+redact = gets.chomp
+
+words = text.split(" ")
+
+words.each do |word|
+if word == redact
+    print "REDACTED "
+else
+    print text + " "
+end
+end
+
+
+-a 2 dimensional array, is simply an array within an array like so:
+my_2d_array = [["a","b","c"]]
+
+
+-Ruby hashes/dictionaries look like so:
+
+hash = {
+  key1 => value1,
+  key2 => value2,
+  key3 => value3
+}
+
+
+We can add to a hash two ways: if we created it using literal notation, we can simply add a new key-value pair directly between the curly braces. If we used Hash.new, we can add to the hash using bracket notation:
+
+pets = Hash.new
+pets["Stevie"] = "cat"
+# Adds the key "Stevie" with the
+# value "cat" to the hash
+
+You can access values in a hash just like an array.
+
+pets = {
+  "Stevie" => "cat",
+  "Bowser" => "hamster",
+  "Kevin Sorbo" => "fish"
+}
+
+puts pets["Stevie"]
+# will print "cat"
+In the example above, we create a hash called pets.
+Then we print cat by accessing the key "Stevie" in the `pets hash.
+
+### Multidimensional arrays
+
+Iterating Over Multidimensional Arrays
+Now let's see how to iterate over a multidimensional array.
+
+We've created a 2-D array, s (for "sandwiches"). We want to iterate over s in such a way that we don't print out each element, like ["ham", "swiss"], but each element within each element, so we get a list of all the meats and cheeses within s.
+
+If we just wanted to access "swiss", we could type
+
+s[0][1]
+Meaning, "bring me the second element of the first element," which is "swiss." If we iterate over a regular array using
+
+array.each { |element| action }
+then how might we iterate over an array of arrays?
+
+
+
+
+Instructions
+Puts out every element inside the sub-arrays inside s.
+
+Iterate through .each element in the s array. Call the elements sub_array.
+Then iterate through .each sub_array and puts out their items.
+
+
+### CODE: 
+s = [["ham", "swiss"], ["turkey", "cheddar"], ["roast beef", "gruyere"]]
+
+
+
+s.each do |sub_array|
+    sub_array.each do |element|
+        puts element
+end
+    
+end
+
+
+### Iterating over hashes 
+
+When iterating over hashes, we need two placeholder variables to represent each key/value pair.
+
+restaurant_menu = {
+  "noodles" => 4,
+  "soup" => 3,
+  "salad" => 2
+}
+
+restaurant_menu.each do |item, price|
+  puts "#{item}: #{price}"
+end
+In the example above, we create a new hash called restaurant_menu.
+Then, we loop through the restaurant_menu hash and assign the key to item and the value to price for each iteration.
+Finally, we puts out:
+noodles: 4
+soup: 3
+salad: 2
+Instructions
+Use .each to iterate over the secret_identities hash.
+Use puts to print each key-value pair, separated by a colon and a space (:), to the console, just like the example above.
+
+
+### CODE: 
+secret_identities = {
+  "The Batman" => "Bruce Wayne",
+  "Superman" => "Clark Kent",
+  "Wonder Woman" => "Diana Prince",
+  "Freakazoid" => "Dexter Douglas"
+}
+  
+
+secret_identities.each do |id, name|
+    puts "#{id}: #{name}"
+end
+
+We've done a fair amount of iteration over arrays, so to finish up, let's review how to iterate over a hash.
+
+numbers = [1, 2, 3, 4, 5]
+numbers.each { |element| puts element }
+Instructions
+Iterate through .each key/value pair in lunch_order.
+Please puts out the value of each pair (just the value, not the key).
+
+
+### CODE:
+lunch_order = {
+  "Ryan" => "wonton soup",
+  "Eric" => "hamburger",
+  "Jimmy" => "sandwich",
+  "Sasha" => "salad",
+  "Cole" => "taco"
+}
+
+
+
+lunch_order.each do |key, value|
+   puts value 
+end
+
+
+### This is what i need for project 3 
+puts "Enter some text"
+text = gets.chomp
+
+words = text.split
+
+frequencies = Hash.new(0)
+
+words.each do |word|
+    frequencies[word] += 1
+end
+
+frequencies = frequencies.sort_by { |k, v| v }
+frequencies.reverse!
+
+frequencies.each do |key, value|
+    puts "#{key} #{value}"
+end
+
+
+-for methods/functions you can use the *(splat) indicator before an argument to denote that there will be multiple arguments being associated with that variable
+
+# EXAMPLE:
+def what_up(greeting, *bros)
+  bros.each { |bro| puts "#{greeting}, #{bro}!" }
+end
+ 
+what_up("What up", "Justin", "Ben", "Kevin Sorbo")
+
+
+-abstracting is a means of making things simpler:
+	-you could say "let's look at this lovely combo of windows, paint, doors, and a roof", or just abstract it and say "let's look at this lovely house"
+	
+-.stort! works on letters as well as numbers
+
+-<=> is a comparison sort operator, it compares two objects and returns 0 if the first item being compared is equal to the second, 1 if the first operand is greater than and -1 if the first operand is less than the second.  
+
+
+
+What if we wanted to sort the books by title, but from Z – A, or descending order? It appears that Ruby's sort method only works for A – Z, or ascending order.
+
+The sort method assumes by default that you want to sort in ascending order, but it accepts a block as an optional argument that allows you, the programmer, to specify how two items should be compared.
+
+Instructions
+Sort your books in descending order on line 8. Use the example of sorting in ascending order on line 4 as a guide.
+
+# CODE:
+
+books = ["Charlie and the Chocolate Factory", "War and Peace", "Utopia", "A Brief History of Time", "A Wrinkle in Time"]
+
+# To sort our books in ascending order, in-place
+books.sort! { |firstBook, secondBook| firstBook <=> secondBook }
+
+# Sort your books in descending order, in-place below
+books.sort! { |secondBook, firstBook| secondBook <=> firstBook }
+
+
