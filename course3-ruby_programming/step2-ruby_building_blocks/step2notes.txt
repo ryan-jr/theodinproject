@@ -1,0 +1,588 @@
+# The Odin Project
+# 09/05/2016 11:19
+
+# Ruby Programming >> Basic Ruby >> 2: Ruby Building Blocks
+
+
+
+
+# Assignment 2: Codeacademy Introduction to Ruby:
+
+-Ruby is object oriented meaning that you can manipulate data structures to build/execute programs.
+
+-3 main data types we're interested in:
+	-numbers, booleans, and strings.  
+	
+-Ruby has the standard operators:
+Addition (+)
+Subtraction (-)
+Multiplication (*)
+Division (/)
+Exponentiation (**)
+Modulo (%)
+
+-print simply prints to the screen, the puts command adds a newline after what you want printed to the screen.  
+
+-because of the object oriented nature of ruby, everything has methods associated with it, either string methods, numerical methods, etc...
+
+-by convention Ruby uses lowercase/snake case for variable names and $ and @ are reserved.  
+
+-In ruby you can do method chaining or do it on each separate line, for readability/code flow it is probably best to do it on each separate line.  
+
+-Single line comments are #, and multi line comments are =begin/=end
+
+
+# Beginning Ruby (3rd Edition)
+
+## Ch 2 
+-an object oriented language defines/operates on concepts in a program like how we might deal with concepts in the real world.  We create objects based on the concepts which ruby lets you put into instances and perform operations on them.  
+
+class Person 	#defines the concept of a 'person', a 'concept' is a class 
+				#as in most languages.  A class is the definition of a #single type of object
+				
+	attr_accessor :name, :age, :height
+				#provides 3 attributes for the person class.  Each Person has a name, age, and height.  
+end 			
+				#ends the class
+				
+				
+if we try and create a new person we will get:
+>person_instance = Person.new		#<Person:0x00HEX>
+									#This creates a new person and assigns it to person instance
+									
+>person_instance.name = "Chris"
+>person_instance.age = 22 
+>person_instance.height = "5' 10"
+									#assigns name, age, and height 
+puts person_instance				#Chris 
+									
+-person instance is another variable that holds/refers to a unique person object.  
+
+-Let's say we have a snake, a dog, a cat, and a rat.  We could create separate classes for each of them, but that would take more code than neccessary and we can use inhereitance to make it easier on us.  
+
+# Creating the Pet class with simple attributes
+class Pet
+	attr_accessor :name, age, color 
+end 
+
+class Cat < Pet 				#The < operator denotes the inhereitance
+end 							 of name, age, and color from class Pet
+
+class Dog < Pet 
+end 
+
+class Snake < Pet 
+	attr_accessor :length		#specific to the snake class 
+end 
+
+class Rat < Pet 
+end 
+
+
+-we can also add specific methods to each class, to make them do specific things, like making a dog bark and making a cat meow.  
+
+
+class Dog < Pet 
+	def bark
+		puts "woof"
+	end 
+end 
+
+a_dog = Dog.new 			# Creating a new dog
+a_dog.bark 					# Making the dog bark
+
+-Classes are powerful because it allows you to group objects of a similar type, but still have flexibillity in definign what they should do/how they should act.  
+
+-basically it's like Dave said, if we have a string object we can do string type things with it, if we have a number(FIXNUM) object, we can do number type stuff with it.  
+
+-we can also pass arguments and paramaters to different methods.  
+
+# creates class dog to allow for user input
+class Dog 
+	def bark(x)
+		x.times do 
+			puts "woof" 
+		end 
+	end 
+end 
+
+>my_dog = Dog.new 
+>my_dog.bark(3)			#woof \n woof \n woof
+
+
+class Dog 
+	def say(a, b, c)
+		puts a 
+		puts b 
+		puts c 
+	end 
+end 
+
+my_dog = Dog.new 
+my_dog.say("Hello","There","Human")		#Hello\n There\n Human
+
+-There are multiple methods that you can use with different objects, for instance with the String class there is for the string "test"
+
+.length			#4
+.upcase			#TEST
+.capitalize		#Test 
+.downcase		#test 
+.chop			#tes 
+.next			#tesu 
+.reverse		#tset 
+.sum			#416 
+.swapcase		#TEST 
+.upcase			#TEST 
+
+-we can also chain methods together such as .upcase.reverse.next, each of these will work in succession 'incrementing' upon the previous one. 
+
+# Useful stuff to remember from this chapter:
+ 
+-Classes are powerful because it allows you to group objects of a similar type, but still have flexibillity in definign what they should do/how they should act.  
+
+-A Class is a definition of a concept in an OO language, classes can inhereit features from other classes, but still have unique features 
+
+-An object is a single instance of a class, e.g. an object of class Dog is a single dog.  You can think of objects as real life objects where a class is a classification, but an object is the actual thing itself 
+
+-Object orientation(OO) is the approach of using classes/objects to model real world concepts in a programming language.   
+
+-Variables are the placeholders for a single object be it a string, number, list etc...
+
+-A method is a set of code that contains multiple commands/statements, that can be in a class/object or can be linked directly to a class to perform a specific action 
+
+-Arguments/Paramaters are the data passed to methods in parhentisis.  
+
+
+
+
+
+
+
+
+
+Double-quote strings allow interpolation of other values using #{...}:
+
+"One plus one is two: #{1 + 1}"
+Any expression may be placed inside the interpolated section, but it's best to keep the expression small for readability.
+
+Interpolation may be disabled by escaping the “#” character or using single-quote strings:
+
+'#{1 + 1}' #=> "\#{1 + 1}"
+
+
+# Basic Ruby Ch 2
+
+-Basic expressions are things like 5, 1+5, "a" + "b", x + y, etc...
+
+-the last expression would require variable declarations since x and y in this case are not strings, but are attempted to be added together and we would assign it as we typically would with x = 10 y = 2 
+
+-valid ruby variable names are a single word, and start with either a letter or an underscore 
+
+x 						Valid
+y2 						Valid
+_x 						Valid
+7x 						Invalid (starts with a digit)
+this_is_a_test 			Valid
+this is a test 			Invalid (not a single word)
+this'is@a'test! 		Invalid (contains invalid characters: ', @ , and ! )
+this-is-a-test 			Invalid (looks like subtraction) 
+
+-Ruby has a ton of shortcuts for typical operations such as x += y, x *=y, x /= y, x += 1, etc... 
+
+-While ruby can also perform mathematical operations it can also perform comparision operations 
+
+-Comparisons in ruby can be done with if, unless(oposite of if), &&, ||, ==, etc... 
+
+
+x > y 		Greater than
+x < y 		Less than
+x == y 		Equal to
+x >= y 		Greater than or equal to
+x <= y 		Less than or equal to
+x <=> y 		Comparison; returns 0 if x and y are equal, 1 if x is higher, and -1 if x is lower
+x != y 		Not equal to 
+
+-looping with ruby is pretty simple you can do the times method with something like:
+
+>5.times do puts "Test" end 	#prints test 5 times on newlines 
+OR ALTERNATIVELY
+>5.times { puts "Test" }
+
+Other ways to iterate through things are 
+>1.upto(5) 		{...code to loop here}	#counts from 1 to 5
+>10.downto(5) 	{...code to loop here}	#counts from 10 to 5 
+>0.step(50, 5) 	{...code to loop here}	#counts from 0 to 50 in steps of 5 
+
+-Another way to do this is to declare a counter variable as such:
+
+>1.upto(5) { |number| puts number } # prints 1, 2, 3, 4, 5 
+ALTERNATIVELY 
+>1.upto(5) do |number|	
+>     puts number 
+>end
+
+
+-ruby assumes integers and rounds down, this can be changed by having one of the numbers have a decimal point.
+>10/3		#3 
+>10.0/3 	#3.33333 
+
+-In Ruby we define constants with a capital leter on the variable name as such:
+>Pi = 3.14159 
+
+-In this way classes are a type of constant as well 
+
+-A string is any collection of text characters including digits, letters, whitespace, and symbols of any length.  When a string is embedded directly into code using quotation marks or something else, it is known as a string literal, outside sources/remote sources such as a user input, a text file, the internet etc...
+
+There are several other ways of including a string literal within a program. For example, you might want to include multiple lines of text. Using quotation marks is only viable for a single line, but if you want to span multiple lines, try this:
+
+x = %q{This is a test
+of the multi
+line capabilities}
+
+ In this example, the quotation marks have been replaced with %q{ and } . You don’t have to use curly brackets, though. You can use < and > , ( and ) , or simply two other delimiters of your choice, such as ! and !. This code works in exactly the same way:
+ 
+x = %q!This is a test
+of the multi
+line capabilities! 
+
+-you can concatonate strings with +, multiply strings with *, and also compare strings (or their ASCII numbers rather) with < and >.  You can find out character/string ASCII numbers with .ord as such:
+>"a".ord 	#120
+and find the inverse with 
+>puts 120.chr 	#x 
+
+-It's possible to embed expressions and logic/operations in strings with inerpolation using #{ }
+>x = 5 
+>y = 10 
+>z = "cat"
+>"x + y = #{x + y}"				#x + y = 15
+>"The #{z} in the hat"			#The cat in the hat
+>"It's a #{"bad " * 2} world"	#It's a bad bad world
+
+
+STRING MANIPULATION AND REGULAR EXPRESSIONS
+-regular expressions are a search query/pattern matching done via programming/in ruby.  
+
+
+-you can do substitions in Ruby with 
+>puts "foobar".sub('bar', 'foo')		#foofoo 
+-sub only does one substititon at a time on the first instance of text to match, .gsub does multiple substititions at once:
+
+>puts "this is a test".gsub('i', '')	#ths s a test 
+
+-to replace the first to characters of the string "This is a test" would look like:
+>x = "This is a test"
+>puts x.sub(/^../, "Hello ")	#Hello is a test 
+
+-forward slashes are used to denote regular expressions, the ^ denotes an achor, meaning the the regex will match from the beginning of any lines in the string and the two .. represent "any character".  All together it means "any two characters immediately after teh start of a line".  
+
+-To replace the last two characters in a line would look like: 
+>"This is a test"
+>puts x.sub(/..$/, " Hello")	#This is a te Hello 
+
+-This matches any two characters that are anchored to the end of any lines within the string 
+
+
+***Stoped at page 42 
+
+# Date and Time in Ruby 
+# http://www.tutorialspoint.com/ruby/ruby_date_time.htm 
+
+
+
+
+# Ruby Escape Characters
+# https://github.com/ruby/ruby/blob/trunk/doc/syntax/literals.rdoc#strings
+
+Double-quote strings allow escaped characters such as \n for newline, \t for tab, etc. The full list of supported escape sequences are as follows:
+
+\a             bell, ASCII 07h (BEL)
+\b             backspace, ASCII 08h (BS)
+\t             horizontal tab, ASCII 09h (TAB)
+\n             newline (line feed), ASCII 0Ah (LF)
+\v             vertical tab, ASCII 0Bh (VT)
+\f             form feed, ASCII 0Ch (FF)
+\r             carriage return, ASCII 0Dh (CR)
+\e             escape, ASCII 1Bh (ESC)
+\s             space, ASCII 20h (SPC)
+\\             backslash, \
+\nnn           octal bit pattern, where nnn is 1-3 octal digits ([0-7])
+\xnn           hexadecimal bit pattern, where nn is 1-2 hexadecimal digits ([0-9a-fA-F])
+\unnnn         Unicode character, where nnnn is exactly 4 hexadecimal digits ([0-9a-fA-F])
+\u{nnnn ...}   Unicode character(s), where each nnnn is 1-6 hexadecimal digits ([0-9a-fA-F])
+\cx or \C-x    control character, where x is an ASCII printable character
+\M-x           meta character, where x is an ASCII printable character
+\M-\C-x        meta control character, where x is an ASCII printable character
+\M-\cx         same as above
+\c\M-x         same as above
+\c? or \C-?    delete, ASCII 7Fh (DEL)
+Any other character followed by a backslash is interpreted as the character itself.
+
+
+
+# Deeper understanding
+1.  Numbers, Operators, and Expressions 
+-there are a number of methods to convert things for numbers .to_i and .to_f are used most often for integers and floats respectively.  
+
+-ranges are written in ruby as (3..11) inclusive and (3...11) exclusive
+
+- the = is for variable assignment, and == is for evaluation of expressions 2 == 2, 3 + 2 == 5, etc..
+- === is used to check if something is a subset of something else (e.g is 3 a number between 1 and 4?) # (1..4) === 3 # true or # Integer ===3 #true 
+
+2.  Objects and Methods 
+-objects consist of state(of being, name, hunger, race, etc..) and behavior (talking, sleeping, etc...)
+-A state in programming is manipulated/updated through variables and its behavior is changed through methods.  
+
+-the .is_a? method is a method that has the object reflect on itself and will tell you about itself.  
+
+
+-a method is just a function/black box where you put something in on the left and get something back on the right.  
+
+-methods can take inputs/arguments/paramaters as well e.g. the puts method could also be written as puts("hi")
+
+-methods with a ! at the end of them destructively modify the original object.  For example:
+
+> numbers = [1, 4, 2, 5, 3]
+> numbers.sort					#[1, 2, 3, 4, 5]
+> numbers 						#[1, 4, 2, 5, 3]
+> numbers.sort!					#[1, 2, 3, 4, 5]
+> numbers 						#[1, 2, 3, 4, 5]	#overwrote original 											numbers
+
+-methods ending in ? will return true or false 
+
+-Classes are like umbrellas that let us give an object general behaviors based on what it is.  
+
+-A person could be seen as the Person class that has methods accessible to them of run, jump, laugh etc... Which is useful because if you need to create lots of instances of something, you shouldn't have to rewrite all the methods you want all of them to have, so just write it at the class level and therefore all the instances of the object get to use them through inheritance.  
+
+-in methods you can specify a default input 
+
+>def speak(words = "shhhhh")
+>	puts words 
+>end 
+>
+>speak 							#even w/ no input we would get back shhhh
+
+
+3.  Strings 
+-you can treat strings like an array so that:
+s = "hello"
+>s[0]		#h 
+>s[-1]		#o 
+>s[-2]		#l 
+>s[2..4]	#llo
+>s[1..-2]	#ell 
+
+-we can break a string into a list with the .split method 
+-we can get user input with gets.chomp 
+-we can use .strip to strip out spaces and newlines 
+
+-.sub and .gsub are used for regexs in the format of .gsub("pattern", "replace with")
+
+4.  Arrays 
+-you can put anything in arrays be it numbers, strings, symbols etc... 
+arrays can be called a few different ways
+
+>a = Array.new 
+>b = []
+>c = Array[]
+>d =%w{I am not a crook}
+>e = Array.new(5)			#creates an array filled with 5 nil values 
+>f = Array.new(3, "hi")		#creates an array with 3 "hi" in it 
+
+
+Modifying items in an array can be done with:
+>arr[0] = 42 
+>arr				#[42, 12, 16, 3]
+>arr[0..3] = 99 	#[99, 3]
+
+>first = [1, 2, 300]
+>second = [7, 8, 9]
+>combined = first + second 		#[1, 2, 300, 7, 8, 9]
+
+-It's possible to subtract arrays so that anything that in the right array will be removed from the left array, AND the right array will not show.  
+> [1, 2, 3] - [2, 3, 4]		#[1]
+>[2, 2, 2, 3, 4] - [2, 5, 7]	#[2, 4]
+
+-to find values in both arrays, you can check their union using the & sign.  
+>[1, 2, 3] & [2, 4, 5]
+>[2]
+
+-We can use push and pop, which WILL modify the array, to retrieve values.  
+
+> arr = [1, 2]
+> arr.push(777)			#arr is now [1, 2, 777]
+>arr.pop				#777
+>arr.pop 				#2 
+>arr 
+>[1]
+
+-if you want to remove/add items from the front of the array you can use shift and unshift which will modify the array as well 
+
+>arr = [1, 2, 3]
+>arr.shift				#1   arr is now [2, 3]
+>arr.unshift(777)		#arr is now [777, 2, 3]
+
+-The << operator is also very useful 
+>arr = [1, 2, 3]
+>arr << 4					#arr is now [1, 2, 3, 4]
+
+
+-you can also delete items from the array, but beware that this will shift the other items in the array as well.  You can use the delete_at method to delete array items at a specific index 
+
+>arr = [1, 2, 3]
+>arr.delete_at(1)			#arr is now [1, 3]
+
+-to erase the array you can either use the .clear method, or set the array to []
+
+-you can check to see if an arry includes an item with .include?
+>arr.include?(3)
+>True
+>arr.include?(999)
+>False 
+
+-to find where the instance of a thing that you're looking for is at use the .index method, but it only returns the FIRST instance of that thing. 
+>arr.index(3)
+>2 
+>arr.index(999)
+>nil 
+
+
+A few useful and commonly used methods:
+
+-#max to find the biggest value of an array
+-#min to find the smallest value of an array
+-#uniq to remove all duplicates from your array
+-#size to find out how big the array is
+-#shuffle will mess up your whole array by putting it in random order
+-#sort will clean it up again for you by putting your array in order. Though #sort is pretty self-explanatory in the simple case, it can actually take parameters to let you decide if you want to sort things using a different (or reverse) methodology.
+-#sample picks out a totally random value from the array... good for gambling games!
+-#first gives you the first item (but doesn't remove it, so it's same as [0]) but can be more descriptive of your code's intent.
+-#last is same as [-1]
+
+
+-make your array names descriptivie and plural since they will be holding multiple things.  
+
+-.join and .split are also useful methods to know/have 
+
+
+#Hashes/Dictionaries 
+-Hashes are containers for data much like arrays, but use 'keys' (which can be strings or symbols) to refrence the data insted of a numerical index.  
+
+-each piece of data is mapped to a 'key' and the data is known as a 'value'.  The value can be anything just like an array.  
+
+-hashes start with {} instead of [] which would be an array
+
+-to create a hash we use:
+>my_hash = {}
+OR
+>my_hash = Hash.new 
+
+-A hash has the order of {key => value}
+
+Change Data in a hash just like an array, by indexing into it and assigning a new value. Unlike an array, to create a new data item, just pretend it already exists and assign it a value:
+
+> favorite_colors["eyes"] = "green"       # Changing an item
+=> "green"
+> favorite_colors
+=> {"eyes"=>"green", "hair"=>"blonde"}
+> favorite_colors["skin"] = "suburned"    # Adding a new item
+=> "sunburned"
+> favorite_colors
+=> {"eyes"=>"blue", "hair"=>"blonde", "skin"=>"sunburned"}
+
+-you can use hashes to keep track of a dictionary of words, or to avoid using a bunch of different variables to store similar data.  
+
+player_health = 100
+player_name = "Player1"
+player_speed = 7
+or, better:
+
+player = { "health" => 100, "name" => "Player1", "speed" => 7
+
+-Hashes are often used in rails to pass options/paramaters to a method. 
+
+-Delete things from a hash by setting the value to nil, or by calling the delete method on the key.  
+
+ -we can use the .merge method to combine 2 hashes together, if there are any conflicts the hash being called on the right overrides the hash making the call 
+ >favorite_colors.merge(favorite_day)
+ 
+ -if you want to know all the keys or values in a hash, you can use the .keys or .values methods to spit them out.  
+ 
+ >favorite_colors.keys 
+ >favorite_volors.values 
+ 
+#Dates and Times 
+-to get the current time we can use Time.now 
+-there are extensive date/time methods for the hour, minute, second, and day
+
+-if you want to create a specific time you can, even including the timezone offset that you want:
+>Time.new(2012, 2, 14)
+
+-If you're displaying time for a website or something else and want a standardized method you can use the .ctime method and the .utc time method.  
+
+#Other random stuff 
+-nil is literally nothing, and will return a nomethoderror if you try to run something on it.  
+
+-.blank? and .empty? check to see if an object has nothing in it, but blank? will ignore any whitespace.  
+
+- p is a little different than puts because p runs the .inspect method on the object while puts runs the .to_s method.  p is meant to be informative puts is meant to be pretty.  
+
+
+ is an Assignment Operator but there are a few others that are interesting and common shorthands as well:
+
+a += b is the same as a = a + b
+a -= b is the same as a = a - b
+a *= b is the same as a = a * b
+a /= b is the same as a = a / b
+a %= b is the same as a = a % b
+a **= b is the same as a = a ** b
+Parallel Assignment is when you assign the values of more than one variable at a time (though it works for arrays as well!):
+
+> a, b = 1, "hi"
+=> [1, "hi"]      # ignore this output
+> a
+=> 1
+> b
+=> "hi"
+> my_array = [1,2,3,4]
+=> [1,2,3,4]
+> my_array[1], my_array[3] = 100, 200
+=> [100,200]      # ignore
+> my_array
+=> [1,100,3,200]
+It's also a great way to Swap Two Variables:
+
+> a = 10
+> b = 20
+> a,b = b,a
+> a
+=> 20
+> b
+=> 10
+
+# Odin Project 3: Substrings 
+=begin 
+Implement a method #substrings that takes a word as the first argument and then an array of valid substrings (your dictionary) as the second argument. It should return a hash listing each substring (case insensitive) that was found in the original string and how many times it was found.
+=end 
+
+
+dict = ["he", "l", "o", "a", "i", "u"]
+
+hash = {}
+
+letter_ctr = 0 
+word_ctr = 0
+
+word = "hello I am a unicorn"
+new_word = []
+
+letters = word.split("")
+
+letters.each do |letter|
+	puts dict.index(letter)
+	new_word << letter
+	puts new_word.join.to_s
+	puts dict.index(new_word.join.to_s)
+
+end
+	
+	
