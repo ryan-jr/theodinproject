@@ -334,3 +334,569 @@ books.sort! { |firstBook, secondBook| firstBook <=> secondBook }
 books.sort! { |secondBook, firstBook| secondBook <=> firstBook }
 
 
+
+-default paramaters in ruby are passed like a variable assignment 
+
+-in Ruby only nil and false are regarded as non-true, everything else is 'truthy'
+
+-if you try to access a key in a hash/dictionary that is not there, it will evaluate to/return nil 
+-in Ruby you can create default values to be in a hash so that it does not return nil with:
+
+no_nil_hash = Hash.new("hello")
+
+
+-symbols are denoted with :this, symbols are not strings and there can only be one copy of any particular symbol at a given time.
+
+#Code EXAMPLE:
+my_first_symbol = :symbol
+
+#CODE EXAMPLE
+#Pushing text strings from an array onto a new array as symbols 
+
+strings = ["HTML", "CSS", "JavaScript", "Python", "Ruby"]
+
+# Add your code below!
+
+symbols = []
+
+strings.each do |s|
+    symbols.push(s.to_sym)
+end 
+
+- .intern does pretty much the same thing as .to_sym 
+
+-just like in arrays you have to put , between things in a elements/items in a hash/dictionary 
+
+
+- newer syntax for hashes: 
+movies = {
+    hello: "world",
+    new:   "movie"
+    
+      }
+
+#hello, and new are still symbols.  
+
+
+#### Using select to find specific values given a set of constraints 
+
+movie_ratings = {
+  memento: 3,
+  primer: 3.5,
+  the_matrix: 5,
+  truman_show: 4,
+  red_dawn: 1.5,
+  skyfall: 4,
+  alex_cross: 2,
+  uhf: 1,
+  lion_king: 3.5
+}
+
+
+
+good_movies = movie_ratings.select { |name, rating| rating > 3 }
+
+
+
+We know how to grab a specific value from a hash by specifying the associated key, but what if we want to filter a hash for values that meet certain criteria? For that, we can use .select.
+
+grades = { alice: 100,
+  bob: 92,
+  chris: 95,
+  dave: 97
+}
+
+grades.select {|name, grade| grade < 97}
+# ==> {:bob=>92, :chris=>95}
+
+grades.select { |k, v| k == :alice }
+# ==> {:alice=>100}
+
+
+
+In the example above, we first create a grades hash that maps symbols to integers.
+Then we call the .select method and pass in a block of code. The block contains an expression for selecting matching key/value pairs. It returns a hash containing :bob and :chris.
+Finally, we call the .select method again. Our block looks only for the key :alice. This is an inefficient method of getting a key/value pair, but it shows that .select does not modify the hash.
+(Here we're using "name" or "k" to stand for the key and "grade" or "v" to stand for the value, but as usual with blocks, you can call your variables whatever you like.)
+
+### CODE EXAMPLE
+#In ruby you can either print just the key or just the value 
+
+
+Great work!
+
+We've often found we only want the key or value associated with a key/value pair, and it's kind of a pain to put both into our block and only work with one. Can we iterate over just keys or just values?
+
+This is Ruby. Of course we can.
+
+Ruby includes two hash methods, .each_key and .each_value, that do exactly what you'd expect:
+
+my_hash = { one: 1, two: 2, three: 3 }
+
+my_hash.each_key { |k| print k, " " }
+# ==> one two three
+
+my_hash.each_value { |v| print v, " " }
+# ==> 1 2 3
+Let's wrap up our study of Ruby hashes and symbols by testing these methods out.
+
+
+movie_ratings = {
+  memento: 3,
+  primer: 3.5,
+  the_matrix: 3,
+  truman_show: 4,
+  red_dawn: 1.5,
+  skyfall: 4,
+  alex_cross: 2,
+  uhf: 1,
+  lion_king: 3.5
+}
+# Add your code below!
+
+movie_ratings.each_key do |key|
+    puts key
+end
+
+
+-the case statment is associated with a variable and the conditionals are noted with when and a specific operation/input:
+
+choice = gets.chomp
+
+case choice
+when "add"
+    puts "Added!"
+when "update"
+    puts "Updated!"
+when "display"
+    puts "Movies!"
+when "delete"
+    puts "Deleted!"
+else
+end
+
+-Apparently you add to hashes in a SUPER weird way when you have variables 
+# the hash variable name is movies along with the title and rating variables 
+
+moves[title] = rating
+
+To make the above accurate we need to use .to_sym and .to_i on the title and rating respectively
+
+movies[title.to_sym] = rating.to_i
+
+-to remove things from a hash we just need to call the .delete method on the hash and the key of what it is we want to delete, which will remove the key and the value.  
+
+movies.delete(hello)
+
+
+
+
+### ADD, UPDATE, READ, DELETE with a Ruby Hash 
+
+movies = {
+    Wrinkle_in_time: 1
+    
+    
+    
+}
+
+puts "What would you like to do?"
+puts "Type 'add', to add a movie"
+puts "Type 'update', to update a rating"
+puts "Type 'display', to display the movies/ratings"
+puts "Type 'delete', to remove a movie/rating"
+
+choice = gets.chomp
+
+case choice
+when "add"
+    puts "input a movie title!"
+    title = gets.chomp
+    puts "input a rating 1 to 5, 1 being the best"
+    rating = gets.chomp
+    title = title
+    rating = rating
+    if movies[title.to_sym] = nil
+        movies[title.to_sym] = rating.to_i
+    else
+        puts "This movie is already in the system!"
+    end
+when "update"
+    puts "Type the movie title you want to update!"
+    title = gets.chomp
+    if movies[title.to_sym] = nil
+        puts "This movie is not in the system!"
+    else
+        puts "What is new rating?"
+        rating = gets.chomp
+        movies[title.to_sym] = rating.to_i
+end
+when "display"
+    movies.each do |movie, rating|
+        puts "#{movie}: #{rating}"
+    end
+when "delete"
+    puts "What is the title you want to remove?"
+    title = gets.chomp
+    if movies[title.to_sym] = nil
+        puts "Error! The movie is not in the system!"
+    else
+        movies.delete(title)
+    end
+else
+end
+    puts "Error!"
+	
+
+### Blocks, Procs, and Lambadas
+
+-if we want to perform operations on an array BUT NOT mutate/change the original array, we can use the .collect method like so 
+
+fibs = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+# Add your code below!
+doubled_fibs = []
+
+
+fibs.collect do |dubs|
+    dub = dubs * 2
+    doubled_fibs << dub
+end
+
+doubled_fibs
+
+
+### YIELD 
+-OK yield is a bit strange to try and wrap your head around, but basically yield pauses the code that is being executed in the method, and instead runs the code that was in the block that called it, and then runs the rest of the code in the method.  
+
+
+https://learn.co/lessons/yield-and-blocks
+
+
+Think of the yield keyword as saying "stop executing the code in this method and instead execute the code in the block. Then, return to the code in the method."
+
+Here's an example:
+def hello
+	puts "hello"
+	yield 
+	puts "world"
+end
+
+hello do
+	puts "there"
+end 
+
+#OUTPUT OF ABOVE CODE 
+# hello 
+# there 
+# world 
+
+ALSO:
+
+def yield_name(name)
+  puts "In the method! Let's yield."
+  yield("Kim")
+  puts "In between the yields!"
+  yield(name)
+  puts "Block complete! Back in the method."
+end
+
+yield_name("Eric") { |n| puts "My name is #{n}." }
+
+# Now call the method with your name!
+
+yield_name("RJR") do |name|
+    puts "#{name}"
+    
+end
+
+### ANOTHER EXAMPLE OF YIELD 
+
+def double(num)
+    
+    yield(num)
+
+
+end
+
+
+double(2) do |num|
+    num * 2
+end
+
+
+# PROCs 
+-so Procs are simply PROCcesses that can be assigned to a variable 
+
+you can write a proc a couple of ways for example 
+
+=begin 
+
+The .floor method rounds a float (a number with a decimal) down to the nearest integer. Write a proc called round_down that will do this rounding (we've added the code to pass it to floats.collect).
+
+=end 
+
+floats = [1.2, 3.45, 0.91, 7.727, 11.42, 482.911]
+# Write your code below this line!
+
+
+round_down = Proc.new do |x|
+    x.floor 
+    end
+
+#The above also works as:
+# round_down = Proc.new { |x| x.floor }
+# remeber that anything between the pipes is a placeholder, and 
+# { } simply stands in for DO and END 
+
+
+# Write your code above this line!
+ints = floats.collect(&round_down)
+
+-when you're calling a method and passing it to a proc, you have to include the ampersadn before the proc you call in parens
+
+
+### Codeacademy STUFFS 
+Instructions
+Create a method, greeter, that takes no arguments and yields to a block.
+Create a Proc, phrase, that puts "Hello there!". Pass this to greeter instead of a block. (Don't forget to pass &phrase instead of just phrase!) 
+
+***CODE: 
+def greeter
+    
+    yield
+
+end
+
+
+phrase = Proc.new do 
+    
+    puts "Hello there!"
+    
+    end
+    
+greeter(&phrase)
+
+### 
+
+Calling a proc with a method isn't too tricky. However, there's an even easier way.
+
+Unlike blocks, we can call procs directly by using Ruby's .call method.
+
+Remember: there's always more than one way to do something in Ruby.
+
+hi = Proc.new do 
+    
+    puts "Hello!"
+
+    end
+    
+hi.call
+
+#LAMBADAS 
+Lambda Syntax
+Lambdas are defined using the following syntax:
+
+lambda { |param| block }
+Lambdas are useful in the same situations in which you'd use a proc. 
+
+#EXAMPLE CODE 
+
+strings = ["leonardo", "donatello", "raphael", "michaelangelo"]
+# Write your code below this line!
+
+
+symbolize =  lambda { |param| param.to_sym } 
+
+
+# Write your code above this line!
+symbols = strings.collect(&symbolize)
+
+If you're thinking that procs and lambdas look super similar, that's because they are! There are only two main differences.
+
+First, a lambda checks the number of arguments passed to it, while a proc does not. This means that a lambda will throw an error if you pass it the wrong number of arguments, whereas a proc will ignore unexpected arguments and assign nil to any that are missing.
+
+Second, when a lambda returns, it passes control back to the calling method; when a proc returns, it does so immediately, without going back to the calling method.
+
+
+Create a lambda, symbol_filter, that takes one parameter and checks to see if that parameter .is_a? Symbol.
+Create a new variable called symbols, and store the result of calling my_array.select and passing it your lambda.
+
+
+my_array = ["raindrops", :kettles, "whiskers", :mittens, :packages]
+
+# Add your code below!
+
+symbol_filter = lambda { |param| param.is_a?Symbol }
+
+symbols = my_array.select(&symbol_filter)
+
+
+Quick Review
+All this talk of blocks, procs, and lambdas might have your head spinning. Let's take a minute to clarify exactly what each one is:
+
+A block is just a bit of code between do..end or {}. It's not an object on its own, but it can be passed to methods like .each or .select.
+A proc is a saved block we can use over and over.
+A lambda is just like a proc, only it cares about the number of arguments it gets and it returns to its calling method rather than returning immediately.
+Yeild is a command that will temporary pause the code being run in the metho and pass the information back to the block that called it.  
+
+
+The odds_n_ends array is full of all sorts of objects, but we only want the integers (numbers without decimal bits).
+
+Create a new variable, ints, and store the result of calling odds_n_ends.select method with a block that checks if the element .is_a? Integer.
+
+odds_n_ends = [:weezard, 42, "Trady Blix", 3, true, 19, 12.345]
+
+check = lambda { |int| int.is_a?Integer }
+
+ints = odds_n_ends.select(&check)
+
+
+Now we'll be using the ages array. Create a variable called youngsters and set it equal to calling .select on ages, and pass in your under_100 proc to filter for the ages that are less than one hundred. Remember to pass &under_100 to convert your proc to a block!
+
+
+ages = [23, 101, 7, 104, 11, 94, 100, 121, 101, 70, 44]
+
+under_100 = Proc.new do |num|
+   
+   num < 100
+    
+end
+
+youngsters = ages.select(&under_100)
+
+To finish up, let's go ahead and create a variable called a_to_m and set it equal to calling .select on crew, and pass in your first_half lambda to filter for the names that are before "M" in the alphabet. Remember to pass &first_half to convert your lambda to a block!
+
+crew = {
+  captain: "Picard",
+  first_officer: "Riker",
+  lt_cdr: "Data",
+  lt: "Worf",
+  ensign: "Ro",
+  counselor: "Troi",
+  chief_engineer: "LaForge",
+  doctor: "Crusher"
+}
+# Add your code below!
+
+
+first_half = lambda { | key, value | value < "M" }
+
+a_to_m = crew.select(&first_half)
+
+
+
+### Ruby Explained 
+# http://www.eriktrautman.com/posts/ruby-explained-conditionals-and-flow-control 
+
+
+-Truthiness and Falsiness are ways of asking what evaluates to true.  For ruby everything that is not nil or false evaluates to truthy
+ 
+-unless is the opposite of an if statement, basically with unless, if something is false it will execute that code.  
+
+-the spaceship operator compares two objects and gives different outputs based upon wether the thing on the left side is greater than, less than, or equal to the right side.  
+
+-the logical operators are &&, ||, and !.  with && both sides of the equation must be true, with || either side of the equation must be true, with ! it will flip the value.  
+
+-logical operations follow the order of operations from left to right unless parens are involved, which are evaluated first.  
+
+
+Ruby is Lazy which means two things here:
+
+It will only evaluate far enough to determine that the expression is definitively true or false.
+It will return whatever is returned by the last part of the expression to get evaluated (instead of just a simple true or false it relies on that returned thing being truthy or falsey).
+
+ For another example, 7 || nil returns 7 (which behaves truthy) instead of true and 7 && nil returns nil (which behaves falsey) instead of false If this seems a bit much to swallow right off the bat, keep it in the back of your mind until you first see it in action then it will click.
+
+ 
+ ||= is a sneaky expression that takes advantage of Ruby's natural laziness -- it basically expands to thing_a || thing_a = thing_b. So if thing_a hasn't been set to anything, it becomes thing_b, otherwise it keeps its original value. It's a bit complex and you don't need to know exactly why it works, but we'll go over it for completeness:
+
+If thing_a hasn't yet been assigned to anything, it is nil and Ruby then checks the right side of the || to see if that might be true, which involves running the expression to set thing_a = thing_b. If it has already been assigned a value, it just keeps that value like normal. This is another sneaky trick used by programmers in situations like when you don't want to override whatever's already been set, but you want something to be there (like which url originally referred the user to your site)
+
+You may have seen some oddly compact and strange looking statements that appeared to be if statements under the hood. That's probably because they use the Ternary Operator, which is a shorthand notation for a simple if that separates the different parts using the ? and : like:
+
+condition ? do_this_if_true : do_this_if_false
+
+So:
+
+> true ? puts "I like truth" : puts "not gonna happen"
+"I like truth"
+=> nil
+You can also nest if statements inside one another. Sometimes it gets a little crazy and you find yourself 6 levels deep (and probably needing to rethink your strategy). For those situations where you're really just checking to see if something equals any one of a number of clear but different options, a case statement can be a good substitute. It basically lets you construct a chain of logic that says "if x equals option_a, do this, if it equals option_b, do this, if it equals option_c, do this... and otherwise do this."
+
+case current_user.energy   # Assume it's an value 1-3
+when 3
+    puts "Go run a marathon!"
+when 2
+    puts "Go for a walk."
+when 1
+    puts "Go take a nap"
+else
+    puts "You're only supposed to have energy of 1,2 or 3..."
+
+	
+	
+-ternary operators simply use ? and : in place of if/else statements and are more compact.  
+
+-case statements are more succinct because they allow you to not go 6 levels deep with if/else statements.
+
+
+# Ruby Explained: Iteration 
+
+-the index variable keeps track of which iteration you are on in a loop and is usually found inbetween | | 
+
+- the .loop is the most basic way to loop in ruby, and is not oft seen because other methods have more flexibility, because the .loop command is stopped with a break command.  
+
+
+-since most things involve iterating over a hash or an array in ruby we usually use the .each method.  Where most other methods just do something a certain number of times, the .each method will pass whater item it is currently on in the array/hash into the code block.  
+
+
+-while is another way to do it as is until, but the until command runs as long as the condition is/evalutates to FALSE
+
+# Example of while and until loops 
+
+i = 0 
+while i < 5 
+	puts "#{i}"
+	i += 1 
+end 
+
+i = 0 
+until i >= 5 
+	puts "#{i}"
+	i += 1 
+end 
+
+- for is used in a number of languages, but gets less love in ruby but you can still use it like so:
+
+for x in (1..3) 	#1 up to and INCLUDING 3 
+	puts "#{x}"
+end 
+
+-the times method is an incredibly simple method that take the value of the current iteration an pass it to the block if you have an index variable.
+
+# w/ pipe variable:
+5.times do |num| 
+
+	puts "hello "
+end 
+
+# w/o pipe variable: 
+5.times { puts "hello" } 
+
+-other methods include the .upto method which looks like:
+1.upto(4) { | current_num | ...code... }, this is basically like the .times method but you choose the starting and ending points.  The inverse of this is the .downto method.  
+
+
+Your best friends early on will be while for anything that needs to run until a certain condition is reached (like winning the game), #each for any time you want to do stuff with every item in an array or hash, and #times for the simple cases when you just want to do something a fixed number of times.
+
+-to have more control over loops you can use the break statement to stop loops, and is usually seen with an if statment.  
+
+-you can also use next, which will jump to the next iteraton of the loop.  
+
+-don't use return to exit a loop, since it will exit an entire method as well.  
+
+
+
+  
+
