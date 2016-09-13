@@ -897,6 +897,147 @@ Your best friends early on will be while for anything that needs to run until a 
 -don't use return to exit a loop, since it will exit an entire method as well.  
 
 
-
+-Nesting loops are when one loop occurs inside of another, so that you you execute the inner loop each time you go through the outer loop.  This happens with '2d problesm' like searching arrays w/in arrays.  
   
 
+  
+# Ruby Explained: Blocks, Procs, and Lambadas 
+
+-blocks are just that blocks of code (usually seen in loops), and are usually enclosed/declared with { } OR can be enclosed with do...end
+
+-blocks should be used with the implicit return and not the explict return.  
+
+-blocks are used as arguments to other methods (.each anyone?), and the .each method is built to accept a block as an argument, because blocks are used as arguments to other methods, so blocks are not THAT special, they just usually take up multiple lines.  
+
+-the yield statement is pretty important at this point because it allows you to pass back/push back/call back to the block of code that called a particular method etc... 
+EXAMPLE:
+
+def hello
+    puts "hello"
+    yield 
+    puts "world"
+end
+
+hello do
+    puts "there"
+end 
+
+>hello 
+>there
+>world 
+
+So one reason blocks are great is because you can write a sort of generic method like #each which wraps your block in code that says what to do with it. Another use case is when creating methods where you want to optionally be able to override how they "work" internally by supplying your own block
+
+Here's a theoretical example more like what you might see when you've got your own website built using Rails, where we may want to send only an array filled with our users' emails out to the webpage:
+
+u = User.all
+@user_emails = u.map { |user| user.email }
+
+You can also use these methods on hashes as well, just remember that now you have two inputs to work with for your block:
+
+> my_hash = {"Joe" => "male", "Jim" => "male", "Patty" => "female"}
+> my_hash.select{|name, gender| gender == "male" }
+=> {"Joe" => "male", "Jim" => "male"}
+
+-a proc is short for procedure, and is just a block that you save to a variable like so:
+
+my_proc = Proc.new { |arg1| print "#{arg1}! " } 
+>[1,2,3].each(&my_proc)
+>1, 2, 3
+
+-NOTE that when you call the proc in the () you have to use the &.  
+
+
+-Blocks and Procs are both a type of "closure". A closure is basically a formal, computer-science-y way of saying "a chunk of code that you can pass around but which hangs onto the variables that you gave it when you first called it"
+
+
+
+
+
+-Lambdas are closer to methods because you can use explict returns and return multiple values at once, and lambdas are also very strict about you having to pass the correct number of arguments to it.  
+
+# EXAMPLE 
+
+lambda do |word| 
+>   puts word
+>   return word            # you can do this in lambdas not Procs
+> end.call("howdy ")
+howdy => "howdy "        # not nil because we gave it a return
+
+Blocks are unnamed little code chunks you can drop into other methods. Used all the time.
+
+Procs are identical to blocks but you can store them in variables, which lets you pass them into functions as explicit arguments and save them for later. Used explicitly sometimes.
+
+Lambdas are really full methods that just haven't been named. Used rarely.
+Methods are a way of taking actual named methods and passing them around as arguments to or returns from other methods in your code. Used rarely.
+
+Closure is just the umbrella term for all four of those things, which all somehow involve passing around chunks of code.
+
+# Ruby Explained: Map, Select, and Other Enumerable Methods
+# http://www.eriktrautman.com/posts/ruby-explained-map-select-and-other-enumerable-methods
+
+-the .select method takes or SELECTS item based upon certain criteria that you feed it and will run the block on every item of the object you pass it, and return a new object that contains only the items for which the block returned true:
+  
+my_array.select{|item| item%2==0 }
+=> [2,4,6,8,100]      # wow, that was easy.
+
+
+
+.map and .collect DO THE SAME THING:
+
+What if instead of selecting only a few items we want to keep all items but modify them somehow? That sounds a lot like we're doing something and collecting the results, doesn't it?  #collect will run your block and give you an object filled with whatever your block returned each time. Ruby says:
+
+> my_array.collect{|num| num**2 }
+=> [4,16,36,64,10000]
+
+You've heard of #map? It's the EXACT same method as collect, just called something different. Some people visualize it in their heads as doing something and collecting the results, other people see it as re-mapping your original object through some sort of transformation. It's more conventional to use #map but both work the same way.
+-NOTE THAT MAP AND COLLECT RETURN A NEW ARRAY 
+
+-we can use the .inject method to keep a running total of integers/floats in an array.  The .inject method will default to the 0th item in the array, but you can specify the starting point with .inject(3) for example.  INJECT WILL SUM TO THE RESULT OF THE LAST ITERATION IS, SO WE HAVE TO KEEP A RUNNING TOTAL OF THINGS.  
+
+
+[1, 2, 3, 4].inject(0) { |result, element| result + element } # => 10
+
+
+-This offers a REALLY good explanation of things:
+http://blog.jayfields.com/2008/03/ruby-inject.html 
+
+
+
+
+OTHER HANDY METHODS:
+
+Enumerable is a large bunch of methods and you'll only use a half-dozen of them regularly but there are some others that you should be familiar with as well. The full list is available in the docs here.
+
+#any? returns true/false (see the question mark?) and answers the question, "do ANY of the elements in this object pass the test in my block?". If your block returns true on any time it runs, any? will return true.
+#all? returns true/false and answers the question, "do ALL the elements of this object pass the test in my block?". Every time the block runs it must return true for this method to return true.
+#none? returns true only if NONE of the elements in the object return true when the block is run.
+#find returns the first item in your object for which the block returns true.
+Awesome but less common methods
+
+#group_by will run your block and return a hash that groups all the different types of returns from that block. For example:
+
+> names = ["James", "Bob", "Joe", "Mark", "Jim"]
+> names.group_by{|name| name.length}
+=> {5=>["James"], 3=>["Bob", "Joe", "Jim"], 4=>["Mark"]} 
+#grep returns an array with those items that actualy match the specified criteria (RegEx) (using a === match)
+
+> names.grep(/J/)
+=> ["James", "Joe", "Jim"]
+Some of the methods you've already seen and use are part of Enumerable too -- #include?, #sort, #count etc.
+
+When you use the Enumerable methods, you'll sometimes see what's called an enumerator object pop up, usually if you forget to give them a parameter that they want like a block. What the heck is that?
+
+Consider it an implementation detail of Enumerator. As we said before, the methods that are part of Enumerable rely on the underlying collections' #each method to work.  enumerable is basically a go-between for the original collection and Enumerator. It's not really something you'll be using right off the bat but it's useful for gaining a better understanding of Enumerable.
+
+
+# Ruby Explained: Methods 
+# http://www.eriktrautman.com/posts/ruby-explained-writing-and-running-methods
+
+-each method should do one thing
+-the should do this in order to keep things organized and clear 
+
+-Methods should be SHORT! If they're >10 lines, you're probably doing too much. When you look at the open-source projects on Github, their methods are often incredibly short. Good code doesn't look long, it looks brief but descriptive.
+
+
+-When naming methods the goal is to be descriptive but short. Name based on what it will return or what the major intended side effect will be. You shouldn't be missing any parts from the name because the method should only do one thing anyway. I
