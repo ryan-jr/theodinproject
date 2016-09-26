@@ -1698,3 +1698,459 @@ total.victory
 
 ```
 
+
+## Codecademy Project: Banking on Ruby 
+
+```ruby 
+class Account
+  attr_reader :name, :balance
+  def initialize(name, balance=100)
+    @name = name
+    @balance = balance
+  end
+  
+  def display_balance(pin_number)
+    puts pin_number == pin ? "Balance: $#{@balance}." : pin_error
+  end
+  
+  def withdraw(pin_number, amount)
+    if pin_number == pin
+      @balance -= amount
+      puts "Withdrew #{amount}. New balance: $#{@balance}."
+    else
+      puts pin_error
+    end
+  end
+  
+  private
+  
+  def pin
+    @pin = 1234
+  end
+  
+  def pin_error
+    "Access denied: incorrect PIN."
+  end
+end
+
+my_account = Account.new("Eric", 1_000_000)
+my_account.withdraw(11, 500_000)
+my_account.display_balance(1234)
+my_account.withdraw(1234, 500_000)
+my_account.display_balance(1234)
+```
+
+####  Creating the account class 
+
+* We can set default values/paramaters so that if there are supposed to be 2 arguments, but only 1 is provided 
+
+```ruby
+def initialize(name, balance=100)
+  @name = name
+  @balance = balance
+  end 
+  
+```
+
+* Ruby also allows us to use underscores for big numbers like 1_000 or 1_000_000.  
+
+* Instructions: Create an Account class in the editor. The :name and :balance attributes should be readable (but not writeable!). The class' initialize method should take two parameters, name and balance, and the balance parameter should default to 100.  Finally, go ahead and store your parameters in instance variables @name and @balance, respectively.
+
+
+```ruby
+class Account 
+    attr_reader :name
+    attr_reader :balance 
+    
+    def initialize(name, balance=100)
+    @name = name
+    @balance = balance
+end
+end
+```
+
+#### Private Affairs 
+
+* Instructions: Add two private methods to your Account class, pin and pin_error.  pin should take no arguments and set an instance variable, @pin, equal to the PIN number 1234.  pin_error should take no arguments and should simply return the string "Access denied: incorrect PIN."
+
+
+```ruby 
+class Account 
+    attr_reader :name
+    attr_reader :balance 
+    
+    def initialize(name, balance=100)
+    @name = name
+    @balance = balance
+    
+    private
+    def pin
+        @pin = 1234
+    end
+    
+    def pin_error
+        return "Access denied: incorrect PIN."
+    end
+end
+end
+    
+```
+
+#### Displaying the balance
+
+```ruby 
+
+class Account 
+    attr_reader :name
+    attr_reader :balance 
+    
+    def initialize(name, balance=100)
+    @name = name
+    @balance = balance
+    
+    private
+    def pin
+        @pin = 1234
+    end
+    
+    def pin_error
+        return "Access denied: incorrect PIN."
+    end
+    
+    public
+    def display_balance(pin_number)
+        if pin_number == @pin
+            puts "Balance: $#{@balance}"
+        else
+            puts pin_error
+    end 
+end
+    end
+end
+    
+	
+```
+
+
+#### Making a withdrawl
+
+```ruby 
+
+class Account 
+    attr_reader :name
+    attr_reader :balance 
+    
+    def initialize(name, balance=100)
+    @name = name
+    @balance = balance
+    
+    private
+    def pin
+        @pin = 1234
+    end
+    
+    def pin_error
+        return "Access denied: incorrect PIN."
+    end
+    
+    public
+    def display_balance(pin_number)
+        if pin_number == @pin
+            puts "Balance: $#{@balance}"
+        else
+            puts pin_error
+    end 
+    
+    def withdraw(pin_number, amount)
+        if pin_number == @pin
+            @balance = @balance - amount
+            puts "Withdrew #{amount}.  New balance: $#{@balance}."
+        else
+            puts pin_error
+    end
+    end
+    
+end
+    end
+end
+    
+```
+
+### Erik Trautman Ruby Explained: Classes 
+
+
+* classes are just a clear, logical way to order a number of methods around an object you want to create E.G. the viking class would have the attack and eat methods available to it.  
+
+* Classes are a way to organize intellectual/abstract complexity 
+
+* When you find that you want the same method to be run on  a bunch of different objects, without having to use a number of different if/else/case statments, that's when you should be using a class.  
+
+* We've been over storing data in hashes, but what happens when you want to treat that data like a real object and make it move? Or if you want to handle 10,000 different instances of it? When you just store your Viking's name, age, health, and strength, it just kind of sits there. What about when you want to make an army of Vikings who can do stuff like #eat, #travel, #sleep and, of course, #attack? For that, you need a slightly more complex structure to make your Viking out of, so you give it its own Viking class:
+
+```ruby 
+class Viking 
+	# methods and variables go here 
+end 
+```
+
+* To create a huge set of vikings we would create new ones, which means 'instantiating' a new viking.  To instantiate a viking we use the .new method.  We've seen this method before with things like arrays: arr = Array.new  
+
+* When you call the .new method on the Viking class (e.g: new_viking = Viking.new).  When we run the new method it creates a new instance of the class and allows us to utilize the def initialize method within the class and pass it variables. 
+
+```ruby 
+class Viking 
+	def initialize(name, age, health, str)
+		# setup goes here 
+	end 
+end 
+``` 
+
+* Since we don't want all vikings to have the same str we use instance variables with the @ symbol before the var_name like so: @viking_str 
+
+* Instance variables create a unique value for each viking to be stored/utilized.  These variables are usually created/set up in the initialize method.    
+
+```ruby 
+class Viking 
+	def initialize(name, age, health, str)
+		@name = name 
+		@age = age 
+		@health = health 
+		@str = str
+	end 
+end 
+```
+
+* By convention class names are capitalized and use CamelCase.  
+
+* To give the vikings something to do, we can give it methods particular/specific to the class which are called instance methods.  
+
+```ruby 
+class Viking 
+	def initialize(name, age, health, str)
+		# code goes here 
+	end 
+	
+	def attack(enemy)
+		# fight code 
+	end 
+end 
+```
+
+* If we had 2 vikings, oleg and lars we could now use lars.attack(oleg), but if we wanted to find out oleg's health with oleg.health it would throw an error because while instance variables might be part of oleg it's inaccessible outside the class.  
+
+* In order to solve the above issue we have to create a method to get that information, specifically a getter method named the same thing as the variable you want:
+
+```ruby 
+def health 
+	@health 
+end 
+# oleg.health 
+# 87 
+``` 
+
+* If we want to set the variable ourselves we would create a setter method which is similar in syntax, but with an equals sign and taking an argument: 
+
+```ruby 
+def health=(new_health)
+	@health = new_health 
+end 
+```
+
+
+* Since we would likely be writing a ton of the above methods, ruby has the attr_accessor method(s) so we DRY(O)s, which will create all the getters and setters for us simply by passing symbols for whatever variables we want to make accessible.  
+
+```ruby 
+class Viking 
+	attr_accessor :name, :age, :health, :str 
+	#code goes here 
+end 
+```
+
+* attr_accessor uses Ruby's ability to create methods from w/in the script ('metaprogramming') to set up name, age, etc...
+
+* Since we shouldn't make things readable/writeable without good reason, Ruby gives us attr_reader and attr_writer which are a getter and a setter respectively.  
+
+* Because of getters and setters there are 2 different ways to access instance variables from inside the class, either calling it with @age or calling the method on the instance using self.  
+
+* An example of self is provided below:
+```
+class Viking
+    ...
+    def take_damage(damage)
+        self.health -= damage							# Doing a method call
+        # OR we could have said @health -= damage
+        self.shout("OUCH!")								# Doing a method call 
+    end
+    def shout(strng)
+        puts strng
+    end
+    ...
+end
+```
+
+* We can also call methods from within other methods, like we see with shout above.  
+
+* Ruby will often make assumptions for you, so if we had used shout("Ouch!") in the take_damage method above, it would have worked and Ruby would have assumed we were calling the shout method.  These types of assumptions work most of the time, EXCEPT for when you're using an assignment operator: 
+
+
+```ruby 
+	def sleep 
+		health += 1 unless health >= 99 	# Does not work!
+	end 
+```
+
+* In the above example Ruby assumes that we are trying to create a new health variable and uses .health= instead of accessing @health.  Watch out for this if you decide to not use the self call 
+
+* Getting back to the class level, we have class variables and class methods.  Class variables are denoted with two @@s and are owned by the class itself which means that there is only one of them, and not one class variable per instance.  
+
+* For example, we can assume that all the vikings all start with the same health:
+
+```ruby 
+class Viking 
+	@@starting_health 
+	def initialize(name, age, strength)
+		@health = @@starting_health
+		# More code here
+	end 
+end 
+```
+
+* We declare class methods by preceding its name with self E.g: def self.class_method, or with the name of the class E.g: def Viking.class_method.  
+
+* There are two cases in which you want to use a class method: A.  When you're building new instances of a class that have a bunch of known/preset features, B.  When you have some sort of utility method that should be identical across all instances and won't need to directly access instance variables.  
+
+* The first case is a factory method and is made to save us from having to keep passing a bunch of paramaters manually to the initialize method:
+
+```ruby 
+class Viking 
+	def initialize(name, health, age, str)
+		# set vars here 
+	end 
+	
+	def self.create_warrior(name)
+		age = rand * 20 + 15			# rand gives a random 0 to 1
+		health = [age * 5, 120].min 
+		str = [age / 2, 10].min 
+		Viking.new(name, health, age, str)	# the return 
+	end 
+end 
+
+sten = Viking.create_warrior("Sten")			# creates Viking sten w/ name, age,  # etc...
+```
+
+* With the second case there may be things that all vikings should 'have'/'know'.  
+
+```ruby 
+
+class Viking
+    ...
+    def self.random_name      # useful for making new warriors!
+        ["Erik","Lars","Leif"].sample
+    end
+    def self.silver_to_gold(silver_pieces)
+        silver_pieces / 10
+    end
+    class << self           # The less common way
+        def gold_to_silver(gold_pieces)
+            gold_pieces * 10
+        end
+    end
+end
+
+> warrior1 = Viking.create_warrior(Viking.random_name)
+=> #<Viking:0x007ffc05a745c8 @age=22.369775138257097, @name="Lars", @health=111.84887569128549, @strength=10>
+```
+
+* To review: Classes are usful to use when you want to give methods to your data/have multiple instances of your data.  Class methods have access to other class methods and class variables but DO NOT have access to instance methods OR instance variables.  Finally, Instance methods can call other instance methods, instance variables, class methods, or class variables.  
+
+* What is the differnce between modules that can mixin to classes, and class methods?  The most notable difference is that a class can be instantiated, but a module cannot.  A module will always be a library of methods, a class can be more since it can hold state through keep track of instance variables, and be duplicated as many times as you want.  
+
+* If you need to instantiate something or have it exist over time, use a class instead of a module.  
+
+* Inheritance is the ability of one class to utilize or 'inherit' all of its characteristics including methods and variables (This is also known as a parent/child relationship).  
+
+* A class can only have ONE parent, and in Ruby a class inherits from another using the < notation:
+
+```ruby 
+class Viking < Person 
+
+# New class < Base class 
+# Child class < Parent class 
+# Inheriticance given < Inherits From 
+# Addon < Original
+```
+
+* In the above code, Viking has access to all of Person's methods, and we can now say that Viking extends Person.  
+
+* We've added methods to another existing class, and we could overwrite existing methods which would cause problems, if we modified original ruby methods etc...
+
+* Because of the nature of the relationship, Viking has the option to overwrite Person's methods:
+
+```ruby 
+class Person 
+	MAX_HEALTH = 120 
+	... 
+	def heal 
+		self.health += 1 unless self.health + 1 > MAX_HEALTH 
+	end 
+end 
+
+class Viking < Person 
+	... 
+	def heal 
+		self.health = [self.health + 2, MAX_HEALTH].min 
+		puts "Ready for battle!"
+	end 
+end 
+```
+
+* The above way works, but we could also call the paren't heal method directly a couple of times using the super method because super lets you call the superclass's version of the current method and in this case it would look like:
+
+```ruby 
+
+class Viking < Person 
+	def heal 
+		2.times { super }
+		puts "Ready for battle"
+	end 
+end 
+```
+
+
+* Oftentimes we use super in the subclass's initialize method when we want to use the parent's initialized but just add a tweak or two of our own and pass in paramaters as needed which saves us having to rewrite code.    
+
+```ruby 
+class Viking < Person 
+	def initialize(name, health, age, str, weapon)
+		super(name, health, age, str)
+		@weapon = weapon 
+	end 
+end 
+```
+
+#### Ruby Explained: Inheritance and Scope 
+
+* Scope is the formal term that represents when you can access a variable or method and when you can't.  Scope is just a concept so if a variable is 'in scope' it is available for use, otherwise it's 'out of scope'.  
+
+* Scope is like a container of one way glass around certain parts of your code.  Inside the container the variable/method can see/use anything in the world outside the container, but the outside world can't see in.  
+
+* A new scope is created when you first define a variable.  That variable is then accessible by anything 'downstream' of it in the code until the current scope is exited (e.g. leaving a method or loop).
+
+* A rule of thumb is that you create a new scope anytime that you indent your code and anytime within that indent that a new variable is defined.  
+
+
+* Method scope is similar but has some important differences because it deals much more explicitly with the notion of privacy. You still can't call a method until the Ruby interpreter has had the chance to define it. By default, instance methods can be called by any instance of a class (e.g. oleg.sleep) and class methods can be called directly on the class itself (e.g. Viking.new).
+
+* If you want to create methods that should ONLY be accessible by other methods within your class, mark them/indicate/preface them with private.  This is the default setting for instance variables unless you expose them using attr_accessor.  
+
+* You should change the default thought in your head from "everything is accessible, what do I need to hide?" to "everything should be hidden, what do I absolutely need to make externally available?" That principle will take you far, especially when designing things like APIs that will be used by other programs. 
+
+* If we want something that provides most of the privacy of private, BUT lets the methods inside other instances of the same class or descendents access it as well, we use the protected keyword before a method.  
+
+* So that's privacy for you, and it can be summed up by saying "don't let anything access any methods or variables that it doesn't need to. It's on a 'need-to-know' basis, and it doesn't need to know." It's not as big an issue while you're building toy projects, but becomes more important when you're interfacing with the real world and you want to zip up your classes tightly to prevent any malicious or unintended shenanigans from occurring.
+
+* A similar principle is that a method should not reach outside its scope to modify variables unless that is specifically what the method is meant to do because a method should take inputs and provide a return without having to modify anything else (look, but don't touch).  
+
+
+
+
