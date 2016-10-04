@@ -3,7 +3,8 @@
 # Draw Board Method
 # Draws the starting board
 
-def blank_board()
+def starting_board()
+	def blank_board
 	1.times do 
 		puts " \t * \t * \n"
 	end 
@@ -36,15 +37,38 @@ def blank_board()
 	2.times do 
 		puts " \t * \t * \n"
 	end
+	end
 end
 
 
 
+puts "\n \n \n"
+puts "*** WELCOME TO TIC TAC TOE ***"
+puts "\n \n \n"
 
-blank_board 
 
-puts "Please input a number: "
-number = gets.chomp
-puts number.to_i
+
+board = starting_board()
+puts board.blank_board
+puts "Please input the side that you want"
+puts "Choose between X or O please"
+side = gets.chomp.upcase 
+
+
+if side == "X"
+	puts "You chose X, you go first!"
+elsif side == "O"
+	puts "You chose O, you go second!"
+else
+	until side == "X" or side == "O"
+		puts "Please select a valid side, either X or O"
+		side = gets.chomp.upcase
+	end
+end
+
+puts "What Square do you want to put a/an #{side} in?: "
+selection = gets.chomp.to_i
+
+
 
 	
