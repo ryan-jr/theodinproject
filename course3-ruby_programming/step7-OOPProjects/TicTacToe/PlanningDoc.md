@@ -23,3 +23,14 @@
 * Have boardstate as a class?
 * Pass to the class the number that the user enters and if they are X or O
 
+
+### Story Driven Development
+
+* I am a user of the game and I want to learn how to play Tic Tac Toe and play a game against myself.  
+
+* I am a user of the game and I want to play a game against different AIs of varying difficulty
+
+* I am a user of the game and I want to play against a friend on the network.  
+
+
+
