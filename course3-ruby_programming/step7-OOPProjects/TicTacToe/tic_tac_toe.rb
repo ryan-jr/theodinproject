@@ -51,13 +51,11 @@ def board_state( board )
 end
 
 def horiz_win_check( board, win_condition )
-		puts board[0]
-		puts board[0].class
-		puts board[0].inspect
-		puts win_condition
 		if board[0] == "X" and board[1] == "X" and board[2] == "X"
 			puts "X wins!"
 			win_condition = true
+			puts "THIS IS WIN:"
+			puts win_condition
 			return win_condition
 		elsif board[3] == "X" and board[4] == "X" and board[5] == "X"
 			puts "X wins!"
@@ -80,7 +78,7 @@ def horiz_win_check( board, win_condition )
 			win_condition = true
 			return win_condition
 	end
-		
+			return win_condition
 end 
 
 
@@ -161,11 +159,10 @@ menu = Menu.new(
 
 
 # Initializing variables 
-win_condition = nil
+win_condition = false
 turn = 1
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-board.each { | c | puts c.class }
 
 # basic welcome screen
 puts "\n \n \n"
@@ -187,14 +184,14 @@ while (( choice = menu.get_menu_choice ) != menu.quit )
 					puts "Turn #{turn}, O's turn"
 					side = "O"
 					square_input(side, board)
-					horiz_win_check( board, win_condition )
+					win_condition = horiz_win_check( board, win_condition )
 					turn += 1 
 				else 
 					board_state(board)
 					puts "Turn #{turn}, X's turn"
 					side = "X"
 					square_input(side, board)
-					horiz_win_check( board, win_condition )
+					win_condition = horiz_win_check( board, win_condition )
 					turn += 1 
 				end 
 			end 
