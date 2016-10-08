@@ -6,9 +6,9 @@
 
 * (Done) Board
 * (Done) User Input: At the beginng of the game, select X or O
-* User Input: Have the user select the square
-* We have to keep track of what side the user selects, the board state, and used vs. unused squares.  
-* Win Condtion(s)/Draw Condition(s)
+* (Done) User Input: Have the user select the square
+* (Done) We have to keep track of what side the user selects, the board state, and used vs. unused squares.  
+* (Done) Win Condtion(s)/Draw Condition(s)
 * Error Handling
 * Testing/TDD?
 * 1st Iteration: AI selects random, unused, square/space

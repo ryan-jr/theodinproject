@@ -70,9 +70,21 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-blank_board">#blank_board</a>
+    <li ><a href="#method-i-board_reset">#board_reset</a>
+    
+    <li ><a href="#method-i-board_state">#board_state</a>
+    
+    <li ><a href="#method-i-side_choice">#side_choice</a>
     
     <li ><a href="#method-i-square_input">#square_input</a>
+    
+    <li ><a href="#method-i-turn_reset">#turn_reset</a>
+    
+    <li ><a href="#method-i-tutorial">#tutorial</a>
+    
+    <li ><a href="#method-i-win_check">#win_check</a>
+    
+    <li ><a href="#method-i-win_reset">#win_reset</a>
     
   </ul>
 </div>
@@ -108,10 +120,10 @@
        </header>
 
     
-      <div id="method-i-blank_board" class="method-detail ">
+      <div id="method-i-board_reset" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">blank_board</span><span
+          <span class="method-name">board_reset</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -121,45 +133,109 @@
 
         <div class="method-description">
           
-          <p>starting_board method which draws the starting board</p>
+          <p>Resets the Board after a game</p>
           
           
 
           
-          <div class="method-source-code" id="blank_board-source">
-            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">blank_board</span>
-        <span class="ruby-value">1</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot; \t * \t * \n&quot;</span>
-        <span class="ruby-keyword">end</span> 
-        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;   1 \t *   2   *   3&quot;</span>
-        
-        <span class="ruby-value">2</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot; \t * \t * \n&quot;</span>
-        <span class="ruby-keyword">end</span>
-        
-        <span class="ruby-value">14</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;* &quot;</span>
-        <span class="ruby-keyword">end</span> 
-        
-        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;\n   4 \t *   5   *   6&quot;</span>
-        
-        <span class="ruby-value">3</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">puts</span><span class="ruby-string">&quot;\t * \t * \n&quot;</span>
-        <span class="ruby-keyword">end</span>
-        
-        <span class="ruby-value">14</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;* &quot;</span>
-        <span class="ruby-keyword">end</span>
-        
-        <span class="ruby-value">1</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;\n \t * \t * \n&quot;</span>
-        <span class="ruby-keyword">end</span> 
+          <div class="method-source-code" id="board_reset-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">board_reset</span>
+        <span class="ruby-identifier">board</span> = [<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>, <span class="ruby-value">7</span>, <span class="ruby-value">8</span>, <span class="ruby-value">9</span>]
+        <span class="ruby-identifier">puts</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{board[0]} | #{board[1]} | #{board[2]}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">*</span> <span class="ruby-value">12</span> 
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{board[3]} | #{board[4]} | #{board[5]}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">*</span> <span class="ruby-value">12</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{board[6]} | #{board[7]} | #{board[8]}&quot;</span>
+        <span class="ruby-identifier">puts</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">board</span> 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
 
-        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;   7 \t *   8   *   9&quot;</span>
         
-        <span class="ruby-value">2</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> 
-                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot; \t * \t * \n&quot;</span>
+
+        
+      </div>
+
+    
+      <div id="method-i-board_state" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">board_state</span><span
+            class="method-args">( board )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Displays and updates the state/status of the Tic Tac Toe Board</p>
+          
+          
+
+          
+          <div class="method-source-code" id="board_state-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">board_state</span>( <span class="ruby-identifier">board</span> )
+        <span class="ruby-identifier">puts</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{board[0]} | #{board[1]} | #{board[2]}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">*</span> <span class="ruby-value">12</span> 
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{board[3]} | #{board[4]} | #{board[5]}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">*</span> <span class="ruby-value">12</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{board[6]} | #{board[7]} | #{board[8]}&quot;</span>
+        <span class="ruby-identifier">puts</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-side_choice" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">side_choice</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>asking user for input on which side they want</p>
+          
+          
+
+          
+          <div class="method-source-code" id="side_choice-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">side_choice</span>
+
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Please input the side that you want&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Choose between X or O please&quot;</span>
+        <span class="ruby-identifier">side</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">upcase</span> 
+        <span class="ruby-comment"># validating user input</span>
+        
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">side</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;You chose X, you go first!&quot;</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">side</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;You chose O, you go second!&quot;</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-keyword">until</span> <span class="ruby-identifier">side</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">side</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Please select a valid side, either X or O&quot;</span>
+                        <span class="ruby-identifier">side</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">upcase</span>
+                <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -176,7 +252,7 @@
         
         <div class="method-heading">
           <span class="method-name">square_input</span><span
-            class="method-args">(side)</span>
+            class="method-args">(side, board)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -187,22 +263,235 @@
           
           <p><a href="Object.html#method-i-square_input">#square_input</a> method takes
 input from the user validates that it is an integer in the range of
-1-9(incl) takes an argument, side, depending on which side (X or O) is
+1-9(incl) takes an argument, and side, depending on which side (X or O) is
 going</p>
           
           
 
           
           <div class="method-source-code" id="square_input-source">
-            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">square_input</span>(<span class="ruby-identifier">side</span>)
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">square_input</span>(<span class="ruby-identifier">side</span>, <span class="ruby-identifier">board</span>)
         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;What Square do you want to put an #{side} in?: &quot;</span>
         <span class="ruby-identifier">selection</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">to_i</span>
+        
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">selection</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">selection</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">9</span>
                 <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;please input a valid number between 1 and 10&quot;</span>
+                <span class="ruby-keyword">until</span> <span class="ruby-identifier">selection</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">selection</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">9</span> 
+                        <span class="ruby-identifier">selection</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-keyword">end</span> 
         <span class="ruby-keyword">else</span>
-                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{selection} is where your #{side} will be put&quot;</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">board</span>[<span class="ruby-identifier">selection</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>].<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Fixnum</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Square #{selection} is where your #{side} will be put \n&quot;</span>
+                        <span class="ruby-identifier">board</span>[<span class="ruby-identifier">selection</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>] = <span class="ruby-node">&quot;#{side}&quot;</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">board</span>
+                <span class="ruby-keyword">else</span> 
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Please select another square, that one is already taken&quot;</span>
+                        <span class="ruby-identifier">square_input</span>(<span class="ruby-identifier">side</span>, <span class="ruby-identifier">board</span>)
+                <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span> 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-turn_reset" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">turn_reset</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>resets the turn counter after a game has been won/lost</p>
+          
+          
+
+          
+          <div class="method-source-code" id="turn_reset-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">turn_reset</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tutorial" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tutorial</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Explains the basic concept/rules of Tic Tac Toe</p>
+          
+          
+
+          
+          <div class="method-source-code" id="tutorial-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tutorial</span>
+        <span class="ruby-identifier">puts</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Tic Tac Toe is a 2 player game between the sides, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.&quot;</span>
+        <span class="ruby-identifier">puts</span>
+        <span class="ruby-keyword">return</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-win_check" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">win_check</span><span
+            class="method-args">( board, win_condition )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checks if the win condition has been satisifed along the rows, columns, and
+diagonals</p>
+          
+          
+
+          
+          <div class="method-source-code" id="win_check-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">win_check</span>( <span class="ruby-identifier">board</span>, <span class="ruby-identifier">win_condition</span> )
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">7</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">8</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">7</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">8</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">8</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">8</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">7</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">8</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;X&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;X wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">7</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">board</span>[<span class="ruby-value">8</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;O&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;O wins!&quot;</span>
+                        <span class="ruby-identifier">win_condition</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+                
+        <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">win_condition</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-win_reset" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">win_reset</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>resets the win condition after a game has been won/lost</p>
+          
+          
+
+          
+          <div class="method-source-code" id="win_reset-source">
+            <pre><span class="ruby-comment"># File tic_tac_toe.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">win_reset</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> 
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -222,7 +511,7 @@ going</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
