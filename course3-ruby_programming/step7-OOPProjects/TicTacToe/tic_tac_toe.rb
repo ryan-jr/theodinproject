@@ -2,8 +2,6 @@
 
 
 # Provides the choices for the user 
-
-
 class Menu 
 	# creating a getter for the quit value via symbol
 	
